@@ -1,3 +1,4 @@
+import { Route, Routes } from "react-router-dom";
 import Home from "@views/home/Home.jsx";
 import Booking from "@views/booking/Booking.jsx";
 import LogIn from "@views/login/LogIn.jsx";
@@ -16,7 +17,6 @@ function App() {
         <Route path="/login" element={<LogIn />} />
         <Route path="/profile" element={<Profle />} />
         <Route path="/manager" element={<Manager />} />
-        <Route path="/sign" element={<Sign />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
