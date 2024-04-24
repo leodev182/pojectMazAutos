@@ -24,6 +24,7 @@ const LogIn = () => {
    const [error, setError] = useState(false);
    const [alert, setAlert] = useState('');
    const [message, setMessage] = useState('');
+   const [success, setSuccess] = useState(false);
 
   //Función antes de enviar el formulario
   const validarInput = (e) => {
@@ -38,7 +39,9 @@ const LogIn = () => {
            setMessage('Error:Debe completar todos los datos')
            return
          } 
-      
+         setSuccess(true)
+         setAlert('success')
+         setMessage("datos ingresados: " + nombre +"-"+ apellido +"-"+ email +"-"+ telefono +"-"+ empresa +"-"+ direccion +"-"+ ciudad)
 
     //eliminar mensaje de error
     setError(false);
@@ -49,6 +52,7 @@ const LogIn = () => {
     setEmpresa('');
     setDireccion('');
     setCiudad('');
+    //setMessage('')
  }
 
   return <div>
@@ -94,6 +98,7 @@ const LogIn = () => {
                       <form action="" className="formulario" onSubmit={validarInput}>    
                             
                       {error ?  <Alert severity={alert}> {message} </Alert>: null}
+                      {success?  <Alert severity={alert}> {message} </Alert>: null}
                       
 
                         <div>
