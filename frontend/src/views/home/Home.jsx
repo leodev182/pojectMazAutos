@@ -1,8 +1,17 @@
 import React from 'react'
+import NavBar from '../../components/navbar/NavBar'
+import Banner from '../../components/banner/Banner'
+import PoolCard from '../../components/poolcard/PoolCard'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <>
+      <NavBar>    
+      </NavBar>
+      <Banner>
+      </Banner>
+      <PoolCard/>
+    </>
   )
 }
 
