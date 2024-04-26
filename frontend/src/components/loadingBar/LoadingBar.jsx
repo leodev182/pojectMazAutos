@@ -1,35 +1,41 @@
 import React from "react";
 import { LinearProgress } from "@mui/material";
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 export const LoadingBar = ({ value }) => {
   return (
-    <LinearProgress
-      variant="determinate"
-      value={(value / 10) * 100}
-      sx={{
-        height: "12px",
-        borderRadius: "5px",
-        background: `
-          repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 6px,
-            #ccc 5px,
-            #ccc 10px
-          )
-        `,
-        "& .MuiLinearProgress-bar": {
+    <Box sx={{width:'94%', pt:2, pb:2, px:2}}>
+      <Box sx={{display:'flex',justifyContent:'space-between',pb:0.6}}>
+        <Typography sx={{fontSize:'0.8rem'}}>
+            Reservas:
+        </Typography>
+        <Typography sx={{fontSize:'0.8rem'}}>
+            Disponibles:
+        </Typography>
+      </Box>
+      <LinearProgress
+        variant="determinate"
+        value={(value / 10) * 100}
+        sx={{
+          height: "1rem",
+          borderRadius: "5px",
           background: `
-            linear-gradient(
+            repeating-linear-gradient(
               45deg,
-              #020024,
-              #090979,
-              #00d4ff
+              transparent,
+              transparent 6px,
+              #ccc 5px,
+              #ccc 10px
             )
           `,
-        },
-      }}
-    />
+          "& .MuiLinearProgress-bar": {
+            background: `
+            #00ad71`,
+          },
+        }}
+      />
+    </Box>
   );
 };
 
