@@ -3,7 +3,7 @@ import { Grid, Container } from '@mui/material'; // Grid version 1
 // import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import PoolCard from '../poolcard/PoolCard';
 
-const Pools = () => {
+const Carrousel = () => {
   return (
     <Container maxWidth="" xs={{width:'100vw'}} md={{width:'90vw'}} sx={{
           display:'flex',
@@ -30,4 +30,4 @@ const Pools = () => {
   )
 }
 
-export default Pools
+export default Carrousel
