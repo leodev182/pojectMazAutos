@@ -11,14 +11,12 @@ import PoolDetails from '../../components/pooldetails/PoolDetails'
 const Home = () => {
   return (
     <>
-      {/* <NavBar>    
-      </NavBar> */}
-      <PoolDetails/>
-      {/* <Banner>
-      </Banner> */}
+      <NavBar/>
+      {/* <Banner/> */}
       {/* <Pools/> */}
       {/* <Carrousel/> */}
       {/* <PoolCard/> */}
+      <PoolDetails/>
       {/* <LogIn/> */}
     </>
   )

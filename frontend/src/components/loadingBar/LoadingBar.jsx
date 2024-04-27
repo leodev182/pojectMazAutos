@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 
 export const LoadingBar = ({ value }) => {
   return (
-    <Box sx={{width:'94%', pt:2, pb:2, px:2}}>
+    <Box sx={{width:'100%', pt:2, px:2}}>
       <Box sx={{display:'flex',justifyContent:'space-between',pb:0.6}}>
         <Typography sx={{fontSize:'0.8rem'}}>
             Reservas:
@@ -18,7 +18,7 @@ export const LoadingBar = ({ value }) => {
         variant="determinate"
         value={(value / 10) * 100}
         sx={{
-          height: "1rem",
+          height: "1.5rem",
           borderRadius: "5px",
           background: `
             repeating-linear-gradient(

@@ -150,10 +150,10 @@ export default function PoolCard() {
                 marginBottom: '20px',  
             }}
             >
-            <Typography>
-                Ver maz autos
-            </Typography>
-        </Button>
+                <Typography>
+                    Detalles
+                </Typography>
+            </Button>
         </Box>
       </CardContent>
     </Card>
