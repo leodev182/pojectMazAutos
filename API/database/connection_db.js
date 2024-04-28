@@ -1,5 +1,5 @@
 const { Pool } = require("pg");
-require("dotenv").config({ path: "./serv.env" });
+require("dotenv").config({ path: "./serv.env" }); //configuren su ruta dot.env
 
 class Database {
   constructor() {
@@ -19,7 +19,6 @@ class Database {
 
   handleError(err) {
     console.error("Error in PostgreSQL pool", err);
-    // Puedes agregar más lógica aquí para manejar el error según tus necesidades
   }
 
   query(sql, params) {

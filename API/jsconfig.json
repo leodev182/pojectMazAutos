@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
-    "baseUrl": "./src", // Ruta base para las importaciones
+    "baseUrl": "./src",
     "paths": {
-      "@controllers/*": ["controllers/*"], // Ruta de importación para los controladores
-      "@models/*": ["models/*"], // Ruta de importación para los modelos
-      "@utils/*": ["utils/*"], // Ruta de importación para las utilidades
-      //   "@services/*": ["services/*"], // Ruta de importación para los servicios
-      "@middlewares/*": ["middlewares/*"], // Ruta de importación para los middlewares
-      //   "@shared/*": ["shared/*"], // Ruta de importación para archivos compartidos
-      //   "@config/*": ["config/*"], // Ruta de importación para la configuración
-      "@database/*": ["database/*"] // Ruta de importación para la base de datos
+      "@controllers/*": ["controllers/*"],
+      "@models/*": ["models/*"],
+      "@utils/*": ["utils/*"],
+      "@services/*": ["services/*"],
+      "@middlewares/*": ["middlewares/*"],
+      "@shared/*": ["shared/*"],
+      "@config/*": ["config/*"],
+      "@database/*": ["database/*"]
     }
   },
-  "include": ["src/**/*.js"], // Incluye todos los archivos JavaScript dentro de la carpeta src
-  "exclude": ["node_modules"] // Excluye la carpeta node_modules de las importaciones
+  "include": ["src/**/*.js"],
+  "exclude": ["node_modules"]
 }
