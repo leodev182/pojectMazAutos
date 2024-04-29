@@ -405,30 +405,51 @@ export default function PoolDetails() {
             }}
             >
             <Typography>
-                Reservar
+                Iniciar reserva
             </Typography>
         </Button>
         </Box>
       </CardContent>
     </Box>
 
+
+
+
+
+
+
+
+
+
+
+
+    {/* ////////////////////////////////////////////////////////// */}
+
+
+
+
+
+
+
+
+
+
+
     {/* desktop devices */}
 
     <Container maxWidth="" xs={{width:'100vw'}} md={{width:'90vw'}} sx={{
           display:'flex',
           justifyContent:'center',
-          bgcolor:'#eceff1',
           overflow: 'auto',
           display: {xs:'none', md:'none',lg:'block'}
         }}>
-        <Grid container sx={{
+        <Grid container gap={4} sx={{
+            my:2,
             display:'flex',
-            justifyContent:'center',
-            bgcolor:'#eceff1'
+            justifyContent:'center'
             }}>
-            <Grid item xs={6} sx={{
-                height:'100vh',
-                bgcolor:'#eceff1',
+            <Grid className='item desktop detailes' item xs={7.5} sx={{
+                height:'86vh',
                 border:'solid 1px #CFD8DB',
                 borderRadius:'15px'
             }}>
@@ -444,111 +465,6 @@ export default function PoolDetails() {
                     />
                 </Box>
 
-                                {/* Colors Section */}
-
-                                <CardContent>
-                    <Grid container sx={{
-                        display:'flex',
-                        justifyContent: 'left'
-                    }}>
-                        <Grid item xs={2.4} sx={{
-                                textAlign:'center',
-                                height:'6.5vh',
-                                display:'flex',
-                                justifyContent:'center',
-                                alignItems:'center'
-                            }}>
-                            <Typography variant='h4' sx={{
-                                fontSize:'0.8rem',
-                                fontWeight:'500'
-                            }}>
-                                Colors
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={1.92} sx={{
-                                height:'6.5vh',
-                                display:'flex',
-                                justifyContent:'center',
-                                alignItems:'center'
-                            }}>
-                            <Box sx={{
-                                height:'36px',
-                                width:'36px',
-                                bgcolor:'black',
-                                border:'solid 2 #252525',
-                                borderRadius:'25px',
-                                fontSize:'36px'
-                            }}>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={1.92} sx={{
-                                height:'6.5vh',
-                                display:'flex',
-                                justifyContent:'center',
-                                alignItems:'center'
-                            }}>
-                            <Box sx={{
-                                height:'36px',
-                                width:'36px',
-                                bgcolor:'black',
-                                border:'solid 2 #252525',
-                                borderRadius:'25px',
-                                fontSize:'36px'
-                            }}>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={1.92} sx={{
-                                height:'6.5vh',
-                                display:'flex',
-                                justifyContent:'center',
-                                alignItems:'center'
-                            }}>
-                            <Box sx={{
-                                height:'36px',
-                                width:'36px',
-                                bgcolor:'black',
-                                border:'solid 2 #252525',
-                                borderRadius:'25px',
-                                fontSize:'36px'
-                            }}>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={1.92} sx={{
-                                height:'6.5vh',
-                                display:'flex',
-                                justifyContent:'center',
-                                alignItems:'center'
-                            }}>
-                            <Box sx={{
-                                height:'36px',
-                                width:'36px',
-                                bgcolor:'black',
-                                border:'solid 2 #252525',
-                                borderRadius:'25px',
-                                fontSize:'36px'
-                            }}>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={1.92} sx={{
-                                height:'6.5vh',
-                                display:'flex',
-                                justifyContent:'center',
-                                alignItems:'center'
-                            }}>
-                            <Box sx={{
-                                height:'36px',
-                                width:'36px',
-                                bgcolor:'black',
-                                border:'solid 2 #252525',
-                                borderRadius:'25px',
-                                fontSize:'36px'
-                            }}>
-                            </Box>
-                        </Grid>
-                    </Grid>
-                </CardContent>
-                <Divider variant="middle"/>
-
                 {/* Loading bar */}
 
                 <CardContent sx={{
@@ -560,9 +476,8 @@ export default function PoolDetails() {
                 <Divider variant="middle"/>
 
             </Grid>
-            <Grid item xs={6} sx={{
-                height:'100vh',
-                bgcolor:'#eceff1',
+            <Grid className='item desktop detailes' item xs={4} sx={{
+                height:'86vh',
                 border:'solid 1px #CFD8DB',
                 borderRadius:'15px'
             }}>
@@ -788,6 +703,111 @@ export default function PoolDetails() {
                 </CardContent>
                 <Divider variant="middle"/>
 
+                {/* Colors Section */}
+
+                <CardContent>
+                    <Grid container sx={{
+                        display:'flex',
+                        justifyContent: 'left'
+                    }}>
+                        <Grid item xs={2.4} sx={{
+                                textAlign:'center',
+                                height:'6.5vh',
+                                display:'flex',
+                                justifyContent:'center',
+                                alignItems:'center'
+                            }}>
+                            <Typography variant='h4' sx={{
+                                fontSize:'0.8rem',
+                                fontWeight:'500'
+                            }}>
+                                Colors
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={1.92} sx={{
+                                height:'6.5vh',
+                                display:'flex',
+                                justifyContent:'center',
+                                alignItems:'center'
+                            }}>
+                            <Box sx={{
+                                height:'36px',
+                                width:'36px',
+                                bgcolor:'black',
+                                border:'solid 2 #252525',
+                                borderRadius:'25px',
+                                fontSize:'36px'
+                            }}>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={1.92} sx={{
+                                height:'6.5vh',
+                                display:'flex',
+                                justifyContent:'center',
+                                alignItems:'center'
+                            }}>
+                            <Box sx={{
+                                height:'36px',
+                                width:'36px',
+                                bgcolor:'black',
+                                border:'solid 2 #252525',
+                                borderRadius:'25px',
+                                fontSize:'36px'
+                            }}>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={1.92} sx={{
+                                height:'6.5vh',
+                                display:'flex',
+                                justifyContent:'center',
+                                alignItems:'center'
+                            }}>
+                            <Box sx={{
+                                height:'36px',
+                                width:'36px',
+                                bgcolor:'black',
+                                border:'solid 2 #252525',
+                                borderRadius:'25px',
+                                fontSize:'36px'
+                            }}>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={1.92} sx={{
+                                height:'6.5vh',
+                                display:'flex',
+                                justifyContent:'center',
+                                alignItems:'center'
+                            }}>
+                            <Box sx={{
+                                height:'36px',
+                                width:'36px',
+                                bgcolor:'black',
+                                border:'solid 2 #252525',
+                                borderRadius:'25px',
+                                fontSize:'36px'
+                            }}>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={1.92} sx={{
+                                height:'6.5vh',
+                                display:'flex',
+                                justifyContent:'center',
+                                alignItems:'center'
+                            }}>
+                            <Box sx={{
+                                height:'36px',
+                                width:'36px',
+                                bgcolor:'black',
+                                border:'solid 2 #252525',
+                                borderRadius:'25px',
+                                fontSize:'36px'
+                            }}>
+                            </Box>
+                        </Grid>
+                    </Grid>
+                </CardContent>
+                <Divider variant="middle"/>
+
                 {/* Seccion de boton */}
 
                 <CardContent>
@@ -796,7 +816,7 @@ export default function PoolDetails() {
                             textAlign: "left"
                         }}>
                         <Button variant="contained" sx={{color: 'white',
-                            width: '94%',
+                            width: '100%',
                             height: '45px', 
                             borderRadius: '10px', 
                             marginBottom: '20px',  
