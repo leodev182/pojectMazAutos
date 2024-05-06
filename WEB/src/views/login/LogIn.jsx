@@ -55,39 +55,18 @@ const LogIn = () => {
     //setMessage('')
  }
 
-  return <div>
+
+  return <Box>
+
             <Box
                     sx={{ p: 2, 
                     bgcolor: "#DCDCDC",
                     display:"flex",
                     justifyContent:"center",
                     flexDirection:"column",
-                    height:"1018px", 
-                    width:"430px" }}>
-                    <Box>
-                    <div>
-                      <div style={{paddingRight:"40vh"}}><label><h2>Mi Perfil</h2></label></div>
-                            <div  style={{
-                                  display:"flex",
-                                  justifyContent: "space-between",
-                                  alignItems: "baselines"
-                                  }}>
-                              <div>
-                                    <Button
-                                        sx={{ borderRadius: 2, backgroundColor: "#CBCACA", padding: "0px"}}>
-                                          <CircleIcon 
-                                            sx={{ backgroundColor: "#CBCACA", padding: "0px 0px ", color:"#000000", fontSize: 60}}/>
-                                    </Button>
-                                    <FormHelperText>Guardar</FormHelperText>
-                              </div>
-                                                      
-                               <div>
-                                <Switch {...label} defaultChecked color="default" />
-                                <FormHelperText>Subir Foto</FormHelperText>
-                              </div>
-                            </div>
-                    </div>
-                    </Box>
+
+                    height:"100vh", 
+                    width:"100vw" }}>
 
                     <Box  sx={{
                                 my:4,
@@ -214,7 +193,9 @@ const LogIn = () => {
                       </form> 
                     </Box>
                 </Box>
-  </div>;
+
+  </Box>
+
 };
 
 export default LogIn;
