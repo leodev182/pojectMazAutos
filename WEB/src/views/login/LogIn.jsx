@@ -55,15 +55,19 @@ const LogIn = () => {
     //setMessage('')
  }
 
+
   return <Box>
+
             <Box
                     sx={{ p: 2, 
                     bgcolor: "#DCDCDC",
                     display:"flex",
                     justifyContent:"center",
                     flexDirection:"column",
+
                     height:"100vh", 
                     width:"100vw" }}>
+
                     <Box  sx={{
                                 my:4,
                                 borderRadius: 5,
@@ -189,7 +193,9 @@ const LogIn = () => {
                       </form> 
                     </Box>
                 </Box>
+
   </Box>
+
 };
 
 export default LogIn;

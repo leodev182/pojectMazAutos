@@ -405,12 +405,15 @@ export default function PoolDetails() {
             }}
             >
             <Typography>
+
                 Iniciar reserva
+
             </Typography>
         </Button>
         </Box>
       </CardContent>
     </Box>
+
 
 
 
@@ -435,11 +438,13 @@ export default function PoolDetails() {
 
 
 
+
     {/* desktop devices */}
 
     <Container maxWidth="" xs={{width:'100vw'}} md={{width:'90vw'}} sx={{
           display:'flex',
           justifyContent:'center',
+
           overflow: 'auto',
           display: {xs:'none', md:'none',lg:'block'}
         }}>
@@ -450,6 +455,7 @@ export default function PoolDetails() {
             }}>
             <Grid className='item desktop detailes' item xs={7.5} sx={{
                 height:'86vh',
+
                 border:'solid 1px #CFD8DB',
                 borderRadius:'15px'
             }}>
@@ -476,8 +482,10 @@ export default function PoolDetails() {
                 <Divider variant="middle"/>
 
             </Grid>
+
             <Grid className='item desktop detailes' item xs={4} sx={{
                 height:'86vh',
+
                 border:'solid 1px #CFD8DB',
                 borderRadius:'15px'
             }}>
@@ -703,6 +711,7 @@ export default function PoolDetails() {
                 </CardContent>
                 <Divider variant="middle"/>
 
+
                 {/* Colors Section */}
 
                 <CardContent>
@@ -816,7 +825,9 @@ export default function PoolDetails() {
                             textAlign: "left"
                         }}>
                         <Button variant="contained" sx={{color: 'white',
+
                             width: '100%',
+
                             height: '45px', 
                             borderRadius: '10px', 
                             marginBottom: '20px',  
