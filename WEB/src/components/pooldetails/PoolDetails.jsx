@@ -1,13 +1,9 @@
-import React, { useContext } from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
+import { useContext } from 'react';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-import CardActionArea from '@mui/material/CardActionArea';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
-import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import CarImage from '../../assets/maxus-T60-white-mazautos.jpeg'
@@ -320,44 +316,6 @@ export default function PoolDetails() {
 
         {/* Seccion de boton */}
 
-<<<<<<< HEAD:frontend/src/components/pooldetails/PoolDetails.jsx
-        <CardContent>
-            <Box 
-                sx={{
-                    textAlign: "left"
-                }}>
-                <Button variant="contained" sx={{color: 'white',
-                    width: '100%',
-                    height: '45px', 
-                    borderRadius: '10px', 
-                    marginBottom: '20px',  
-                }}
-                onClick={goToCheckout}
-                >
-                    <Typography>
-                        Iniciar reserva
-                    </Typography>
-                </Button>
-            </Box>
-            <Box 
-                sx={{
-                    textAlign: "left"
-                }}>
-                <Button variant="plain" sx={{
-                    width: '100%',
-                    height: '35px', 
-                    borderRadius: '10px', 
-                    marginBottom: '20px',  
-                }}>
-                    <Typography sx={{
-                        fontSize: '0.8rem'
-                    }}>
-                        Contactar a un asesor
-                    </Typography>
-                </Button>
-            </Box>
-        </CardContent>
-=======
       <CardContent>
         <Box 
             sx={{
@@ -371,14 +329,11 @@ export default function PoolDetails() {
             }}
             >
             <Typography>
-
                 Iniciar reserva
-
             </Typography>
         </Button>
         </Box>
       </CardContent>
->>>>>>> 84dd5b5ee52113d048048e68b5d614836b97899b:WEB/src/components/pooldetails/PoolDetails.jsx
     </Box>
 
 
@@ -681,16 +636,10 @@ export default function PoolDetails() {
                 </CardContent>
                 <Divider variant="middle"/>
 
-<<<<<<< HEAD:frontend/src/components/pooldetails/PoolDetails.jsx
-                {/* ColorSection */}
-                
-                <CardContent>        
-=======
 
-                {/* Colors Section */}
+                {/* Color Section */}
 
                 <CardContent>
->>>>>>> 84dd5b5ee52113d048048e68b5d614836b97899b:WEB/src/components/pooldetails/PoolDetails.jsx
                     <Grid container sx={{
                         display:'flex', 
                         justifyContent: 'left'
@@ -753,11 +702,11 @@ export default function PoolDetails() {
                             </Typography>
                         </Button>
                     </Box>
-                </CardContent>
+                </CardContent> 
             </Grid>
         </Grid>
     </Container>
 </>
-  );
+    );
 }
 PoolDetails

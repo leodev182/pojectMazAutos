@@ -3,11 +3,11 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
+import ContextProvider from './context/PoolsContext.jsx';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import ContextProvider from './context/PoolsContext.jsx';
 
-
+console.log(createTheme)
 const theme = createTheme({
   palette: {
     primary: {
@@ -31,7 +31,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <BrowserRouter>
         <ThemeProvider theme={theme}>
           <CssBaseline/>
-          <App />
+          <App/>
         </ThemeProvider>
       </BrowserRouter>
     </ContextProvider>
