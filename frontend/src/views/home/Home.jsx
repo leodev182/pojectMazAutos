@@ -1,27 +1,29 @@
 import React from 'react'
 import NavBar from '../../components/navbar/NavBar'
 import Banner from '../../components/banner/Banner'
-import PoolCard from '../../components/poolcard/PoolCard'
 import Carrousel from '../../components/Carrousel/Carrousel'
 import PoolDetails from '../../components/pooldetails/PoolDetails'
 import LogIn from '../../views/login/LogIn'
 import Register from '../../components/register/Register'
 import Profile from '../../components/profile/Profile'
-// import Pools from '../../components/pools/Pools'
+import Pools from '../../components/pools/Pools'
+import Booking from '../../components/booking/Booking'
+import PreBooking from '../../components/prebooking/PreBooking'
+import Payment from '../../components/payment/Payment'
 
 
 const Home = () => {
   return (
     <>
-      <NavBar/>
-      {/* <Banner/> */}
-      {/* <Pools/> */}
+      <Banner/>
+      {/* <PreBooking/> */}
+      <Pools/>
+      <Payment/>
       {/* <Carrousel/> */}
-      {/* <PoolCard/> */}
       {/* <PoolDetails/> */}
       {/* <LogIn/> */}
       {/* <Register/> */}
-      <Profile/>
+      {/* <Profile/> */}
     </>
   )
 }

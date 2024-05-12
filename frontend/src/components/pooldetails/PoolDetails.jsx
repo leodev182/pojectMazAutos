@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import React, { useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -11,27 +10,33 @@ import Divider from '@mui/material/Divider';
 import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CarImage from '../../assets/maxus-T60-white-mazautos.jpeg'
 import InfoIcon from '@mui/icons-material/Info';
+import CarColor from '../carcolor/CarColor';
 import { LoadingBar } from '../loadingBar/LoadingBar';
 import { useNavigate } from 'react-router-dom';
 import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
-import { Grid, Container } from '@mui/material'; // Grid version 1
-
+import { Grid, Container } from '@mui/material';
+import { useParams } from 'react-router-dom';
+import { MyContext } from '../../context/PoolsContext';
 
 export default function PoolDetails() {
 
     const navigate = useNavigate()
-    
+    const { pools, setPools, amount,setAmount } = useContext(MyContext);
+    const { id } = useParams()
+    const poolIdsAsString = pools.map(pool => String(pool.id));
+    const index = poolIdsAsString.findIndex((poolId) => poolId === id);
+    const poolDetails = pools[index];
+
+    const goToCheckout = () => {
+        navigate(`/checkout/${poolDetails.id}`);
+    }
+    const formattedPrice = parseFloat(poolDetails.price).toLocaleString("de-DE");
+    const formattedSavedPrice = parseFloat(poolDetails.saved_price).toLocaleString("de-DE");
 
   return (
 <>
-    {/* Mobile and medium devices */}
 
     <Box  sx={{
             maxWidth: '100vw', 
@@ -48,8 +53,8 @@ export default function PoolDetails() {
             <CardMedia
                 component="img"
                 height="60%"
-                image= {CarImage}
-                alt="Maxus T60"
+                src={`${poolDetails.image}`}
+                alt={`${poolDetails.brand} ${poolDetails.model} ${poolDetails.year}`}
             />
         </Box>
 
@@ -60,7 +65,7 @@ export default function PoolDetails() {
                     fontSize:'1.2rem',
                     my:0
                 }}>
-                Maxus T60
+                {poolDetails.brand} {poolDetails.model} {poolDetails.year}
             </Typography>
         </CardContent>
 
@@ -75,7 +80,7 @@ export default function PoolDetails() {
                 borderRadius:'15px'
             }}>
                 <Box sx={{
-                    width:{xs:'30%', md:'20%', lg:'15%'},
+                    width:{xs:'30%', md:'20%', lg:'30%'},
                     display:'flex',
                     alignItems:'center',
                     justifyContent:'space-around',
@@ -85,11 +90,11 @@ export default function PoolDetails() {
                     <Typography variant='h4' sx={{
                         fontSize:'0.8rem'
                     }}>
-                        Gasolina
+                        {poolDetails.fuel}
                     </Typography>
                 </Box>
                 <Box sx={{
-                    width:{xs:'30%', md:'20%', lg:'15%'},
+                    width:{xs:'30%', md:'20%', lg:'40%'},
                     display:'flex',
                     alignItems:'center',
                     justifyContent:'space-around',
@@ -99,11 +104,11 @@ export default function PoolDetails() {
                     <Typography variant='h4' sx={{
                         fontSize:'0.8rem'
                     }}>
-                        Manual
+                        {poolDetails.transmission}
                     </Typography>
                 </Box>
                 <Box sx={{
-                    width:{xs:'30%', md:'20%', lg:'15%'},
+                    width:{xs:'30%', md:'20%', lg:'30%'},
                     display:'flex',
                     alignItems:'center',
                     justifyContent:'space-around',
@@ -113,7 +118,7 @@ export default function PoolDetails() {
                     <Typography variant='h4' sx={{
                         fontSize:'0.8rem'
                     }}>
-                        1500cc
+                        {poolDetails.type}
                     </Typography>
                 </Box>
             </Box>
@@ -138,7 +143,7 @@ export default function PoolDetails() {
                     pt:1,
                     pb:1
                 }}>
-                    $12.000.000
+                    $ {formattedPrice}
                 </Typography>
                 <Box sx={{                        
                         pt:1,
@@ -159,10 +164,13 @@ export default function PoolDetails() {
                     <Typography variant='p' sx={{
                         textDecoration: 'line-through',
                     }}>
-                        3.000.000
+                        {formattedSavedPrice}
                     </Typography>
                 </Box>
-                <Box sx={{display:'flex'}}>
+                <Box sx={{
+                    display:'flex',
+                    alignItems:'center'
+                }}>
                     <IconButton color="primary" sx={{p: 0, m: 0}}>
                         <InfoIcon sx={{paddingRight:'10px'}}/>
                     </IconButton>
@@ -198,12 +206,12 @@ export default function PoolDetails() {
                         fontSize:'0.8rem',
                         fontWeight:'500'
                     }}>
-                        Espacio de Carga
+                        Motor
                     </Typography>
                     <Typography variant='h4' sx={{
                         fontSize:'0.8rem'
                     }}>
-                        360cmc
+                        {poolDetails.engine}
                     </Typography>
                 </Grid>
                 <Grid item xs={5.4} md={6}  sx={{
@@ -219,12 +227,12 @@ export default function PoolDetails() {
                         fontSize:'0.8rem',
                         fontWeight:'500'
                     }}>
-                        Espacio de Carga
+                        Capacidad de carga
                     </Typography>
                     <Typography variant='h4' sx={{
                         fontSize:'0.8rem'
                     }}>
-                        360cmc
+                        {poolDetails.capacity} Kg
                     </Typography>
                 </Grid>
                 <Grid item xs={5.4} md={6}  sx={{
@@ -240,12 +248,12 @@ export default function PoolDetails() {
                         fontSize:'0.8rem',
                         fontWeight:'500'
                     }}>
-                        Espacio de Carga
+                        Asientos
                     </Typography>
                     <Typography variant='h4' sx={{
                         fontSize:'0.8rem'
                     }}>
-                        360cmc
+                        {poolDetails.seatings} Asientos
                     </Typography>
                 </Grid>
                 <Grid item xs={5.4} md={6}  sx={{
@@ -261,124 +269,44 @@ export default function PoolDetails() {
                         fontSize:'0.8rem',
                         fontWeight:'500'
                     }}>
-                        Espacio de Carga
+                        Automonía
                     </Typography>
                     <Typography variant='h4' sx={{
                         fontSize:'0.8rem'
                     }}>
-                        360cmc
+                        {poolDetails.range} Km
                     </Typography>
                 </Grid>
             </Grid>
         </CardContent>
         <Divider variant="middle"/>
         
-        {/* Colors Section */}
-
-        <CardContent>
+        {/* ColorSection */}
+        
+        <CardContent>        
             <Grid container sx={{
-                display:'flex',
+                display:'flex', 
                 justifyContent: 'left'
             }}>
-                <Grid item xs={2.4} md={6}  sx={{
-                        textAlign:'center',
-                        height:'6.5vh',
-                        display:'flex',
-                        justifyContent:'center',
-                        alignItems:'center'
-                    }}>
+                <Grid item xs={2.4} sx={{
+                    textAlign:'center', 
+                    height:'6.5vh', 
+                    display:'flex', 
+                    justifyContent:'center', 
+                    alignItems:'center'
+                }}>
                     <Typography variant='h4' sx={{
-                        fontSize:'0.8rem',
+                        fontSize:'0.8rem', 
                         fontWeight:'500'
                     }}>
                         Colors
                     </Typography>
                 </Grid>
-                <Grid item xs={1.92} md={6}  sx={{
-                        height:'6.5vh',
-                        display:'flex',
-                        justifyContent:'center',
-                        alignItems:'center'
-                    }}>
-                    <Box sx={{
-                        height:'36px',
-                        width:'36px',
-                        bgcolor:'black',
-                        border:'solid 2 #252525',
-                        borderRadius:'25px',
-                        fontSize:'36px'
-                    }}>
-                    </Box>
-                </Grid>
-                <Grid item xs={1.92} md={6}  sx={{
-                        height:'6.5vh',
-                        display:'flex',
-                        justifyContent:'center',
-                        alignItems:'center'
-                    }}>
-                    <Box sx={{
-                        height:'36px',
-                        width:'36px',
-                        bgcolor:'black',
-                        border:'solid 2 #252525',
-                        borderRadius:'25px',
-                        fontSize:'36px'
-                    }}>
-                    </Box>
-                </Grid>
-                <Grid item xs={1.92} md={6}  sx={{
-                        height:'6.5vh',
-                        display:'flex',
-                        justifyContent:'center',
-                        alignItems:'center'
-                    }}>
-                    <Box sx={{
-                        height:'36px',
-                        width:'36px',
-                        bgcolor:'black',
-                        border:'solid 2 #252525',
-                        borderRadius:'25px',
-                        fontSize:'36px'
-                    }}>
-                    </Box>
-                </Grid>
-                <Grid item xs={1.92} md={6}  sx={{
-                        height:'6.5vh',
-                        display:'flex',
-                        justifyContent:'center',
-                        alignItems:'center'
-                    }}>
-                    <Box sx={{
-                        height:'36px',
-                        width:'36px',
-                        bgcolor:'black',
-                        border:'solid 2 #252525',
-                        borderRadius:'25px',
-                        fontSize:'36px'
-                    }}>
-                    </Box>
-                </Grid>
-                <Grid item xs={1.92} md={6}  sx={{
-                        height:'6.5vh',
-                        display:'flex',
-                        justifyContent:'center',
-                        alignItems:'center'
-                    }}>
-                    <Box sx={{
-                        height:'36px',
-                        width:'36px',
-                        bgcolor:'black',
-                        border:'solid 2 #252525',
-                        borderRadius:'25px',
-                        fontSize:'36px'
-                    }}>
-                    </Box>
-                </Grid>
+                <CarColor poolDetails={poolDetails} />
             </Grid>
         </CardContent>
         <Divider variant="middle"/>
 
-            
         {/* Loading bar */}
 
         <CardContent sx={{
@@ -386,30 +314,48 @@ export default function PoolDetails() {
             px:0
         }}>
 
-            <LoadingBar value={5} />
+            <LoadingBar value={5} goal={10}/>
 
         </CardContent>
 
         {/* Seccion de boton */}
 
-      <CardContent>
-        <Box 
-            sx={{
-                textAlign: "left"
-            }}>
-            <Button variant="contained" sx={{color: 'white',
-                width: '100%',
-                height: '45px', 
-                borderRadius: '10px', 
-                marginBottom: '20px',  
-            }}
-            >
-            <Typography>
-                Iniciar reserva
-            </Typography>
-        </Button>
-        </Box>
-      </CardContent>
+        <CardContent>
+            <Box 
+                sx={{
+                    textAlign: "left"
+                }}>
+                <Button variant="contained" sx={{color: 'white',
+                    width: '100%',
+                    height: '45px', 
+                    borderRadius: '10px', 
+                    marginBottom: '20px',  
+                }}
+                onClick={goToCheckout}
+                >
+                    <Typography>
+                        Iniciar reserva
+                    </Typography>
+                </Button>
+            </Box>
+            <Box 
+                sx={{
+                    textAlign: "left"
+                }}>
+                <Button variant="plain" sx={{
+                    width: '100%',
+                    height: '35px', 
+                    borderRadius: '10px', 
+                    marginBottom: '20px',  
+                }}>
+                    <Typography sx={{
+                        fontSize: '0.8rem'
+                    }}>
+                        Contactar a un asesor
+                    </Typography>
+                </Button>
+            </Box>
+        </CardContent>
     </Box>
 
 
@@ -460,8 +406,8 @@ export default function PoolDetails() {
                     <CardMedia
                         component="img"
                         height="60%"
-                        image= {CarImage}
-                        alt="Maxus T60"
+                        src={`${poolDetails.image}`}
+                        alt={`${poolDetails.brand} ${poolDetails.model} ${poolDetails.year}`}
                     />
                 </Box>
 
@@ -471,10 +417,23 @@ export default function PoolDetails() {
                     mx:0,
                     px:0
                 }}>
-                    <LoadingBar value={5} />
+                    <LoadingBar value={poolDetails.quantity} goal={poolDetails.goal_quantity} />
                 </CardContent>
                 <Divider variant="middle"/>
-
+                <Box sx={{
+                    p:2,
+                    display:'flex',
+                    alignItems:'center'
+                    }}>
+                    <IconButton color="primary" sx={{p: 0, m: 0}}>
+                        <InfoIcon sx={{paddingRight:'10px'}}/>
+                    </IconButton>
+                    <Typography variant='p' sx={{
+                        fontSize:'0.8rem'
+                    }}>
+                        Al unirte al pool obtienes el precio de flota.
+                    </Typography>
+                </Box>
             </Grid>
             <Grid className='item desktop detailes' item xs={4} sx={{
                 height:'86vh',
@@ -488,7 +447,7 @@ export default function PoolDetails() {
                             fontSize:'1.2rem',
                             my:0
                         }}>
-                        Maxus T60
+                        {poolDetails.brand} {poolDetails.model} {poolDetails.year}
                     </Typography>
                 </CardContent>
 
@@ -510,7 +469,7 @@ export default function PoolDetails() {
                                 pt:1,
                                 pb:1
                             }}>
-                                $12.000.000
+                                $ {formattedPrice}
                             </Typography>
                             <Box sx={{                        
                                     pt:1,
@@ -531,17 +490,7 @@ export default function PoolDetails() {
                                 <Typography variant='p' sx={{
                                     textDecoration: 'line-through',
                                 }}>
-                                    3.000.000
-                                </Typography>
-                            </Box>
-                            <Box sx={{display:'flex'}}>
-                                <IconButton color="primary" sx={{p: 0, m: 0}}>
-                                    <InfoIcon sx={{paddingRight:'10px'}}/>
-                                </IconButton>
-                                <Typography variant='p' sx={{
-                                    fontSize:'0.8rem'
-                                }}>
-                                    Al unirte al pool obtienes el precio de flota.
+                                    {formattedSavedPrice}
                                 </Typography>
                             </Box>
                         </Box>
@@ -572,7 +521,7 @@ export default function PoolDetails() {
                             <Typography variant='h4' sx={{
                                 fontSize:'0.8rem'
                             }}>
-                                Gasolina
+                                {poolDetails.fuel}
                             </Typography>
                         </Box>
                         <Box sx={{
@@ -586,7 +535,7 @@ export default function PoolDetails() {
                             <Typography variant='h4' sx={{
                                 fontSize:'0.8rem'
                             }}>
-                                Manual
+                                {poolDetails.transmission}
                             </Typography>
                         </Box>
                         <Box sx={{
@@ -600,7 +549,7 @@ export default function PoolDetails() {
                             <Typography variant='h4' sx={{
                                 fontSize:'0.8rem'
                             }}>
-                                1500cc
+                                {poolDetails.type}
                             </Typography>
                         </Box>
                     </Box>
@@ -628,12 +577,12 @@ export default function PoolDetails() {
                                 fontSize:'0.8rem',
                                 fontWeight:'500'
                             }}>
-                                Espacio de Carga
+                                Motor
                             </Typography>
                             <Typography variant='h4' sx={{
                                 fontSize:'0.8rem'
                             }}>
-                                360cmc
+                                {poolDetails.engine}
                             </Typography>
                         </Grid>
                         <Grid item xs={5.4} md={6}  sx={{
@@ -649,12 +598,12 @@ export default function PoolDetails() {
                                 fontSize:'0.8rem',
                                 fontWeight:'500'
                             }}>
-                                Espacio de Carga
+                                Capacidad de carga
                             </Typography>
                             <Typography variant='h4' sx={{
                                 fontSize:'0.8rem'
                             }}>
-                                360cmc
+                                {poolDetails.capaci}
                             </Typography>
                         </Grid>
                         <Grid item xs={5.4} md={6}  sx={{
@@ -670,12 +619,12 @@ export default function PoolDetails() {
                                 fontSize:'0.8rem',
                                 fontWeight:'500'
                             }}>
-                                Espacio de Carga
+                                Asientos
                             </Typography>
                             <Typography variant='h4' sx={{
                                 fontSize:'0.8rem'
                             }}>
-                                360cmc
+                                {poolDetails.seatings}
                             </Typography>
                         </Grid>
                         <Grid item xs={5.4} md={6}  sx={{
@@ -691,119 +640,40 @@ export default function PoolDetails() {
                                 fontSize:'0.8rem',
                                 fontWeight:'500'
                             }}>
-                                Espacio de Carga
+                                Automonía
                             </Typography>
                             <Typography variant='h4' sx={{
                                 fontSize:'0.8rem'
                             }}>
-                                360cmc
+                                {poolDetails.range}
                             </Typography>
                         </Grid>
                     </Grid>
                 </CardContent>
                 <Divider variant="middle"/>
 
-                {/* Colors Section */}
-
-                <CardContent>
+                {/* ColorSection */}
+                
+                <CardContent>        
                     <Grid container sx={{
-                        display:'flex',
+                        display:'flex', 
                         justifyContent: 'left'
                     }}>
                         <Grid item xs={2.4} sx={{
-                                textAlign:'center',
-                                height:'6.5vh',
-                                display:'flex',
-                                justifyContent:'center',
-                                alignItems:'center'
-                            }}>
+                            textAlign:'center', 
+                            height:'6.5vh', 
+                            display:'flex', 
+                            justifyContent:'center', 
+                            alignItems:'center'
+                        }}>
                             <Typography variant='h4' sx={{
-                                fontSize:'0.8rem',
+                                fontSize:'0.8rem', 
                                 fontWeight:'500'
                             }}>
                                 Colors
                             </Typography>
                         </Grid>
-                        <Grid item xs={1.92} sx={{
-                                height:'6.5vh',
-                                display:'flex',
-                                justifyContent:'center',
-                                alignItems:'center'
-                            }}>
-                            <Box sx={{
-                                height:'36px',
-                                width:'36px',
-                                bgcolor:'black',
-                                border:'solid 2 #252525',
-                                borderRadius:'25px',
-                                fontSize:'36px'
-                            }}>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={1.92} sx={{
-                                height:'6.5vh',
-                                display:'flex',
-                                justifyContent:'center',
-                                alignItems:'center'
-                            }}>
-                            <Box sx={{
-                                height:'36px',
-                                width:'36px',
-                                bgcolor:'black',
-                                border:'solid 2 #252525',
-                                borderRadius:'25px',
-                                fontSize:'36px'
-                            }}>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={1.92} sx={{
-                                height:'6.5vh',
-                                display:'flex',
-                                justifyContent:'center',
-                                alignItems:'center'
-                            }}>
-                            <Box sx={{
-                                height:'36px',
-                                width:'36px',
-                                bgcolor:'black',
-                                border:'solid 2 #252525',
-                                borderRadius:'25px',
-                                fontSize:'36px'
-                            }}>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={1.92} sx={{
-                                height:'6.5vh',
-                                display:'flex',
-                                justifyContent:'center',
-                                alignItems:'center'
-                            }}>
-                            <Box sx={{
-                                height:'36px',
-                                width:'36px',
-                                bgcolor:'black',
-                                border:'solid 2 #252525',
-                                borderRadius:'25px',
-                                fontSize:'36px'
-                            }}>
-                            </Box>
-                        </Grid>
-                        <Grid item xs={1.92} sx={{
-                                height:'6.5vh',
-                                display:'flex',
-                                justifyContent:'center',
-                                alignItems:'center'
-                            }}>
-                            <Box sx={{
-                                height:'36px',
-                                width:'36px',
-                                bgcolor:'black',
-                                border:'solid 2 #252525',
-                                borderRadius:'25px',
-                                fontSize:'36px'
-                            }}>
-                            </Box>
-                        </Grid>
+                        <CarColor poolDetails={poolDetails} />
                     </Grid>
                 </CardContent>
                 <Divider variant="middle"/>
@@ -821,13 +691,31 @@ export default function PoolDetails() {
                             borderRadius: '10px', 
                             marginBottom: '20px',  
                         }}
+                        onClick={goToCheckout}
                         >
                             <Typography>
-                                Iniciar Reserva
+                                Iniciar reserva
                             </Typography>
                         </Button>
                     </Box>
-                </CardContent> 
+                    <Box 
+                        sx={{
+                            textAlign: "left"
+                        }}>
+                        <Button variant="plain" sx={{
+                            width: '100%',
+                            height: '15px', 
+                            borderRadius: '10px', 
+                            marginBottom: '20px',  
+                        }}>
+                            <Typography sx={{
+                                fontSize: '0.8rem'
+                            }}>
+                                Contactar a un asesor
+                            </Typography>
+                        </Button>
+                    </Box>
+                </CardContent>
             </Grid>
         </Grid>
     </Container>

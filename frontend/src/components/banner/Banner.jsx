@@ -29,6 +29,7 @@ const Banner = () => {
                 borderRadius: '15px', 
                 marginBottom: '20px',  
                 marginTop: '20px'}}
+                href='#pools'
             >
                 <Typography>
                     Ver maz autos

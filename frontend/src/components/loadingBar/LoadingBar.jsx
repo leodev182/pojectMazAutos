@@ -3,20 +3,30 @@ import { LinearProgress } from "@mui/material";
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-export const LoadingBar = ({ value }) => {
+
+export const LoadingBar = ({ value,goal }) => {
   return (
-    <Box sx={{width:'100%', pt:2, px:2}}>
-      <Box sx={{display:'flex',justifyContent:'space-between',pb:0.6}}>
+    <Box sx={{
+      width:'100%', 
+      py:2, 
+      px:2
+    }}>
+      <Box sx={{
+        display:'flex',
+        justifyContent:'space-between',
+        py:0.8
+      }}>
         <Typography sx={{fontSize:'0.8rem'}}>
-            Reservas:
+            Reservas: {value}
         </Typography>
         <Typography sx={{fontSize:'0.8rem'}}>
-            Disponibles:
+            Flota: {goal}
         </Typography>
       </Box>
       <LinearProgress
         variant="determinate"
-        value={(value / 10) * 100}
+        goal={10}
+        value={(value / goal) * 100}
         sx={{
           height: "1.5rem",
           borderRadius: "5px",

@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react';
 import { Grid, Container } from '@mui/material'; // Grid version 1
 // import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import PoolCard from '../poolcard/PoolCard';
+import { MyContext } from "../../context/PoolsContext";
 
 const Pools = () => {
+
+  const {pools} = useContext(MyContext);
+
   return (
-    <Container maxWidth="" xs={{width:'100vw'}} md={{width:'90vw'}} sx={{
+    <Container maxWidth="" id="pools" xs={{width:'100vw'}} md={{width:'90vw'}} sx={{
           display:'flex',
           justifyContent:'center',
           bgcolor:'#eceff1'
@@ -16,18 +20,14 @@ const Pools = () => {
             display:'flex',
             justifyContent:'space-evenly'
           }}>
-            <Grid item xs={12} md={3.8} sx={{ mb: 2, mt: 2 }}>
-                <PoolCard/>
-            </Grid>
-            <Grid item xs={12} md={3.8} sx={{ mb: 2, mt: 2 }}>
-                <PoolCard/>
-            </Grid>
-            <Grid item xs={12} md={3.8} sx={{ mb: 2, mt: 2 }}>
-                <PoolCard/>
-            </Grid>
+                {pools.map((p) => (
+                    <Grid item xs={12} md={3.8} sx={{ mb: 2, mt: 2 }} key={p.id}>
+                      <PoolCard pool={p} />
+                    </Grid>
+                ))}
         </Grid>
     </Container>
-  )
+  );
 }
 
-export default Pools
+export default Pools;
