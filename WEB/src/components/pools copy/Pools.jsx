@@ -1,8 +1,12 @@
 import React, { useContext } from 'react';
 import { Grid, Container } from '@mui/material'; // Grid version 1
 // import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
+<<<<<<<< HEAD:frontend/src/components/pools copy/Pools.jsx
+import PoolCard from '../carcolor/PoolCard';
+========
 import PoolCard from '../poolcard/PoolCard';
 import { MyContext } from "../../context/PoolsContext";
+>>>>>>>> 477537a1 (adding new views and components):frontend/src/components/pools/Pools.jsx
 
 const Pools = () => {
 

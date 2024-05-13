@@ -1,19 +1,29 @@
 import * as React from 'react';
+import {Box, Toolbar,IconButton, Typography, Menu, Container, Button, Tooltip, MenuItem} from '@mui/material';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import Logo from '../../assets/MazAutos.svg';
+import { NavLink } from 'react-router-dom';
 import './NavBar.css';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = [
+        {
+            name:'Inicio',
+            href:'/'
+        },
+        {
+            name:'Ofertas',
+            href:'pools'
+        },
+        {
+            name:'Reservas',
+            href:'booking'
+        },
+        {
+            name:'Perfil',
+            href:'profile'
+        }
+    ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function NavBar() {
@@ -36,7 +46,14 @@ function NavBar() {
   };
 
   return (
-    <AppBar position="static" sx={{bgcolor: 'white', boxShadow: 'none', borderBottom: '0.5px solid', borderColor: "#0090DF"}}>
+    <AppBar position="static" sx={{
+        bgcolor: 'white', 
+        boxShadow: 'none', 
+        borderBottom: '0.5px solid', 
+        borderColor: "#0090DF",
+        height:'80',
+        maxHeight:'80px'
+    }}>
 
       <Container maxWidth="lg">
                 <Toolbar disableGutters>
@@ -47,7 +64,7 @@ function NavBar() {
                     href="#app-bar-with-responsive-menu"
                     sx={{
                     mr: 2,
-                    display: { xs: 'none', md: 'flex', width: '150px', maxHeight: '60px'},
+                    display: { xs: 'none', md: 'flex', width: '150px', height: '60px'},
                     }}
                 >
                     <img src={Logo} alt="Logo" className='logo' />
@@ -60,7 +77,7 @@ function NavBar() {
                     href="#app-bar-with-responsive-menu"
                     sx={{
                     mr: 2,
-                    display: { xs: 'flex', md: 'none', width: '150px', maxHeight: '60px' },
+                    display: { xs: 'flex', md: 'none', width: '150px', height: '60px' },
                     flexGrow: 1,
                     }}
                     >
@@ -75,7 +92,9 @@ function NavBar() {
                         onClick={handleCloseNavMenu}
                         sx={{ my: 2, color: 'primary', display: 'block' }}
                     >
-                        {page}
+                        <NavLink to={page.href}>
+                            {page.name}
+                        </NavLink>
                     </Button>
                     ))}
                 </Box>
@@ -135,9 +154,12 @@ function NavBar() {
                                     display: { xs: 'block', md: 'none' },
                                 }}
                             >
+                                
                                 {pages.map((page) => (
                                     <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                                        <NavLink to={page.href}>
+                                        <Typography textAlign="center">{page.name}</Typography>
+                                        </NavLink>
                                     </MenuItem>
                                 ))}
                             </Menu>

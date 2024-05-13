@@ -1,33 +1,48 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
+import React, { useContext } from 'react';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActionArea from '@mui/material/CardActionArea';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
-import Collapse from '@mui/material/Collapse';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CarImage from '../../assets/maxus-T60-white-mazautos.jpeg'
 import InfoIcon from '@mui/icons-material/Info';
 import { LoadingBar } from '../loadingBar/LoadingBar';
 import { useNavigate } from 'react-router-dom';
+import { MyContext } from '../../context/PoolsContext';
 
-export default function PoolCard() {
+export default function PoolCard({pool}) {
 
     const navigate = useNavigate()
+
+    const {pools, setPools, setAmount} = useContext(MyContext);
+    const formattedPrice = parseFloat(pool.price).toLocaleString("de-DE");
+    const formattedSavedPrice = parseFloat(pool.saved_price).toLocaleString("de-DE");
+    const carAvailability = pool.quantity - pool.goal_quantity
+
+
+    const goToDatils = () => {
+        navigate(`/details/${pool.id}`);
+    }
+
+    const clickHandler = () => {
+        const index = pools.findIndex((p) => p.id === pool.id);
+        const ClientOrder = [...pools];
+        if (typeof ClientOrder[index].quantity !== 'undefined') {
+          ClientOrder[index].quantity++;
+        } else {
+          ClientOrder[index].quantity = 1;
+        }
     
+        setPools([...ClientOrder]);
+        setAmount((prevAmount) => prevAmount + pool.price);
+      };
 
   return (
- <CardActionArea>
+ <CardActionArea key={pool.id}>
     <Card sx={{
             maxWidth: '90vw', 
             maxHeight:'100vh',
@@ -37,40 +52,27 @@ export default function PoolCard() {
         }}>
     
     {/* Seccion de la imagen */}
-
+    
       <CardMedia
         component="img"
         height="194"
-        image= {CarImage}
-        alt="Maxus T60"
-      />
-
-    {/* Seccion del titulo */}
-    
-        {/* <CardHeader 
+        src={`${pool.image}`}
+        alt={`${pool.brand} ${pool.model} ${pool.year}`}
         sx={{
-            textAlign: 'left',
-            '& .MuiTypography-title': {
-                fontSize: '1.2rem',
-            },
-            '& .MuiTypography-subheader': {
-                fontSize: '1rem', // Puedes cambiar el tamaño de fuente del subheader aquí
-            },
+            mt:1
         }}
-            title="Maxus T60"
-            subheader="El compañero que llevará tu trabajo y/o tu vida al siguiente nivel."
-      /> */}
+      />
 
         <CardContent sx={{textAlign:'left'}}>
             <Typography  variant='h5' 
                 sx={{ fontSize:'1.2rem'
                     }}>
-                Maxus T60
+                {pool.brand} {pool.model} {pool.year}
             </Typography>
             <Typography variant='h5' 
                 sx={{fontSize:'0.8rem'
                     }}>
-                El compañero que llevará tu trabajo y/o tu vida al siguiente nivel.
+                {pool.version}
             </Typography>
        </CardContent>
       <Divider variant="middle"/>
@@ -92,7 +94,7 @@ export default function PoolCard() {
                     pt:1,
                     pb:1
                 }}>
-                    $12.000.000
+                   $ {formattedPrice}
                 </Typography>
                 <Box sx={{                        
                         pt:1,
@@ -113,10 +115,13 @@ export default function PoolCard() {
                     <Typography variant='p' sx={{
                         textDecoration: 'line-through',
                     }}>
-                        3.000.000
+                        {formattedSavedPrice}
                     </Typography>
                 </Box>
-                <Box sx={{display:'flex'}}>
+                <Box sx={{
+                    display:'flex',
+                    alignItems:'center'
+                    }}>
                     <IconButton color="primary" sx={{p: 0, m: 0}}>
                         <InfoIcon sx={{paddingRight:'10px'}}/>
                     </IconButton>
@@ -132,7 +137,7 @@ export default function PoolCard() {
         
 
 
-        <LoadingBar value={5} />
+        <LoadingBar value={pool.quantity} goal={pool.goal_quantity} />
 
     
 
@@ -144,11 +149,12 @@ export default function PoolCard() {
                 textAlign: "left"
             }}>
             <Button variant="contained" sx={{color: 'white',
-                width: '94%',
+                width: '100%',
                 height: '45px', 
                 borderRadius: '10px', 
                 marginBottom: '20px',  
             }}
+            onClick={goToDatils}
             >
                 <Typography>
                     Detalles
