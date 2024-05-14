@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import Box from '@mui/material/Box';
+//import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import { Grid } from '@mui/material';
 import { MyContext } from '../../context/PoolsContext';
 
