@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import ContextProvider from './context/PoolsContext.jsx';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/';
 import CssBaseline from '@mui/material/CssBaseline';
 
 console.log(createTheme)
