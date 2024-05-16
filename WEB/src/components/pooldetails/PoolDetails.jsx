@@ -311,7 +311,7 @@ export default function PoolDetails() {
             px:0
         }}>
 
-            <LoadingBar value={5} goal={10}/>
+            <LoadingBar value={poolDetails.quantity} goal={poolDetails.goal_quantity}/>
 
         </CardContent>
 
@@ -328,6 +328,7 @@ export default function PoolDetails() {
                 borderRadius: '10px', 
                 marginBottom: '20px',  
             }}
+            onClick={goToCheckout}
             >
             <Typography>
                 Iniciar reserva

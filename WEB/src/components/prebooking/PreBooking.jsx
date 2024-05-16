@@ -2,7 +2,6 @@
 import React, { useContext, useState } from 'react';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
-//import Box from '@mui/material/Box';
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
@@ -14,27 +13,42 @@ import InfoIcon from '@mui/icons-material/Info';
 // import WarningIcon from '@mui/icons-material/Warning';
 import { LoadingBar } from '../loadingBar/LoadingBar';
 import { Grid, Container, Select, MenuItem } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { MyContext } from '../../context/PoolsContext';
 
 const PreBooking = () => {
-
-    const { pools, setPools, amount,setAmount, quantity, setQuantity } = useContext(MyContext);
+    const navigate = useNavigate();
+    const { pools, setPools, amount, setAmount, quantity, setQuantity } = useContext(MyContext);
     const { id } = useParams()
     const poolIdsAsString = pools.map(pool => String(pool.id));
     const index = poolIdsAsString.findIndex((poolId) => poolId === id);
     const poolDetails = pools[index];
 
     const clickHandler = () => {
-    const ClientOrder = [...pools];
-    if (typeof ClientOrder[index].quantity !== 'undefined') {
-    ClientOrder[index].quantity++;
-    } else {
-    ClientOrder[index].quantity = 1;
-    }
-    setPools([...ClientOrder]);
-    setAmount((prevAmount) => prevAmount + poolDetails.price);
+        const ClientOrder = [...pools];
+        if (typeof ClientOrder[index].quantity !== 'undefined') {
+            ClientOrder[index].quantity += quantity;
+        } else {
+            ClientOrder[index].quantity = quantity;
+        }
+        setPools([...ClientOrder]);
+        setAmount((prevAmount) => {
+            const totalAmount = prevAmount + (poolDetails.price * quantity);
+            const amountToPay = totalAmount * 0.05
+            console.log(amountToPay);
+            return amountToPay;
+        });
     };
+    
+    const goToPayment = () => {
+        const paymentUrl = `/payment/${id}`;
+        navigate(paymentUrl);
+        console.log(amount);
+        console.log(quantity);
+
+    };
+    
+      
 
     const colorNames = {
         blue: 'Azul',
@@ -209,7 +223,7 @@ const PreBooking = () => {
                                 <Typography variant='p' sx={{
                                     fontSize:'0.8rem'
                                 }}>
-                                    Al unirte al pool obtienes el precio de flota. Disponibilidad: {carAvailability}
+                                    Al unirte al pool obtienes el precio de flota. Disponibilidad: {carAvailability - quantity}
                                 </Typography>
                             </Box>
                         </Box>
@@ -414,7 +428,10 @@ const PreBooking = () => {
                 borderRadius: '10px', 
                 marginBottom: '20px',  
             }}
-            onClick={clickHandler}
+            onClick={() => {
+                goToPayment();
+                clickHandler();
+              }}
             >
             <Typography>
                 Realizar el pago
@@ -784,9 +801,13 @@ const PreBooking = () => {
                             borderRadius: '10px', 
                             marginBottom: '20px',  
                         }}
+                        onClick={() => {
+                            goToPayment();
+                            clickHandler();
+                          }}
                         >
                             <Typography>
-                                Ir a pagar
+                                Realizar pago
                             </Typography>
                         </Button>
                     </Box>

@@ -1,20 +1,31 @@
 import React from 'react'
 import Banner from '../../components/banner/Banner'
 import Pools from '../../components/pools/Pools'
-import Payment from '../../components/payment/Payment'
+import PaymentBox from '../../components/payment/PaymentBox'
+import FileUpload from '../../components/payment/FileUpload'
+import PoolsCenter from '../../components/poolscenter/PoolsCenter'
+import PoolEditor from '../../components/pooleditor/PoolEditor'
+import Profile from '../../components/profile/Profile'
+import SignIn from '../../components/signin/SignIn'
+import Stepper from '../../components/signin/Stepper'
+import LogIn from '../../views/login/LogIn'
 
 
 const Home = () => {
   return (
     <>
-      <Banner/>
+      {/* <Banner/>
+      <Pools/> */}
+      <Stepper/>
+      {/* <PoolEditor/> */}
       {/* <PreBooking/> */}
-      <Pools/>
-      <Payment/>
+      {/* <PoolsCenter/> */}
+      {/* <PaymentBox/> */}
+      {/* <FileUpload/> */}
       {/* <Carrousel/> */}
       {/* <PoolDetails/> */}
       {/* <LogIn/> */}
-      {/* <Register/> */}
+      {/* <SignIn/> */}
       {/* <Profile/> */}
     </>
   )

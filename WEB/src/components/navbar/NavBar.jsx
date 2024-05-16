@@ -9,7 +9,7 @@ import './NavBar.css';
 const pages = [
         {
             name:'Inicio',
-            href:'/'
+            href:'login'
         },
         {
             name:'Ofertas',
