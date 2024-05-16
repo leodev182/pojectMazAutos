@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
@@ -14,8 +14,9 @@ import InfoIcon from '@mui/icons-material/Info';
 import { LoadingBar } from '../loadingBar/LoadingBar';
 import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../../context/PoolsContext';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
-export default function PoolCard({pool}) {
+export default function PoolCard({pool, edit}) {
 
     const navigate = useNavigate()
 
@@ -25,22 +26,123 @@ export default function PoolCard({pool}) {
     const carAvailability = pool.quantity - pool.goal_quantity
 
 
-    const goToDatils = () => {
+    const goToDetails = () => {
         navigate(`/details/${pool.id}`);
     }
+    const goToEditor = () => {
+        navigate(`/editor/${pool.id}`);
+    }
 
-    const clickHandler = () => {
-        const index = pools.findIndex((p) => p.id === pool.id);
-        const ClientOrder = [...pools];
-        if (typeof ClientOrder[index].quantity !== 'undefined') {
-          ClientOrder[index].quantity++;
-        } else {
-          ClientOrder[index].quantity = 1;
+    const showButtons = () => {
+        if (edit === true) {
+                return (
+                <Box 
+                sx={{
+                    textAlign: "left"
+                }}>
+                    <Button variant="contained" sx={{color: 'white',
+                        width: '100%',
+                        display:'none',
+                        height: '45px', 
+                        borderRadius: '10px', 
+                        marginBottom: '20px',  
+                    }}
+                    onClick={goToDetails}
+                    >
+                        <Typography>
+                            Detalles
+                        </Typography>
+                    </Button>
+                    <Box sx={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems:'center'
+                    }}>
+                        <Button variant="contained" sx={{color: 'white',
+                            width: '48%',
+                            height: '45px', 
+                            borderRadius: '10px', 
+                            marginBottom: '20px',  
+                        }}
+                        onClick={goToEditor}
+                        >
+                            <ModeEditIcon sx={{
+                                pr:1
+                            }}/>
+                            <Typography>
+                                Editar Pool
+                            </Typography>
+                        </Button>
+                        <Button variant="contained" sx={{color: 'white',
+                            width: '48%',
+                            height: '45px', 
+                            borderRadius: '10px', 
+                            marginBottom: '20px',  
+                        }}
+                        onClick={goToDetails}
+                        >
+                            <Typography>
+                                Detalles
+                            </Typography>
+                        </Button>
+                    </Box>
+                </Box>)
+            }
+            else {
+                return (
+                    <Box 
+                    sx={{
+                        textAlign: "left"
+                    }}>
+                        <Button variant="contained" sx={{color: 'white',
+                            width: '100%',
+                            display:'flex',
+                            height: '45px', 
+                            borderRadius: '10px', 
+                            marginBottom: '20px',  
+                        }}
+                        onClick={goToDetails}
+                        >
+                            <Typography>
+                                Detalles
+                            </Typography>
+                        </Button>
+                        <Box sx={{
+                            display: 'none',
+                            justifyContent: 'space-between',
+                            alignItems:'center'
+                        }}>
+                            <Button variant="contained" sx={{color: 'white',
+                                width: '48%',
+                                height: '45px', 
+                                borderRadius: '10px', 
+                                marginBottom: '20px',  
+                            }}
+                            onClick={goToDetails}
+                            >
+                                <ModeEditIcon sx={{
+                                    pr:1
+                                }}/>
+                                <Typography>
+                                    Editar Pool
+                                </Typography>
+                            </Button>
+                            <Button variant="contained" sx={{color: 'white',
+                                width: '48%',
+                                height: '45px', 
+                                borderRadius: '10px', 
+                                marginBottom: '20px',  
+                            }}
+                            onClick={goToDetails}
+                            >
+                                <Typography>
+                                    Detalles
+                                </Typography>
+                            </Button>
+                        </Box>
+                    </Box>)
+            }
         }
-    
-        setPools([...ClientOrder]);
-        setAmount((prevAmount) => prevAmount + pool.price);
-      };
 
   return (
  <CardActionArea key={pool.id}>
@@ -143,25 +245,8 @@ export default function PoolCard({pool}) {
     
 
         {/* Seccion de boton */}
-
       <CardContent>
-        <Box 
-            sx={{
-                textAlign: "left"
-            }}>
-            <Button variant="contained" sx={{color: 'white',
-                width: '100%',
-                height: '45px', 
-                borderRadius: '10px', 
-                marginBottom: '20px',  
-            }}
-            onClick={goToDatils}
-            >
-                <Typography>
-                    Detalles
-                </Typography>
-            </Button>
-        </Box>
+            {showButtons()}
       </CardContent>
     </Card>
     </CardActionArea>
