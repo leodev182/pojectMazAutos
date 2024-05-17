@@ -6,20 +6,25 @@ export default function SignIn() {
 
     const backgroundImageUrl = 'https://img.freepik.com/foto-gratis/hombre-guapo-joven-abrazando-coche-sala-exposicion-automoviles_1303-20420.jpg?t=st=1715829075~exp=1715832675~hmac=e2cfdbee8005ed6902ea24fd859b4c26b3019d75e6cadbcbbd5d2c0e13e6d815&w=2000';
 
-    const [nombre, setNombre] = useState('');
-    const [apellido, setApellido] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [telefono, setTelefono] = useState('');
-    const [empresa, setEmpresa] = useState('');
-    const [direccion, setDireccion] = useState('');
-    const [ciudad, setCiudad] = useState('');
+    const [email, setEmail] = useState('')
+    const [name, setName] = useState('Luis')
+    const [lastName, setLastName] = useState('Taurik')
+    const [phone, setPhone] = useState('')
+    const [enterprise, setEnterprise] = useState('')
+    const [address, setAddress] = useState('')
+    const [country, setCountry] = useState('')
+    const [password, setPassword] = useState('')
+    const [passwordConfirmation, setPasswordConfirmation] = useState('')
+    const [alert, setAlert] = useState({
+        alert: false,
+        status:'',
+        message:''
+    })
 
     const label = { inputProps: { 'aria-label': 'Size switch demo' } };
 
     //Estado para los errores
     const [error, setError] = useState(false);
-    const [alert, setAlert] = useState('');
     const [message, setMessage] = useState('');
     const [success, setSuccess] = useState(false);
 

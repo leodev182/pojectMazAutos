@@ -19,7 +19,7 @@ const PoolsCenter = () => {
           justifyContent:'space-evenly'
         }}>
               {pools.map((p) => (
-                  <Grid item xs={12} md={3.8} sx={{ mb: 2, mt: 2 }} key={p.id}>
+                  <Grid item xs={12} md={5.7} lg={3.8} sx={{ mb: 2, mt: 2 }} key={p.id}>
                     <PoolCard pool={p} edit={true}/>
                   </Grid>
               ))}
