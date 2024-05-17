@@ -3,29 +3,35 @@ import React, { createContext, useEffect, useState } from "react";
 export const MyContext = createContext({});
 
 const ContextProvider = ({ children }) => {
-    const url = 'users.json';
-    const [users, setUsers] = useState([]);
+  const [userId, setUserId] = useState(null);
+  const [role, setRole] = useState("");
+  const [token, setToken] = useState(window.localStorage.getItem("token"));
 
-    const getData = async () => {
-        const res = await fetch(url);
-        const data = await res.json();
-        setUsers([...data]);
-    }
+  const saveToken = (newToken) => {
+    setToken(newToken);
+    window.localStorage.setItem("token", newToken);
+  };
 
-    useEffect(()=> {
-        getData();
-      },
-        []
-      )    
-      
-      
-      console.log(users)
+  const removeToken = () => {
+    setToken(null);
+    window.localStorage.removeItem("token");
+  };
 
-    return (
-        <MyContext.Provider value={{users, setUsers}}>
-            {children}
-        </MyContext.Provider>
-    )
-}
+  return (
+    <MyContext.Provider
+      value={{
+        token,
+        saveToken,
+        removeToken,
+        userId,
+        setUserId,
+        role,
+        setRole,
+      }}
+    >
+      {children}
+    </MyContext.Provider>
+  );
+};
 
 export default ContextProvider;
