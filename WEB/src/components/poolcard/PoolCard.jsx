@@ -158,11 +158,11 @@ export default function PoolCard({pool, edit}) {
     
       <CardMedia
         component="img"
-        height="194"
         src={`${pool.image}`}
         alt={`${pool.brand} ${pool.model} ${pool.year}`}
         sx={{
-            mt:1
+            mt:1,
+            maxHeight:{xs:'332px',md:'214px',lg:'216px'},
         }}
       />
 
