@@ -15,18 +15,18 @@ import "./App.css";
 function App() {
   return (
     <>
-      <NavBar/>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path='/details/:id' element={<Details/>}></Route>
-        <Route path='/checkout/:id' element={<PreBooking/>}></Route>
-        <Route path='/payment/:id' element={<Payment/>}></Route>
-        <Route path='/editor/:id' element={<PoolEditor/>}></Route>
-        <Route path="/booking" element={<Bookings/>} />
-        <Route path="/login" element={<LogIn/>} />
-        <Route path="/login" element={<LogIn/>} />
-        <Route path="/profile" element={<Profile/>} />
-        <Route path="/manager" element={<Manager/>} />
+        <Route path="/details/:id" element={<Details />}></Route>
+        <Route path="/checkout/:id" element={<PreBooking />}></Route>
+        <Route path="/payment/:id" element={<Payment />}></Route>
+        <Route path="/editor/:id" element={<PoolEditor />}></Route>
+        <Route path="/booking" element={<Bookings />} />
+        <Route path="/login" element={<LogIn />} />
+        <Route path="/login" element={<LogIn />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/manager" element={<Manager />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
