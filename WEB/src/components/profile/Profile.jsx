@@ -83,7 +83,6 @@ const Profile = () => {
         message:'',
     })
 
-
     const emailValidation = (email) => {
         const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
         return regex.test(email);
@@ -117,7 +116,7 @@ const Profile = () => {
         if (!phoneValidation(phone)) {
             setPhoneError({
                 phoneError: true,
-                message: `Ejemplo: "987546321"`,
+                message: `Debe ser un formato válido, ej: "987546321"`,
             });
             hasError = true; // Marcar que hay un error
         } else {
@@ -127,7 +126,6 @@ const Profile = () => {
             });
         }
     
-        // Si hay algún error, detener el proceso de envío del formulario
         if (hasError) {
             setAlert({
                 alert:true,
@@ -137,7 +135,6 @@ const Profile = () => {
             return;
         }
     
-        // Si no hay errores, continuar con el proceso de envío del formulario
         console.log(email);
         setError({
             error: false,

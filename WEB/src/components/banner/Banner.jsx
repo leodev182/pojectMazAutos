@@ -1,5 +1,6 @@
 import React from 'react'
-import Box from '@mui/material/Box';
+//import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import backgroundImage from '../../assets/mazautos-banner-homepage-autos.jpeg';
