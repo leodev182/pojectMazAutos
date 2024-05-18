@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useContext } from "react";
 import { useEffect } from "react";
+import backgroundImage from '../../assets/mazautos-un-chico-comprando-un-auto-nuevo.jpg'
 import {
   TextField,
   Box,
@@ -19,10 +20,11 @@ export default function LogIn() {
     navigate("/");
   };
 
-  const { setUserId, setRole, saveToken } = useContext(MyContext);
+  const goToSignUp = () => {
+    navigate("/signup")
+  }
 
-  const backgroundImageUrl =
-    "https://img.freepik.com/foto-gratis/hombre-guapo-joven-abrazando-coche-sala-exposicion-automoviles_1303-20420.jpg?t=st=1715829075~exp=1715832675~hmac=e2cfdbee8005ed6902ea24fd859b4c26b3019d75e6cadbcbbd5d2c0e13e6d815&w=2000";
+  const { setUserId, setRole, saveToken } = useContext(MyContext);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,7 +41,7 @@ export default function LogIn() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:9080/login", {
+      const response = await axios.post("http://localhost:6080/login", {
         email: email,
         password: password,
       });
@@ -71,12 +73,25 @@ export default function LogIn() {
     }
   };
 
+  const getUsers = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.get("http://localhost:6080/users");
+      const data = response.json(); //
+      console.log(data);
+    } catch (error) {
+      console.error("Error al obtener usuarios:", error);
+    }
+  };
+  
+ 
   return (
     <Box
       sx={{
         minWidth: "90vw",
-        minHeight: "70vh",
         display: { xs: "auto", md: "flex", lg: "flex" },
+        alignItems:'center',
+
       }}
     >
       <Box
@@ -87,6 +102,7 @@ export default function LogIn() {
           alignItems: "center",
           flexDirection: "column",
           px: "10vw",
+          mt:{xs:'10vh',md:'0'},
         }}
       >
         <Box
@@ -166,6 +182,7 @@ export default function LogIn() {
           <Button
             variant="contained"
             type="submit"
+            onClick={getUsers}
             sx={{
               color: "white",
               width: "90%",
@@ -211,6 +228,7 @@ export default function LogIn() {
             ¿Aún no tienes cuenta?
             <Button
               variant="text"
+              onClick={goToSignUp}
               sx={{
                 textTransform: "capitalize",
                 fontWeight: 600,
@@ -224,10 +242,10 @@ export default function LogIn() {
       </Box>
       <Box
         sx={{
-          height: "100vh",
+          height: {xs:'',md:"100vh",lg:"100vh"},
           width: { xs: "0", md: "50vw", lg: "50vw" },
           bgcolor: "blue",
-          backgroundImage: `url(${backgroundImageUrl})`,
+          backgroundImage: `url(${backgroundImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           p: 0,
@@ -238,6 +256,8 @@ export default function LogIn() {
           sx={{
             position: "absolute",
             height: "100%",
+            p:0,
+            m:0,
             width: { xs: "0", md: "50vw", lg: "50vw" },
             background:
               "linear-gradient(to bottom, rgba(0,145,223,0.2), rgba(0,145,223,0.9))",

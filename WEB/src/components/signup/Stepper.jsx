@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Box,Stepper, Step, TextField, StepLabel, Button, Typography, Checkbox, FormControlLabel, FormGroup, Alert } from '@mui/material';
+import { Box,Stepper, Step, TextField, StepLabel, Button, Typography, Checkbox, FormControlLabel, FormGroup, Alert, Grid, CardMedia } from '@mui/material';
+import BuyACar from '../../assets/ver-las-ofertas-de-carros.png'
+import ContactSeller from '../../assets/servicio-al-cliente-mazautos.png'
 
 const steps = ['Paso 1', 'Paso 2'];
 
@@ -20,7 +22,7 @@ export default function HorizontalLinearStepper() {
         status: '',
         message: ''
     });
-    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
 
@@ -32,7 +34,144 @@ export default function HorizontalLinearStepper() {
         return skipped.has(step);
     };
 
+    const [nameError, setNameError] = useState({
+        emailError:false,
+        message:'',
+    })
+    const [passwordError, setPasswordError] = useState({
+        emailError:false,
+        message:'',
+    })
+    const [emailError, setEmailError] = useState({
+        emailError:false,
+        message:'',
+    })
+    const [phoneError, setPhoneError] = useState({
+        phoneError:false,
+        message:'',
+    })
+    const [error, setError] = useState({
+        error:false,
+        message:'',
+    })
+
+    const [accept, setAccept] = useState(false);
+    const [acceptError, setAcceptError] = useState({
+        status:false,
+        bgcolor:'',
+        radius:'',
+        px:'',
+        m:''
+    });
+
+    const emailValidation = (email) => {
+        const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        return regex.test(email);
+    };
+    
+    const phoneValidation = (phone) => {
+        const regex = /^9\d{8}$/;
+        return regex.test(phone)
+    }
+
+    const handleCheckboxChange = (event) => {
+        setAccept(event.target.checked);
+    };
+
+    const validateStep0 = () => {
+        let hasError = false;
+
+        if (name.trim() === '') {
+            setNameError({
+                nameError: true,
+                message: 'El nombre no puede estar vacío',
+            });
+            hasError = true;
+        } else {
+            setNameError({
+                nameError: false,
+                message: '',
+            });
+        }
+
+        if (!emailValidation(email)) {
+            setEmailError({
+                emailError: true,
+                message: 'Ingresa un correo válido',
+            });
+            hasError = true;
+        } else {
+            setEmailError({
+                emailError: false,
+                message: '',
+            });
+        }
+
+        if (!phoneValidation(phone)) {
+            setPhoneError({
+                phoneError: true,
+                message: 'Debe ser un formato válido, ej: "987546321"',
+            });
+            hasError = true;
+        } else {
+            setPhoneError({
+                phoneError: false,
+                message: '',
+            });
+        }
+
+        if (password.trim() === '') {
+            setPasswordError({
+                passwordError: true,
+                message: 'La contraseña no puede estar vacía',
+            });
+            hasError = true;
+        } else {
+            setPasswordError({
+                passwordError: false,
+                message: '',
+            });
+        } 
+
+        if (accept === false) {
+            setAcceptError({
+                status: true,
+                weight: '600'
+
+            });
+            hasError = true
+        } else {
+            setAcceptError({
+                status:false,
+                bgcolor:'',
+                radius:'',
+                px:''
+            })
+        }
+
+        if (hasError) {
+            setAlert({
+                alert: true,
+                status: 'error',
+                message: 'Verifica los datos ingresados',
+            });
+            return false;
+        }
+
+        setAlert({
+            alert: false,
+            status: '',
+            message: '',
+        });
+
+        return true;
+    };
+
     const handleNext = () => {
+        if (activeStep === 0 && !validateStep0()) {
+            return;
+        }
+
         let newSkipped = skipped;
         if (isStepSkipped(activeStep)) {
             newSkipped = new Set(newSkipped.values());
@@ -42,6 +181,7 @@ export default function HorizontalLinearStepper() {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setSkipped(newSkipped);
     };
+
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -62,85 +202,6 @@ export default function HorizontalLinearStepper() {
 
     const handleReset = () => {
         setActiveStep(0);
-    };
-
-    const [emailError, setEmailError] = useState({
-        emailError:false,
-        message:'',
-    })
-    const [phoneError, setPhoneError] = useState({
-        phoneError:false,
-        message:'',
-    })
-    const [error, setError] = useState({
-        error:false,
-        message:'',
-    })
-
-    const emailValidation = (email) => {
-        const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-        return regex.test(email);
-    };
-    
-    const phoneValidation = (phone) => {
-        const regex = /^9\d{8}$/;
-        return regex.test(phone)
-    }
-    
-    const handleSubmit = (e) => {
-        e.preventDefault();
-    
-        let hasError = false;
-    
-        // Validación del correo electrónico
-        if (!emailValidation(email)) {
-            setEmailError({
-                emailError: true,
-                message: "Ingresa un correo válido",
-            });
-            hasError = true; // Marcar que hay un error
-        } else {
-            setEmailError({
-                emailError: false,
-                message: "",
-            });
-        }
-
-        // Validación del teléfono
-        if (!phoneValidation(phone)) {
-            setPhoneError({
-                phoneError: true,
-                message: `Debe ser un formato válido, ej: "987546321"`,
-            });
-            hasError = true; // Marcar que hay un error
-        } else {
-            setPhoneError({
-                phoneError: false,
-                message: "",
-            });
-        }
-    
-        if (hasError) {
-            setAlert({
-                alert:true,
-                status:'error',
-                message:'Verifica los datos ingresados'
-            })
-            return;
-        }
-    
-        console.log(email);
-        setError({
-            error: false,
-            message: "",
-        });
-
-        setAlert({
-            alert:true,
-            status:'success',
-            message:'Se han guardado los cambios'
-        })
-        // handleEdit()
     };
 
     return (
@@ -173,12 +234,80 @@ export default function HorizontalLinearStepper() {
                         alignItems: 'center',
                         minHeight: '70vh'
                     }}>
-                        <Typography sx={{ mt: 2, mb: 1 }}>
-                            ¡Todo listo! Ya puedes ver las ofertas
-                        </Typography>
+                        <Box sx={{
+                            minHeight:'30vh',
+                            minWidth:'45vw',
+                            borderRadius:'15px',
+                            bgcolor:'#0091DF49',
+                        }}>
+                            <Grid container gap={2} sx={{
+                                justifyContent:'center',
+                                height:'18vh',
+                            }}>
+                                <Grid item xs={12} md={12} lg={12}>
+                                    <Typography sx={{ 
+                                        mt: 2,
+                                        mb: 1,
+                                        fontSize:'1.4rem',
+                                        fontWeight:600,
+                                    }}>
+                                        ¡Todo listo! Ya puedes ver las ofertas
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={8} md={4} lg={4} sx={{
+                                    height:'100%',
+                                    borderRadius:'15px',
+                                    bgcolor:'white',
+                                    display:'flex',
+                                    flexDirection:'column',
+                                    alignItems:'center',
+                                    justifyContent:'center',
+                                    py:1,
+                                }}>
+                                    <CardMedia
+                                        component="img"
+                                        src={BuyACar}
+                                        sx={{
+                                            maxHeight:'80%',
+                                            objectFit:'contain',
+                                        }}
+                                    />
+                                    <Typography sx={{
+                                        fontWeight:'500'
+                                    }}>
+                                        Ver pools
+                                    </Typography>
+                                </Grid>
+                                <Grid item xs={8} md={4} lg={4} sx={{
+                                    height:'100%',
+                                    borderRadius:'15px',
+                                    bgcolor:'white',
+                                    display:'flex',
+                                    flexDirection:'column',
+                                    alignItems:'center',
+                                    justifyContent:'center',
+                                    py:1,
+                                }}>
+                                    <CardMedia
+                                        component="img"
+                                        src={ContactSeller}
+                                        sx={{
+                                            maxHeight:'50%',
+                                            my:'10%',
+                                            objectFit:'contain',
+                                        }}
+                                    />
+                                    <Typography sx={{
+                                        fontWeight:'500'
+                                    }}>
+                                        Ver pools
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        </Box>
                         <Button variant="contained" type="submit" sx={{
                             color: 'white',
-                            width: '90%',
+                            width: '46vw',
                             height: '45px',
                             borderRadius: '10px',
                             marginBottom: '20px',
@@ -234,6 +363,8 @@ export default function HorizontalLinearStepper() {
                                     label='Nombre'
                                     type='text'
                                     variant='outlined'
+                                    helperText={nameError.message}
+                                    error={nameError.nameError}
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     sx={{ my: 1, mx: 1, width: '90%' }}
@@ -243,6 +374,8 @@ export default function HorizontalLinearStepper() {
                                     label='Teléfono'
                                     type='phone'
                                     variant='outlined'
+                                    helperText={phoneError.message}
+                                    error={phoneError.phoneError}
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
                                     sx={{ my: 1, mx: 1, width: '90%' }}
@@ -252,6 +385,8 @@ export default function HorizontalLinearStepper() {
                                     label='Correo electrónico'
                                     type='email'
                                     variant='outlined'
+                                    helperText={emailError.message}
+                                    error={emailError.emailError}
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     sx={{ my: 1, mx: 1, width: '90%' }}
@@ -261,11 +396,19 @@ export default function HorizontalLinearStepper() {
                                     label='Contraseña'
                                     type='password'
                                     variant='outlined'
+                                    helperText={passwordError.message}
+                                    error={passwordError.passwordError}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     sx={{ my: 1, mx: 1, width: '90%' }}
                                 />
-                                {alert && alert.status === 'error'?  <Alert severity={alert.status}> {alert.message} </Alert>: null}
+                                <FormGroup sx={{
+                                    width:'90%',
+                                    m:'8px auto',
+                                }}>
+                                    <FormControlLabel required control={<Checkbox checked={accept} onChange={handleCheckboxChange} />} label="Acepto los términos y condiciones"  sx={{fontWeight:acceptError.weight}}/>
+                                </FormGroup>
+                                {alert && alert.status === 'error'?  <Alert sx={{width:'90%',m:'8px auto', borderRadius:'10px'}} severity={alert.status}> {alert.message} </Alert>: null}
                                 {alert && alert.status === 'success'?  <Alert severity={alert.status}> {alert.message} </Alert>: null}
                             </Box>
                             )}
@@ -312,13 +455,6 @@ export default function HorizontalLinearStepper() {
                                     onChange={(e) => setCity(e.target.value)}
                                     sx={{ my: 1, mx: 1, width: '90%' }}
                                 />
-                                <FormGroup sx={{
-                                    width:'90%',
-                                    my: 1, 
-                                    mx: 1,
-                                }}>
-                                    <FormControlLabel required control={<Checkbox />} label="Acepto los términos y condiciones" />
-                                </FormGroup>
                             </Box>
                             )}
                         </Box>
