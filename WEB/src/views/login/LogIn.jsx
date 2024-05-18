@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { UserContext } from "../../context/UsersContext";
 import { useNavigate } from "react-router-dom";
+import BGImage from "../../assets/mazautos-un-chico-comprando-un-auto-nuevo.jpg"
 import axios from "axios";
 
 export default function LogIn() {
@@ -19,11 +20,10 @@ export default function LogIn() {
     navigate("/");
   };
 
+  const goToSignUp = () => {
+    navigate("/signup")
+  }
   const { setUserId, setRole, saveToken } = useContext(UserContext);
-
-  const backgroundImageUrl =
-    "https://img.freepik.com/foto-gratis/hombre-guapo-joven-abrazando-coche-sala-exposicion-automoviles_1303-20420.jpg?t=st=1715829075~exp=1715832675~hmac=e2cfdbee8005ed6902ea24fd859b4c26b3019d75e6cadbcbbd5d2c0e13e6d815&w=2000";
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -216,6 +216,7 @@ export default function LogIn() {
                 fontWeight: 600,
                 fontSize: "1.1rem",
               }}
+              onClick={goToSignUp}
             >
               Regístrate
             </Button>
@@ -227,7 +228,7 @@ export default function LogIn() {
           height: "100vh",
           width: { xs: "0", md: "50vw", lg: "50vw" },
           bgcolor: "blue",
-          backgroundImage: `url(${backgroundImageUrl})`,
+          backgroundImage: `url(${BGImage})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           p: 0,

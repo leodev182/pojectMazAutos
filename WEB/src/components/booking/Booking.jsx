@@ -16,9 +16,8 @@ const Booking = () => {
     }}>
         <Grid container sx={{
             bgcolor:'white',
-            py:2,
-            px:1,
-            width:{xs:'96%', sm:'94%'},
+            p:2,
+            width:{xs:'94%', md:'94%'},
             border:'solid 1px #CFD8DB',
             borderRadius:'15px',
             display:'flex',
@@ -26,7 +25,7 @@ const Booking = () => {
             justifyItems: 'center',
             alignContent: 'center',
         }}>
-            <Grid item xs={5} sm={6} md={7} lg={7} sx={{
+            <Grid item xs={5} md={6} lg={6} sx={{
                 bgcolor:'#FFFFFF',
                 borderRadius:'15px',
                 border:'solid 1px #CFD8DB',
@@ -47,34 +46,35 @@ const Booking = () => {
                     }}
                 />
             </Grid>
-            <Grid item xs={7} sm={6} md={5} lg={5} sx={{
+            <Grid item xs={7} md={6} lg={6} sx={{
                 display:'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
                 alignContent: 'center',
-                px: {xs:'4vw', md:'2vw'},
+                pl: {xs:'2vw', md:'4vw'},
+                pr: {xs:'2vw', md:'2vw'},
             }}>
                 <Box sx={{
-                    my:0.5,
+                    py:0.5,
                     display:'flex',
                     justifyContent: 'left',
                     alignContent: 'center'
                 }}>
                     <Typography className='status'sx={{
-                        fontSize:{xs:'0.8rem',md:'1rem',lg:'1.2rem'}
+                        fontSize:{xs:'0.8rem',md:'1.2rem',lg:'1.4rem'}
                     }}>
                         En proceso
                     </Typography>
                     <Typography className='status'sx={{
                         mx:2,
-                        fontSize:{xs:'0.8rem',md:'1rem',lg:'1.2rem'}
+                        fontSize:{xs:'0.8rem',md:'1.2rem',lg:'1.4rem'}
                     }}>
                         |
                     </Typography>
                     <Typography className='date' sx={{
-                        fontSize:{xs:'0.8rem',md:'1rem',lg:'1.2rem'}
+                        fontSize:{xs:'0.8rem',md:'1.2rem',lg:'1.4rem'}
                     }}>
-                        31/05/2024
+                        Reserva del 31/05/2024
                     </Typography>
                 </Box>
                 <Box sx={{
