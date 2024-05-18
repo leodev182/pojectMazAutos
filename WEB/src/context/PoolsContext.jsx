@@ -4,7 +4,7 @@ export const MyContext = createContext({});
 
 const ContextProvider = ({ children }) => {
   const url = "/pools.json";
-  const url2 = "http://localhost:9080/pools";
+  // const url2 = "http://localhost:9080/pools";
   const [amount, setAmount] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [pools, setPools] = useState([]);
@@ -15,9 +15,6 @@ const ContextProvider = ({ children }) => {
     const data = await res.json();
     console.log(data);
     setPools([...data]);
-    const res2 = await fetch(url2);
-    const data2 = await res2.json();
-    console.log(data2.data);
   };
 
   useEffect(() => {

@@ -9,7 +9,7 @@ import {
   Typography,
   Divider,
 } from "@mui/material";
-import { MyContext } from "../../context/UsersContext";
+import { UserContext } from "../../context/UsersContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -19,7 +19,7 @@ export default function LogIn() {
     navigate("/");
   };
 
-  const { setUserId, setRole, saveToken } = useContext(MyContext);
+  const { setUserId, setRole, saveToken } = useContext(UserContext);
 
   const backgroundImageUrl =
     "https://img.freepik.com/foto-gratis/hombre-guapo-joven-abrazando-coche-sala-exposicion-automoviles_1303-20420.jpg?t=st=1715829075~exp=1715832675~hmac=e2cfdbee8005ed6902ea24fd859b4c26b3019d75e6cadbcbbd5d2c0e13e6d815&w=2000";
