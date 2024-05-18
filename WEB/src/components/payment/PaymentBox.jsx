@@ -1,34 +1,86 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Button, Box, Container, Typography, Accordion, AccordionSummary, AccordionDetails, Grid, TextField, Select, InputLabel, Divider } from '@mui/material';
-import MenuItem from '@mui/material/MenuItem';
-import { styled } from '@mui/material/styles';
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { useParams  } from 'react-router-dom';
-import { MyContext } from '../../context/PoolsContext';
+import React, { useState, useEffect, useContext } from "react";
+import {
+  Button,
+  Box,
+  Container,
+  Typography,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Grid,
+  TextField,
+  Select,
+  InputLabel,
+  Divider,
+} from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
+import { styled } from "@mui/material/styles";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { useParams } from "react-router-dom";
+import { MyContext } from "../../context/PoolsContext";
+import { UserContext } from "../../context/UsersContext";
+import axios from "axios";
 
 const PaymentBox = () => {
+  const { id } = useParams();
+  const { pools, quantity, amount } = useContext(MyContext);
+  const { token } = useContext(UserContext);
+  const [banks, setBanks] = useState([]);
+  const [selectedBank, setSelectedBank] = useState("");
+  const [payment, setPayment] = useState("");
+  const [voucher, setVoucher] = useState("");
+  const [booking, setBooking] = useState({
+    pool_id: "",
+    date: "",
+    quantity: 0,
+    amount: 0,
+    payment: "",
+    condition: "Pending",
+    bank: "",
+    voucher: "",
+    status: true,
+  });
+  console.log(pools);
 
-  const { pools, quantity, amount} = useContext(MyContext);
-
-  const { id } = useParams()
-  const poolIdsAsString = pools.map(pool => String(pool.id));
+  const poolIdsAsString = pools.map((pool) => String(pool.id));
   const index = poolIdsAsString.findIndex((poolId) => poolId === id);
   const poolDetails = pools[index];
 
-  console.log(amount);
-  console.log(quantity);
+  const createBookingId = async (id, token) => {
+    setBooking((prevBooking) => ({
+      ...prevBooking,
+      pool_id: id,
+      quantity: quantity,
+      amount: amount,
+      payment: payment,
+      bank: selectedBank,
+      voucher: voucher,
+    }));
+    // const data = await axios.post(
+    //   `http://localhost:9080/bookings/${id}`,
+    //   {
+    //     headers: { Authorization: `Bearer ${token}` },
+    //   },
+    //   {}
+    // );
+    // console.log(booking);
+  };
 
-  const url = '/accounts.json';
-  const [banks, setBanks] = useState([]);
-  const [selectedBank, setSelectedBank] = useState('');
-  const [expandedTransferAccordion, setExpandedTransferAccordion] = useState(false);
+  useEffect(() => {
+    console.log(booking);
+  }, [booking]);
+
+  const url = "/accounts.json";
+
+  const [expandedTransferAccordion, setExpandedTransferAccordion] =
+    useState(false);
   const [expandedCardAccordion, setExpandedCardAccordion] = useState(false);
 
   const getData = async () => {
     const res = await fetch(url);
     const data = await res.json();
     setBanks(data);
-  }
+  };
 
   useEffect(() => {
     getData();
@@ -36,61 +88,88 @@ const PaymentBox = () => {
 
   const bankInfo = (bank) => {
     return (
-      <Box fullWidth sx={{
-        border: 'solid 1px #B4BFC2',
-        borderRadius: '5px',
-        bgcolor:'#F1F1F1',
-        my:2,
-        pb:1,
-        pt:2,
-      }}>
-        <Box id="bankInfo" sx={{
-          display:'flex',
-          flexDirection:'column',
-          alignItems:'center',
-          justifyContent:'center',
-          p:2,
-        }}>
-          <Typography sx={{
-            fontSize:'1.2rem',
-            fontWeight:400,
-            my:0.2
-          }}>
+      <Box
+        fullWidth
+        sx={{
+          border: "solid 1px #B4BFC2",
+          borderRadius: "5px",
+          bgcolor: "#F1F1F1",
+          my: 2,
+          pb: 1,
+          pt: 2,
+        }}
+      >
+        <Box
+          id="bankInfo"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            p: 2,
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: "1.2rem",
+              fontWeight: 400,
+              my: 0.2,
+            }}
+          >
             Datos Bancarios
           </Typography>
-          <Box key={bank.id} sx={{
-            textAlign:'left',
-            width:{xs:'90%',md:'60%'},
-            border: 'solid 1px #B4BFC2',
-            borderRadius: '5px',
-            bgcolor:'#fff',
-            px:2
-          }}>
-            <Typography sx={{
-              py:0.5,
-              fontWeight:500
-            }}>{bank.bank}</Typography>
-            <Divider/>
-            <Typography sx={{
-              py:0.5
-            }}>{bank.name}</Typography>
-            <Divider/>
-            <Typography sx={{
-              py:0.5
-            }}>{bank.rut}</Typography>
-            <Divider/>
-            <Typography sx={{
-              py:0.5
-            }}>{bank.account}</Typography>
+          <Box
+            key={bank.id}
+            sx={{
+              textAlign: "left",
+              width: { xs: "90%", md: "60%" },
+              border: "solid 1px #B4BFC2",
+              borderRadius: "5px",
+              bgcolor: "#fff",
+              px: 2,
+            }}
+          >
+            <Typography
+              sx={{
+                py: 0.5,
+                fontWeight: 500,
+              }}
+            >
+              {bank.bank}
+            </Typography>
+            <Divider />
+            <Typography
+              sx={{
+                py: 0.5,
+              }}
+            >
+              {bank.name}
+            </Typography>
+            <Divider />
+            <Typography
+              sx={{
+                py: 0.5,
+              }}
+            >
+              {bank.rut}
+            </Typography>
+            <Divider />
+            <Typography
+              sx={{
+                py: 0.5,
+              }}
+            >
+              {bank.account}
+            </Typography>
           </Box>
         </Box>
       </Box>
     );
-  }
+  };
 
   const handleBankChange = (e) => {
     setSelectedBank(e.target.value);
-  }
+  };
 
   const handleTransferAccordionChange = () => {
     setExpandedTransferAccordion((prevExpanded) => !prevExpanded);
@@ -100,131 +179,166 @@ const PaymentBox = () => {
     setExpandedCardAccordion((prevExpanded) => !prevExpanded);
   };
 
-  const VisuallyHiddenInput = styled('input')({
-    clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
     height: 1,
-    overflow: 'hidden',
-    position: 'absolute',
+    overflow: "hidden",
+    position: "absolute",
     bottom: 0,
     left: 0,
-    whiteSpace: 'nowrap',
+    whiteSpace: "nowrap",
     width: 1,
   });
 
   return (
-    <Box fullWidth sx={{
-      bgcolor:'#ECEFF1',
-      minHeight:'100vh',
-      width:'100vw',
-      display:'flex',
-      justifyContent:'center',
-      alignItems:'center',
-    }}>
-      <Container sx={{
-        width:'60vw',
-        px: '10vw'
-      }}>
-        <Box sx={{
-          py: 2
-        }}>
-          <Typography sx={{
-                    fontSize:'1.4rem',
-                    fontWeight:600,
-                    py:2
-          }}>Completa el pago de tu reserva</Typography>
+    <Box
+      fullWidth
+      sx={{
+        bgcolor: "#ECEFF1",
+        minHeight: "100vh",
+        width: "100vw",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Container
+        sx={{
+          width: "60vw",
+          px: "10vw",
+        }}
+      >
+        <Box
+          sx={{
+            py: 2,
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: "1.4rem",
+              fontWeight: 600,
+              py: 2,
+            }}
+          >
+            Completa el pago de tu reserva
+          </Typography>
         </Box>
 
-        <Box fullWidth sx={{
-          border: 'solid 1px #B4BFC2',
-          borderRadius: '15px',
-          bgcolor: '#fff',
-          height:{xs:'150px', md:'200px'},
-          my: 2,
-          display:'flex',
-          alignItems:'center',
-          justifyContent:'center',
-          px:'10%'
-        }}>
-          <Grid container sx={{
-          }}>
+        <Box
+          fullWidth
+          sx={{
+            border: "solid 1px #B4BFC2",
+            borderRadius: "15px",
+            bgcolor: "#fff",
+            height: { xs: "150px", md: "200px" },
+            my: 2,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            px: "10%",
+          }}
+        >
+          <Grid container sx={{}}>
             <Grid item xs={8}>
-              <Typography variant='h5' sx={{
-                fontSize:{xs:'1rem', md:'1.4rem'},
-                py:1,
-                textAlign:'left'
-              }}>
-                Tu pagas: 
+              <Typography
+                variant="h5"
+                sx={{
+                  fontSize: { xs: "1rem", md: "1.4rem" },
+                  py: 1,
+                  textAlign: "left",
+                }}
+              >
+                Tu pagas:
               </Typography>
             </Grid>
             <Grid item xs={4}>
-              <Typography variant='h5' sx={{
-                fontSize:{xs:'1rem', md:'1.4rem'},
-                py:1,
-                fontWeight:600,
-                textAlign:'left'
-              }}>
+              <Typography
+                variant="h5"
+                sx={{
+                  fontSize: { xs: "1rem", md: "1.4rem" },
+                  py: 1,
+                  fontWeight: 600,
+                  textAlign: "left",
+                }}
+              >
                 $ {parseFloat(amount).toLocaleString("de-DE")}
               </Typography>
             </Grid>
             <Grid item xs={8}>
-              <Typography variant='h5' sx={{
-                fontSize:{xs:'1rem', md:'1.4rem'},
-                py:1,
-                textAlign:'left'
-              }}>
+              <Typography
+                variant="h5"
+                sx={{
+                  fontSize: { xs: "1rem", md: "1.4rem" },
+                  py: 1,
+                  textAlign: "left",
+                }}
+              >
                 Estás reservando:
               </Typography>
             </Grid>
             <Grid item xs={4}>
-              <Typography variant='h5' sx={{
-                fontSize:{xs:'1rem', md:'1.4rem'},
-                py:1,
-                fontWeight:600,
-                textAlign:'left'
-              }}>
+              <Typography
+                variant="h5"
+                sx={{
+                  fontSize: { xs: "1rem", md: "1.4rem" },
+                  py: 1,
+                  fontWeight: 600,
+                  textAlign: "left",
+                }}
+              >
                 {parseFloat(quantity).toLocaleString("de-DE")} autos
               </Typography>
             </Grid>
           </Grid>
         </Box>
 
-        <Typography variant='h5' sx={{
-          fontSize:'1.2rem',
-          fontWeight:600,
-          py:2
-        }}>
+        <Typography
+          variant="h5"
+          sx={{
+            fontSize: "1.2rem",
+            fontWeight: 600,
+            py: 2,
+          }}
+        >
           ¿Cómo deseas realizar el pago?
         </Typography>
 
-        <Box sx={{
-          py:2
-        }}>
+        <Box
+          sx={{
+            py: 2,
+          }}
+        >
           <Accordion
             square={true}
             expanded={expandedTransferAccordion}
             onChange={handleTransferAccordionChange}
             sx={{
               py: 4,
-              px:4,
-              border: 'solid 1px #CFD8DB',
-              borderRadius: '15px',
-              overflow: 'hidden'
+              px: 4,
+              border: "solid 1px #CFD8DB",
+              borderRadius: "15px",
+              overflow: "hidden",
             }}
           >
             <AccordionSummary aria-controls="panel1-content" id="panel1-header">
               <Grid container>
-                <Grid item xs={10} sx={{ textAlign: 'left' }}>
+                <Grid item xs={10} sx={{ textAlign: "left" }}>
                   <Typography>Pago por transferencia</Typography>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography sx={{ fontWeight: '600' }}>{expandedTransferAccordion ? 'Cerrar' : 'Elegir'}</Typography>
+                  <Typography sx={{ fontWeight: "600" }}>
+                    {expandedTransferAccordion ? "Cerrar" : "Elegir"}
+                  </Typography>
                 </Grid>
               </Grid>
             </AccordionSummary>
             <AccordionDetails>
-              <Box component='form'>
-                <InputLabel id="demo-simple-select-label" sx={{ textAlign: 'left', py: 0.5 }}>
+              <Box component="form">
+                <InputLabel
+                  id="demo-simple-select-label"
+                  sx={{ textAlign: "left", py: 0.5 }}
+                >
                   Banco
                 </InputLabel>
                 <Select
@@ -234,26 +348,28 @@ const PaymentBox = () => {
                   onChange={handleBankChange}
                   fullWidth
                 >
-                  {banks.map(bank => (
+                  {banks.map((bank) => (
                     <MenuItem key={bank.id} value={bank.id}>
                       {bank.bank}
                     </MenuItem>
                   ))}
                 </Select>
-                {banks.map(bank => {
+                {banks.map((bank) => {
                   if (bank.id === selectedBank) {
                     return bankInfo(bank);
                   }
                   return null;
                 })}
                 <TextField
-                  className='field'
-                  id='vaucher-id'
-                  label='Código de transferencia'
-                  type='text'
-                  variant='outlined'
+                  className="field"
+                  id="vaucher-id"
+                  label="Código de transferencia"
+                  type="text"
+                  variant="outlined"
                   fullWidth
                   sx={{ my: 1 }}
+                  value={voucher}
+                  onChange={(e) => setVoucher(e.target.value)}
                 />
                 <Button
                   component="label"
@@ -263,69 +379,84 @@ const PaymentBox = () => {
                   tabIndex={-1}
                   startIcon={<CloudUploadIcon />}
                   sx={{
-                    my:1,
-                    height:'6.5vh'
+                    my: 1,
+                    height: "6.5vh",
                   }}
                 >
                   Upload file
                   <VisuallyHiddenInput type="file" />
                 </Button>
               </Box>
-                      {/* Seccion de boton */}
-                <Box 
-                    sx={{
-                        textAlign: "left",
-                        py:1
-                    }}>
-                    <Button variant="contained" sx={{color: 'white',
-                        width: '100%',
-                        height: '55px', 
-                        borderRadius: '15px', 
-                        marginBottom: '20px',  
-                    }}
-                    >
-                    <Typography>
-                        Iniciar reserva
-                    </Typography>
+              {/* Seccion de boton */}
+              <Box
+                sx={{
+                  textAlign: "left",
+                  py: 1,
+                }}
+              >
+                <Button
+                  variant="contained"
+                  sx={{
+                    color: "white",
+                    width: "100%",
+                    height: "55px",
+                    borderRadius: "15px",
+                    marginBottom: "20px",
+                  }}
+                  onClick={() => {
+                    setPayment("Transfer");
+                    // console.log(payment);
+                    createBookingId();
+                  }}
+                >
+                  <Typography>Iniciar reserva</Typography>
                 </Button>
-                </Box>
+              </Box>
             </AccordionDetails>
           </Accordion>
         </Box>
-        <Box sx={{
-          py:2
-        }}>
+        <Box
+          sx={{
+            py: 2,
+          }}
+        >
           <Accordion
             square={true}
             expanded={expandedCardAccordion}
             onChange={handleCardAccordionChange}
             sx={{
               py: 4,
-              px:4,
-              border: 'solid 1px #CFD8DB',
-              borderRadius: '15px',
-              overflow: 'hidden'
+              px: 4,
+              border: "solid 1px #CFD8DB",
+              borderRadius: "15px",
+              overflow: "hidden",
             }}
           >
             <AccordionSummary aria-controls="panel1-content" id="panel1-header">
               <Grid container>
-                <Grid item xs={10} sx={{ textAlign: 'left' }}>
+                <Grid item xs={10} sx={{ textAlign: "left" }}>
                   <Typography>Pago por tarjeta</Typography>
                 </Grid>
                 <Grid item xs={2}>
-                  <Typography sx={{ fontWeight: '600' }}>{expandedCardAccordion ? 'Cerrar' : 'Elegir'}</Typography>
+                  <Typography sx={{ fontWeight: "600" }}>
+                    {expandedCardAccordion ? "Cerrar" : "Elegir"}
+                  </Typography>
                 </Grid>
               </Grid>
             </AccordionSummary>
             <AccordionDetails>
-              <Box sx={{
-                display:'flex',
-                alignItems:'center',
-                justifyContent:'center'
-              }}>
-                <Typography sx={{
-                  fontWeight:500
-                }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Typography
+                  sx={{
+                    fontWeight: 500,
+                  }}
+                >
                   Este medio de pago todavía no está disponible
                 </Typography>
               </Box>
@@ -338,4 +469,3 @@ const PaymentBox = () => {
 };
 
 export default PaymentBox;
-

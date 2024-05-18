@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 
-export const MyContext = createContext({});
+export const UserContext = createContext({});
 
 const ContextProvider = ({ children }) => {
   const [userId, setUserId] = useState(null);
@@ -18,7 +18,7 @@ const ContextProvider = ({ children }) => {
   };
 
   return (
-    <MyContext.Provider
+    <UserContext.Provider
       value={{
         token,
         saveToken,
@@ -30,7 +30,7 @@ const ContextProvider = ({ children }) => {
       }}
     >
       {children}
-    </MyContext.Provider>
+    </UserContext.Provider>
   );
 };
 
