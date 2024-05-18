@@ -1,31 +1,16 @@
 import React from "react";
-import Banner from "../../components/banner/Banner";
+import Banner from "../../components/banners/Banner";
+import WhyMazAutos from "../../components/banners/WhyMazAutos";
 import Pools from "../../components/pools/Pools";
-import PaymentBox from "../../components/payment/PaymentBox";
-import FileUpload from "../../components/payment/FileUpload";
-import PoolsCenter from "../../components/poolscenter/PoolsCenter";
-import PoolEditor from "../../components/pooleditor/PoolEditor";
-import Profile from "../../components/profile/Profile";
-import SignIn from "../../components/signin/SignIn";
-import Stepper from "../../components/signin/Stepper";
-import LogIn from "../../views/login/LogIn";
+import SuccessBooking from "../../components/prebooking/SuccessBooking";
 
 const Home = () => {
   return (
     <>
-      <Banner />
+      {/* <Banner />
       <Pools />
-      <Stepper />
-      {/* <PoolEditor /> */}
-      {/* <PreBooking /> */}
-      <PoolsCenter />
-      <PaymentBox />
-      <FileUpload />
-      {/* <Carrousel /> */}
-      {/* <PoolDetails /> */}
-      <LogIn />
-      <SignIn />
-      <Profile />
+      <WhyMazAutos/> */}
+      <SuccessBooking/>
     </>
   );
 };

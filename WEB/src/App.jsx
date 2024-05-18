@@ -7,6 +7,7 @@ import Manager from "./views/manager/Manager.jsx";
 import NotFound from "./views/notfound/NotFound.jsx";
 import Details from "./views/details/Details.jsx";
 import Payment from "./views/payment/Payment.jsx";
+import SignUp from "./views/signup/SignUp.jsx";
 import NavBar from "./components/navbar/NavBar.jsx";
 import PreBooking from "./components/prebooking/PreBooking.jsx";
 import PoolEditor from "./components/pooleditor/PoolEditor.jsx";
@@ -24,7 +25,7 @@ function App() {
         <Route path="/editor/:id" element={<PoolEditor />}></Route>
         <Route path="/booking" element={<Bookings />} />
         <Route path="/login" element={<LogIn />} />
-        <Route path="/login" element={<LogIn />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/manager" element={<Manager />} />
         <Route path="*" element={<NotFound />} />
