@@ -14,15 +14,12 @@ const ContextProvider = ({ children }) => {
     const apiUrl = useSecureUrl();
     const response = await axios.get(`${apiUrl.url}/pools`);
     const data = response.data.data;
-    console.table(data.data);
     setPools([...data]);
   };
 
   useEffect(() => {
     getDataPools();
   }, []);
-
-  console.log(pools);
 
   return (
     <MyContext.Provider

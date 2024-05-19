@@ -5,9 +5,9 @@ import { useState } from 'react';
 const ProfileBox = () => {
 
 
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState('luis.acosta@mazautos.com')
     const [name, setName] = useState('Luis')
-    const [lastName, setLastName] = useState('Taurik')
+    const [lastName, setLastName] = useState('Acosta')
     const [phone, setPhone] = useState('')
     const [enterprise, setEnterprise] = useState('')
     const [address, setAddress] = useState('')
@@ -154,8 +154,10 @@ const ProfileBox = () => {
         display:'flex',
         flexDirection:'column',
         alignItems:'center',
+        bgcolor: "#eceff1",
         justifyContent:'center',
-        my:2
+        my:0,
+        p:2,
     }}>
         <Box sx={{
             my:4,
@@ -166,6 +168,7 @@ const ProfileBox = () => {
             flexDirection:'column',
             alignItems:'center',
             justifyContent:'center',
+            bgcolor:'white', 
             border:'solid 1px #CFD8DB',
             borderRadius:'15px'
         }}>
@@ -200,22 +203,23 @@ const ProfileBox = () => {
                         my:1
                     }}
                 />
-
                 <TextField
-                    className='field' 
+                    className='field'
                     InputProps={{
                         readOnly: true,
                         sx: {
-                            backgroundColor: '#eceff1', 
+                            backgroundColor: '#eceff1',  
                         },
-                    }}               
-                    id='lastname'
-                    label='Apellidos'
-                    type='lastname'
+                    }}
+                    id='email'
+                    label='Email'
+                    type='email'
                     variant='outlined'
                     fullWidth
-                    value={lastName}
-                    onChange={(e)=> setLastName(e.target.value)}
+                    helperText={emailError.message}
+                    error={emailError.emailError}
+                    value={email}
+                    onChange={(e)=> setEmail(e.target.value)}
                     sx={{
                         my:1
                     }}
@@ -243,23 +247,22 @@ const ProfileBox = () => {
                         Editar datos
                 </Button>
 
+
                 <TextField
-                    className='field'
+                    className='field' 
                     InputProps={{
                         readOnly: bgInput.changes,
                         sx: {
-                            backgroundColor: bgInput.color, 
+                            backgroundColor: bgInput.color,
                         },
-                    }}
-                    id='email'
-                    label='Email'
-                    type='email'
+                    }}               
+                    id='lastname'
+                    label='Apellidos'
+                    type='lastname'
                     variant='outlined'
                     fullWidth
-                    helperText={emailError.message}
-                    error={emailError.emailError}
-                    value={email}
-                    onChange={(e)=> setEmail(e.target.value)}
+                    value={lastName}
+                    onChange={(e)=> setLastName(e.target.value)}
                     sx={{
                         my:1
                     }}

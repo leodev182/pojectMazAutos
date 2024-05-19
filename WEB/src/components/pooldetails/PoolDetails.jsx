@@ -1,21 +1,22 @@
 import { useContext } from "react";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-//import Box from '@mui/material/Box';
-import { Box } from "@mui/material";
-import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
+import { Box, Button, Divider, IconButton, Typography, Grid, Container, CardMedia, CardContent } from "@mui/material";
 import CarImage from "../../assets/maxus-T60-white-mazautos.jpeg";
 import InfoIcon from "@mui/icons-material/Info";
 import CarColor from "../carcolor/CarColor";
 import { LoadingBar } from "../loadingBar/LoadingBar";
-import { useNavigate } from "react-router-dom";
-import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
-import { Grid, Container } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { MyContext } from "../../context/PoolsContext";
+import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
+import CarIcon  from "../icons/CarIcon"
+import EngineIcon  from "../icons/EngineIcon"
+import TransmissionIcon  from "../icons/TransmissionIcon"
+import RangeIcon  from "../icons/RangeIcon"
+import CapacityIcon  from "../icons/CapacityIcon"
+import FuelIcon  from "../icons/FuelIcon"
+import SeatingsIcon  from "../icons/SeatingsIcon"
+import ColorIcon  from "../icons/ColorIcon"
+
+
 
 export default function PoolDetails() {
   const navigate = useNavigate();
@@ -100,7 +101,10 @@ export default function PoolDetails() {
                 color: "#37474f",
               }}
             >
-              <EmojiObjectsIcon />
+              <FuelIcon sx={{
+                height:'50px',
+                width:'50px',
+              }}/>
               <Typography
                 variant="h4"
                 sx={{
@@ -115,11 +119,14 @@ export default function PoolDetails() {
                 width: { xs: "30%", md: "20%", lg: "40%" },
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "space-around",
+                justifyContent: "",
                 color: "#37474f",
               }}
             >
-              <EmojiObjectsIcon />
+              <TransmissionIcon sx={{
+                height:'45px',
+                width:'45px',
+              }}/>
               <Typography
                 variant="h4"
                 sx={{
@@ -138,7 +145,11 @@ export default function PoolDetails() {
                 color: "#37474f",
               }}
             >
-              <EmojiObjectsIcon />
+
+              <CarIcon sx={{
+                height: '50px',
+                width: '50px',
+              }}/>
               <Typography
                 variant="h4"
                 sx={{
