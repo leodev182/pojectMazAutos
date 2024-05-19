@@ -7,6 +7,7 @@ import Manager from "./views/manager/Manager.jsx";
 import NotFound from "./views/notfound/NotFound.jsx";
 import Details from "./views/details/Details.jsx";
 import Payment from "./views/payment/Payment.jsx";
+import Pools from "./views/pools/Pools.jsx";
 import SignUp from "./views/signup/SignUp.jsx";
 import NavBar from "./components/navbar/NavBar.jsx";
 import PreBooking from "./components/prebooking/PreBooking.jsx";
@@ -26,7 +27,8 @@ function App() {
         <Route path="/booking" element={<Bookings />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/pools" element={<Pools/>} />
+        <Route path="/profile" element={<Profile/>} />
         <Route path="/manager" element={<Manager />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
