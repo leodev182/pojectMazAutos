@@ -7,13 +7,15 @@ import ContactSeller from '../../assets/servicio-al-cliente-mazautos.png'
 const steps = ['Paso 1', 'Paso 2'];
 
 export default function HorizontalLinearStepper() {
+    const [newUser, setnewUser] = useState({    })
     const [email, setEmail] = useState('');
-    const [name, setName] = useState('Luis');
-    const [lastName, setLastName] = useState('Taurik');
+    const [name, setName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [phone, setPhone] = useState('');
     const [enterprise, setEnterprise] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
+    const [country, setCountry] = useState('Chile');
     const [district, setDistrict] = useState('');
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
@@ -23,6 +25,26 @@ export default function HorizontalLinearStepper() {
         message: ''
     });
 
+    const dataUser = {
+        name,
+        lastName,
+        email,
+        password,
+        phone,
+        address,
+        district,
+        city,
+        country,
+        enterprise,
+        status: true,
+
+    }
+
+    const handleSumbit = () => {
+        setnewUser(dataUser);
+        console.log(dataUser)
+
+    }
     const [activeStep, setActiveStep] = useState(0);
     const [skipped, setSkipped] = useState(new Set());
 
@@ -180,6 +202,10 @@ export default function HorizontalLinearStepper() {
 
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setSkipped(newSkipped);
+
+        if(activeStep === steps.length - 1 ) {
+            handleSumbit();
+        }
     };
 
 
@@ -357,7 +383,7 @@ export default function HorizontalLinearStepper() {
                             </Typography>
                             )}
                             {activeStep === 0 && (
-                            <Box>
+                            <Box component="form">
                                 <TextField
                                     id='name'
                                     label='Nombre'
@@ -367,6 +393,15 @@ export default function HorizontalLinearStepper() {
                                     error={nameError.nameError}
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
+                                    sx={{ my: 1, mx: 1, width: '90%' }}
+                                />
+                                <TextField
+                                    id='lastname'
+                                    label='Apellidos (Opcional)'
+                                    type='text'
+                                    variant='outlined'
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
                                     sx={{ my: 1, mx: 1, width: '90%' }}
                                 />
                                 <TextField

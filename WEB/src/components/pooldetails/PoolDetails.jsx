@@ -778,7 +778,7 @@ export default function PoolDetails() {
                       fontSize: "0.8rem",
                     }}
                   >
-                    {poolDetails.capaci}
+                    {poolDetails.capacity}
                   </Typography>
                 </Grid>
                 <Grid
