@@ -27,7 +27,7 @@ const steps = ["Paso 1", "Paso 2"];
 //   };
 
 export default function HorizontalLinearStepper() {
-  const { setApi, setRequest } = useContext(RequestContext);
+  const { api, setApi, setRequest, getRequests } = useContext(RequestContext);
   const [newUser, setnewUser] = useState({});
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -60,12 +60,10 @@ export default function HorizontalLinearStepper() {
     status: true,
   };
 
-  const handleSumbit = () => {
-    // setnewUser(dataUser);
-    // console.log(dataUser)
-    setApi("users");
-    setRequest(dataUser);
+  const handleSubmit = () => {
+    getRequests("users", dataUser);
   };
+  console.log(dataUser);
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
 
