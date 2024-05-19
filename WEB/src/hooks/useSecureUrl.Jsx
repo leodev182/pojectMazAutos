@@ -2,7 +2,7 @@ const useSecureUrl = () => {
   const port = 9080;
   const url = () => {
     const urlBase = {
-      url: `http://localhost/${port}`,
+      url: `http://localhost:${port}`,
     };
     return urlBase;
   };
