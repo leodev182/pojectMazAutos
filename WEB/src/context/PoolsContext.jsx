@@ -1,24 +1,25 @@
 import React, { createContext, useEffect, useState } from "react";
+import axios from "axios";
+import useSecureUrl from "../hooks/useSecureUrl.Jsx";
 
 export const MyContext = createContext({});
 
 const ContextProvider = ({ children }) => {
-  const url = "/pools.json";
-  // const url2 = "http://localhost:9080/pools";
   const [amount, setAmount] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [pools, setPools] = useState([]);
   const [payment, setPayment] = useState("");
 
-  const getData = async () => {
-    const res = await fetch(url);
-    const data = await res.json();
-    console.log(data);
+  const getDataPools = async () => {
+    const apiUrl = useSecureUrl();
+    const response = await axios.get(`${apiUrl.url}/pools`);
+    const data = response.data.data;
+    console.table(data.data);
     setPools([...data]);
   };
 
   useEffect(() => {
-    getData();
+    getDataPools();
   }, []);
 
   console.log(pools);

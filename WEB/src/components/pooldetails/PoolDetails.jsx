@@ -32,7 +32,9 @@ export default function PoolDetails() {
   const goToCheckout = () => {
     navigate(`/checkout/${poolDetails.id}`);
   };
-  const formattedPrice = parseFloat(poolDetails.price).toLocaleString("de-DE");
+  const formattedPrice = parseFloat(poolDetails.initial_price).toLocaleString(
+    "de-DE"
+  );
   const formattedSavedPrice = parseFloat(
     poolDetails.saved_price
   ).toLocaleString("de-DE");
