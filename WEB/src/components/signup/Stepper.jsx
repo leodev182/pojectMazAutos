@@ -3,8 +3,13 @@ import { useState } from 'react';
 import { Box,Stepper, Step, TextField, StepLabel, Button, Typography, Checkbox, FormControlLabel, FormGroup, Alert, Grid, CardMedia } from '@mui/material';
 import BuyACar from '../../assets/ver-las-ofertas-de-carros.png'
 import ContactSeller from '../../assets/servicio-al-cliente-mazautos.png'
+// import { useNavigate } from "react-router-dom";
 
 const steps = ['Paso 1', 'Paso 2'];
+// const navigate = useNavigate();
+// const goToPools = () => {
+//     navigate('/pools');
+//   };
 
 export default function HorizontalLinearStepper() {
     const [newUser, setnewUser] = useState({    })
@@ -40,7 +45,7 @@ export default function HorizontalLinearStepper() {
 
     }
 
-    const handleSumbit = () => {
+    const handleSubmit = () => {
         setnewUser(dataUser);
         console.log(dataUser)
 
@@ -204,7 +209,7 @@ export default function HorizontalLinearStepper() {
         setSkipped(newSkipped);
 
         if(activeStep === steps.length - 1 ) {
-            handleSumbit();
+            handleSubmit();
         }
     };
 
@@ -216,6 +221,7 @@ export default function HorizontalLinearStepper() {
     const handleSkip = () => {
         if (!isStepOptional(activeStep)) {
             throw new Error("No puedes saltarte esta etapa.");
+            handleSubmit();
         }
 
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -280,7 +286,7 @@ export default function HorizontalLinearStepper() {
                                         ¡Todo listo! Ya puedes ver las ofertas
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={8} md={4} lg={4} sx={{
+                                <Grid item xs={8} md={4} lg={4} component="a" href="/pools" sx={{
                                     height:'100%',
                                     borderRadius:'15px',
                                     bgcolor:'white',
