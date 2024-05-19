@@ -237,7 +237,12 @@ export default function HorizontalLinearStepper() {
     };
 
     return (
-        <Box sx={{ width: '100%', py: 6, px: 6 }}>
+        <Box sx={{ 
+            width: '100%', 
+            py: 6, 
+            px: 6,
+            bgcolor:'#eceff1',    
+        }}>
             <Stepper activeStep={activeStep}>
                 {steps.map((label, index) => {
                     const stepProps = {};
@@ -270,16 +275,17 @@ export default function HorizontalLinearStepper() {
                             minHeight:'30vh',
                             minWidth:'45vw',
                             borderRadius:'15px',
-                            bgcolor:'#0091DF49',
+                            bgcolor:'white',
                         }}>
                             <Grid container gap={2} sx={{
                                 justifyContent:'center',
-                                height:'18vh',
+                                height:{xs:'60vh',md:'18vh',lg:'18vh'},
                             }}>
                                 <Grid item xs={12} md={12} lg={12}>
                                     <Typography sx={{ 
                                         mt: 2,
                                         mb: 1,
+                                        px:{xs:2, md:'0'},
                                         fontSize:'1.4rem',
                                         fontWeight:600,
                                     }}>
@@ -287,8 +293,10 @@ export default function HorizontalLinearStepper() {
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={8} md={4} lg={4} component="a" href="/pools" sx={{
-                                    height:'100%',
+                                    height:{xs:'25%',md:'100%',lg:'100%'},
                                     borderRadius:'15px',
+                                    border:'solid 1px #0091DFA8',
+                                    boxShadow:'6px 6px 11px -7px rgba(19,23,69,0.3)', 
                                     bgcolor:'white',
                                     display:'flex',
                                     flexDirection:'column',
@@ -300,7 +308,7 @@ export default function HorizontalLinearStepper() {
                                         component="img"
                                         src={BuyACar}
                                         sx={{
-                                            maxHeight:'80%',
+                                            maxHeight:'75%',
                                             objectFit:'contain',
                                         }}
                                     />
@@ -310,10 +318,17 @@ export default function HorizontalLinearStepper() {
                                         Ver pools
                                     </Typography>
                                 </Grid>
-                                <Grid item xs={8} md={4} lg={4} sx={{
-                                    height:'100%',
+                                <Grid item xs={8} md={4} lg={4} 
+                                component="a" 
+                                href="https://wa.link/c1zf3q" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                sx={{
+                                    height:{xs:'25%',md:'100%',lg:'100%'},
                                     borderRadius:'15px',
+                                    border:'solid 1px #0091DFA8',
                                     bgcolor:'white',
+                                    boxShadow:'6px 6px 11px -7px rgba(19,23,69,0.3)', 
                                     display:'flex',
                                     flexDirection:'column',
                                     alignItems:'center',
@@ -325,14 +340,14 @@ export default function HorizontalLinearStepper() {
                                         src={ContactSeller}
                                         sx={{
                                             maxHeight:'50%',
-                                            my:'10%',
+                                            my:{xs:'2%',md:'10%',lg:'10%'},
                                             objectFit:'contain',
                                         }}
                                     />
                                     <Typography sx={{
                                         fontWeight:'500'
                                     }}>
-                                        Ver pools
+                                        Contactar a un asesor
                                     </Typography>
                                 </Grid>
                             </Grid>
@@ -358,7 +373,9 @@ export default function HorizontalLinearStepper() {
                 <React.Fragment>
                     <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
                     <Box sx={{
-                        width: '90vw',
+                        width:'100%',
+                        p:0,
+                        m:0,
                         minHeight: '60vh',
                         display: 'flex',
                         justifyContent: 'center',
@@ -367,6 +384,7 @@ export default function HorizontalLinearStepper() {
                         <Box component='form' sx={{
                             width: { xs: '80vw', md: '60vw', lg: '50vw' },
                             border: 'solid 1px #CFD8DB',
+                            bgcolor:'white',
                             borderRadius: '15px',
                             py: 4,
                         }}>
