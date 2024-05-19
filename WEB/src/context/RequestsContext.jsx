@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import useSecureUrl from "../hooks/useSecureUrl.jsx";
+// import useSecureUrl from "../hooks/useSecureUrl.jsx";
 
 export const RequestContext = createContext({});
 
@@ -9,7 +9,7 @@ const ContextProvider = ({ children }) => {
   const [request, setRequest] = useState([]);
   const [api, setApi] = useState("");
   const [loading, setLoading] = useState(true);
-  const url = useSecureUrl();
+  // const url = useSecureUrl();
 
   useEffect(() => {
     const getRequests = async () => {
