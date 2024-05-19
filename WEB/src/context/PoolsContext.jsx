@@ -1,10 +1,10 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import useSecureUrl from "../hooks/useSecureUrl.Jsx";
+import useSecureUrl from "../hooks/useSecureUrl";
 
 export const MyContext = createContext({});
 
-const ContextProvider = ({ children }) => {
+const PoolsContextProvider = ({ children }) => {
   const [amount, setAmount] = useState(0);
   const [quantity, setQuantity] = useState(0);
   const [pools, setPools] = useState([]);
@@ -39,4 +39,4 @@ const ContextProvider = ({ children }) => {
   );
 };
 
-export default ContextProvider;
+export default PoolsContextProvider;
