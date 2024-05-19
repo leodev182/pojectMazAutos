@@ -221,10 +221,10 @@ export default function HorizontalLinearStepper() {
     const handleSkip = () => {
         if (!isStepOptional(activeStep)) {
             throw new Error("No puedes saltarte esta etapa.");
-            handleSubmit();
         }
 
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        handleSubmit();
         setSkipped((prevSkipped) => {
             const newSkipped = new Set(prevSkipped.values());
             newSkipped.add(activeStep);
