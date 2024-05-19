@@ -39,8 +39,38 @@ const PoolEditor = () => {
           console.error('Error uploading file:', error);
         }
       };
-      console.log(poolDetails.engine)
 
+      const [brand,setBrand] = useState('')
+      const [model,setModel] = useState('')
+      const [year,setYear] = useState('')
+      const [type,setType] = useState('')
+      const [fuel,setFuel] = useState('')
+      const [capacity,setCapacity] = useState('')
+      const [seatings,setSeatings] = useState('')
+      const [range,setRange] = useState('')
+      const [version,setVersion] = useState('')
+      const [transmission,setTransmission] = useState('')
+      const [engine,setEngine] = useState('')
+      const [price,setPrice] = useState('')
+      const [savedPrice,setSavedPrice] = useState('')
+      const [goal,setGoal] = useState('')
+      const [quantity,setQuantity] = useState('')
+
+    //   setBrand(poolDetails.brand)
+    //   setModel(poolDetails.model)
+    //   setYear(poolDetails.year)
+    //   setType(poolDetails.type)
+    //   setFuel(poolDetails.fuel)
+    //   setCapacity(poolDetails.capacity)
+    //   setSeatings(poolDetails.seatings)
+    //   setRange(poolDetails.range)
+    //   setVersion(poolDetails.version)
+    //   setTransmission(poolDetails.transmission)
+    //   setEngine(poolDetails.engine)
+    //   setPrice(poolDetails.price)
+    //   setSavedPrice(poolDetails.saved_price)
+    //   setGoal(poolDetails.goal_quantity)
+      
   return (
     <Container sx={{
         minHeight:'100vh',
@@ -117,7 +147,7 @@ const PoolEditor = () => {
                     variant='outlined'
                     defaultValue={poolDetails.brand}
                     // value={brand}
-                    // onChange={(e)=> setBrand(e.target.value)}
+                    onChange={(e)=> setBrand(e.target.value)}
                     sx={{
                         my:1,
                         mx:1,
@@ -131,7 +161,7 @@ const PoolEditor = () => {
                     variant='outlined'
                     defaultValue={poolDetails.model}
                     // value={model}
-                    // onChange={(e)=> setModel(e.target.value)}
+                    onChange={(e)=> setModel(e.target.value)}
                     sx={{
                         my:1,
                         mx:1,
@@ -145,7 +175,7 @@ const PoolEditor = () => {
                     variant='outlined'
                     defaultValue={poolDetails.year}
                     // value={year}
-                    // onChange={(e)=> setYear(e.target.value)}
+                    onChange={(e)=> setYear(e.target.value)}
                     sx={{
                         my:1,
                         mx:1,
@@ -159,7 +189,7 @@ const PoolEditor = () => {
                     variant='outlined'
                     defaultValue={poolDetails.type}
                     // value={type}
-                    // onChange={(e)=> setType(e.target.value)}
+                    onChange={(e)=> setType(e.target.value)}
                     sx={{
                         my:1,
                         mx:1,
@@ -173,7 +203,7 @@ const PoolEditor = () => {
                     variant='outlined'
                     defaultValue={poolDetails.fuel}
                     // value={fuel}
-                    // onChange={(e)=> setFuel(e.target.value)}
+                    onChange={(e)=> setFuel(e.target.value)}
                     sx={{
                         my:1,
                         mx:1,
@@ -187,7 +217,7 @@ const PoolEditor = () => {
                     variant='outlined'
                     defaultValue={poolDetails.capacity}
                     // value={capacity}
-                    // onChange={(e)=> setCapacity(e.target.value)}
+                    onChange={(e)=> setCapacity(e.target.value)}
                     sx={{
                         my:1,
                         mx:1,
@@ -201,7 +231,7 @@ const PoolEditor = () => {
                     variant='outlined'
                     defaultValue={poolDetails.seatings}
                     // value={seatings}
-                    // onChange={(e)=> setSeatings(e.target.value)}
+                    onChange={(e)=> setSeatings(e.target.value)}
                     sx={{
                         my:1,
                         mx:1,
@@ -215,7 +245,7 @@ const PoolEditor = () => {
                     variant='outlined'
                     defaultValue={poolDetails.range}
                     // value={range}
-                    // onChange={(e)=> setRange(e.target.value)}
+                    onChange={(e)=> setRange(e.target.value)}
                     sx={{
                         my:1,
                         mx:1,
@@ -229,7 +259,7 @@ const PoolEditor = () => {
                     variant='outlined'
                     defaultValue={poolDetails.version}
                     // value={version}
-                    // onChange={(e)=> setVersion(e.target.value)}
+                    onChange={(e)=> setVersion(e.target.value)}
                     sx={{
                         my:1,
                         mx:1,
@@ -243,7 +273,7 @@ const PoolEditor = () => {
                     variant='outlined'
                     defaultValue={poolDetails.transmission}
                     // value={transmission}
-                    // onChange={(e)=> setTransmission(e.target.value)}
+                    onChange={(e)=> setTransmission(e.target.value)}
                     sx={{
                         my:1,
                         mx:1,
@@ -257,7 +287,7 @@ const PoolEditor = () => {
                     variant='outlined'
                     defaultValue={poolDetails.engine}
                     // value={engine}
-                    // onChange={(e)=> setEngine(e.target.value)}
+                    onChange={(e)=> setEngine(e.target.value)}
                     sx={{
                         my:1,
                         mx:1,
@@ -282,7 +312,7 @@ const PoolEditor = () => {
                     variant='outlined'
                     defaultValue={poolDetails.price}
                     // value={price}
-                    // onChange={(e)=> setPrice(e.target.value)}
+                    onChange={(e)=> setPrice(e.target.value)}
                     sx={{
                         my:1,
                         mx:1,
@@ -296,7 +326,7 @@ const PoolEditor = () => {
                     variant='outlined'
                     defaultValue={poolDetails.saved_price}
                     // value={savedPrice}
-                    // onChange={(e)=> setSavedPrice(e.target.value)}
+                    onChange={(e)=> setSavedPrice(e.target.value)}
                     sx={{
                         my:1,
                         mx:1,
@@ -310,7 +340,7 @@ const PoolEditor = () => {
                     variant='outlined'
                     defaultValue={poolDetails.goal_quantity}
                     // value={goal}
-                    // onChange={(e)=> setGoal(e.target.value)}
+                    onChange={(e)=> setGoal(e.target.value)}
                     sx={{
                         my:1,
                         mx:1,
@@ -318,17 +348,40 @@ const PoolEditor = () => {
                     }}
                 />
             </Box>
+
+            {/* Seccion de vista previa */}
                 <CardContent sx={{textAlign:'left'}}>
-                    <Typography  variant='h5' 
-                        sx={{ fontSize:'1.2rem'
-                            }}>
-                        {poolDetails.brand} {poolDetails.model} {poolDetails.year}
-                    </Typography>
-                    <Typography variant='h5' 
-                        sx={{fontSize:'0.8rem'
-                            }}>
-                        {poolDetails.version}
-                    </Typography>
+                    <CardMedia
+                        component="img"
+                        src={`${poolDetails.image}`}
+                        alt={`${poolDetails.brand} ${poolDetails.model} ${poolDetails.year}`}
+                        sx={{
+                            my:1,
+                            maxHeight:'2300px',
+                            maxWidth:'430px',
+                            px:'60px',
+                            border:'solid 1px #b0bec5',
+                            borderRadius:'15px',
+                            m:"auto auto",
+                        }}
+                    />
+                    <Box sx={{
+                        mt:4
+                    }}>
+                        <Typography  variant='h5' 
+                            sx={{ fontSize:'1.2rem'
+                                }}>
+                            {poolDetails.brand} {poolDetails.model} {poolDetails.year}
+                        </Typography>
+                        <Typography variant='h5' 
+                            sx={{fontSize:'0.8rem'
+                                }}>
+                            {poolDetails.version}
+                        </Typography>
+                    </Box>
+                    <Box>
+
+                    </Box>
             </CardContent>
             <Divider variant="middle"/>
                 
@@ -392,7 +445,7 @@ const PoolEditor = () => {
                 
 
 
-                <LoadingBar value={poolDetails.quantity} goal={poolDetails.goal_quantity} />
+                <LoadingBar value={0} goal={poolDetails.goal_quantity} />
 
             
 

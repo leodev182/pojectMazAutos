@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Typography, TextField, Button, Divider, Alert, Container } from '@mui/material';
 import { useState } from 'react';
 
-const Profile = () => {
+const ProfileBox = () => {
 
 
     const [email, setEmail] = useState('')
@@ -432,4 +432,4 @@ const Profile = () => {
     )
 }
 
-export default Profile
+export default ProfileBox
