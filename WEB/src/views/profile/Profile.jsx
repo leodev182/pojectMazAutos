@@ -1,7 +1,8 @@
 import React from "react";
+import ProfileBox from "../../components/profile/ProfileBox"
 
 const Profile = () => {
-  return <div>Profile</div>;
+  return <ProfileBox/>;
 };
 
 export default Profile;
