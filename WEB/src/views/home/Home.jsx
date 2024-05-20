@@ -7,10 +7,10 @@ import SuccessBooking from "../../components/prebooking/SuccessBooking";
 const Home = () => {
   return (
     <>
-      {/* <Banner />
+      <Banner />
       <Pools />
-      <WhyMazAutos/> */}
-      <SuccessBooking/>
+      <WhyMazAutos/>
+      {/* <SuccessBooking/> */}
     </>
   );
 };

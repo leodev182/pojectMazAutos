@@ -40,7 +40,6 @@ const PaymentBox = () => {
     voucher: "",
     status: true,
   });
-  console.log(pools);
 
   const poolIdsAsString = pools.map((pool) => String(pool.id));
   const index = poolIdsAsString.findIndex((poolId) => poolId === id);
@@ -85,7 +84,7 @@ const PaymentBox = () => {
   useEffect(() => {
     getData();
   }, []);
-
+  console.log(banks)
   const bankInfo = (bank) => {
     return (
       <Box

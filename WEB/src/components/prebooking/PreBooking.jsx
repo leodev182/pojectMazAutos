@@ -1,25 +1,18 @@
-// import React from 'react'
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { Box, Button, Divider, Typography, Grid, Container, Select, MenuItem } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
-import { Box } from "@mui/material";
-import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
+import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
 import InfoIcon from "@mui/icons-material/Info";
-// import WarningIcon from '@mui/icons-material/Warning';
 import { LoadingBar } from "../loadingBar/LoadingBar";
-import { Grid, Container, Select, MenuItem } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { MyContext } from "../../context/PoolsContext";
 
 const PreBooking = () => {
   const navigate = useNavigate();
-  const { pools, setPools, amount, setAmount, quantity, setQuantity } =
-    useContext(MyContext);
+  const { pools, setPools, amount, setAmount, quantity, setQuantity } = useContext(MyContext);
   const { id } = useParams();
   const poolIdsAsString = pools.map((pool) => String(pool.id));
   const index = poolIdsAsString.findIndex((poolId) => poolId == id);
@@ -34,9 +27,8 @@ const PreBooking = () => {
     }
     setPools([...ClientOrder]);
     setAmount((prevAmount) => {
-      const totalAmount = prevAmount + poolDetails.price * quantity;
+      const totalAmount = prevAmount + poolDetails.initial_price * quantity;
       const amountToPay = totalAmount * 0.05;
-      console.log(amountToPay);
       return amountToPay;
     });
   };
@@ -44,42 +36,13 @@ const PreBooking = () => {
   const goToPayment = () => {
     const paymentUrl = `/payment/${id}`;
     navigate(paymentUrl);
-    console.log(amount);
-    console.log(quantity);
-  };
-
-  //   const colorNames = {
-  //     blue: "Azul",
-  //     red: "Rojo",
-  //     white: "Blanco",
-  //     black: "Negro",
-  //     grey: "Gris",
-  //   };
-
-  const colorNames = [
-    { name: "Azul", color: "blue", status: "" },
-    { name: "Rojo", color: "blue", status: "" },
-    { name: "Blanco", color: "blue", status: "" },
-    { name: "Blanco", color: "blue", status: "" },
-    { name: "Blanco", color: "blue", status: "" },
-  ];
-
-  const [selectedColor, setSelectedColor] = useState({
-    color: poolDetails.colors[0],
-    name: colorNames[poolDetails.colors[0]],
-  });
-  const handleColorChange = (e) => {
-    const selectedColorName = colorNames[e.target.value];
-    setSelectedColor({ color: e.target.value, name: selectedColorName });
   };
 
   const carAvailability = poolDetails.goal_quantity - poolDetails.quantity;
-  const formattedPrice = parseFloat(poolDetails.price).toLocaleString("de-DE");
-  const formattedSavedPrice = parseFloat(
-    poolDetails.saved_price
-  ).toLocaleString("de-DE");
+  const formattedPrice = parseFloat(poolDetails.initial_price).toLocaleString("de-DE");
+  const formattedSavedPrice = parseFloat(poolDetails.saved_price).toLocaleString("de-DE");
   const bookingAmount = () => {
-    const amount = quantity * (poolDetails.price * 0.05);
+    const amount = quantity * (poolDetails.initial_price * 0.05);
     return parseFloat(amount).toLocaleString("de-DE");
   };
 
@@ -412,45 +375,6 @@ const PreBooking = () => {
                 >
                   +
                 </Button>
-              </Grid>
-            </Grid>
-            <Grid
-              container
-              sx={{
-                alignItems: "center",
-                py: 1,
-              }}
-            >
-              <Grid
-                item
-                xs={7.6}
-                sx={{
-                  textAlign: "left",
-                }}
-              >
-                Selecciona el color de tu flota
-              </Grid>
-              <Grid item xs={4.4}>
-                <Select
-                  value={selectedColor.color}
-                  onChange={handleColorChange}
-                  variant="outlined"
-                  fullWidth
-                  sx={{
-                    "& .MuiSelect-select": {
-                      textAlign: "center",
-                    },
-                    "& .MuiSelect-icon": {
-                      right: "5px",
-                    },
-                  }}
-                >
-                  {colorNames.map((color, index) => (
-                    <MenuItem key={index} value={color}>
-                      {color}
-                    </MenuItem>
-                  ))}
-                </Select>
               </Grid>
             </Grid>
           </Box>
@@ -895,45 +819,6 @@ const PreBooking = () => {
                       </Button>
                     </Grid>
                   </Grid>
-                  <Grid
-                    container
-                    sx={{
-                      alignItems: "center",
-                      py: 1,
-                    }}
-                  >
-                    <Grid
-                      item
-                      xs={7.6}
-                      sx={{
-                        textAlign: "left",
-                      }}
-                    >
-                      Selecciona el color de tu flota
-                    </Grid>
-                    <Grid item xs={4.4}>
-                      <Select
-                        value={selectedColor.color}
-                        onChange={handleColorChange}
-                        variant="outlined"
-                        fullWidth
-                        sx={{
-                          "& .MuiSelect-select": {
-                            textAlign: "center",
-                          },
-                          "& .MuiSelect-icon": {
-                            right: "5px",
-                          },
-                        }}
-                      >
-                        {colorNames.map((color, index) => (
-                          <MenuItem key={index} value={color}>
-                            {color.value}
-                          </MenuItem>
-                        ))}
-                      </Select>
-                    </Grid>
-                  </Grid>
                 </Box>
               </Box>
             </Container>
@@ -1036,224 +921,6 @@ const PreBooking = () => {
           </Grid>
         </Grid>
       </Container>
-
-      {/* //////////////////////////// */}
-      {/* //////////////////////////// */}
-      {/* //////////////////////////// */}
-      {/* //////////////////////////// */}
-      {/* //////////////////////////// */}
-      {/* //////////////////////////// */}
-      {/* //////////////////////////// */}
-      {/* //////////////////////////// */}
-      {/* //////////////////////////// */}
-      {/* //////////////////////////// */}
-
-      {/* 
-            <Box component='form' onSubmit={handleSubmit} sx={{
-                width:'90%',
-                maxWidth:'600px',
-                display:'flex',
-                flexDirection:'column',
-                alignItems:'center',
-                justifyContent:'center'
-            }}>
-                <Button variant='contained'
-                        onClick={handleEdit} sx={{
-                        color: 'white',
-                        display: showEditButton.display,
-                        my:2,
-                        width:'100%',
-                        height: '45px', 
-                        borderRadius: '10px', 
-                        marginBottom: '20px',  
-                    }}>
-                        Editar datos
-                </Button>
-
-                <TextField
-                    className='field'
-                    InputProps={{
-                        readOnly: bgInput.changes,
-                        sx: {
-                            backgroundColor: bgInput.color, 
-                        },
-                    }}
-                    id='email'
-                    label='Email'
-                    type='email'
-                    variant='outlined'
-                    fullWidth
-                    helperText={emailError.message}
-                    error={emailError.emailError}
-                    value={email}
-                    onChange={(e)=> setEmail(e.target.value)}
-                    sx={{
-                        my:1
-                    }}
-                />
-
-                <TextField
-                    className='field'   
-                    InputProps={{
-                        readOnly: bgInput.changes,
-                        sx: {
-                            backgroundColor: bgInput.color, 
-                        },
-                    }}
-                    id='phone'
-                    label='Teléfono'
-                    type='phone'
-                    variant='outlined'
-                    fullWidth
-                    helperText={phoneError.message}
-                    error={phoneError.phoneError}
-                    value={phone}
-                    onChange={(e)=> setPhone(e.target.value)}
-                    sx={{
-                        my:1
-                    }}
-                />
-
-                <TextField
-                    className='field'   
-                    InputProps={{
-                        readOnly: bgInput.changes,
-                        sx: {
-                            backgroundColor: bgInput.color, 
-                        },
-                    }}
-                    id='enterprise'
-                    label='Empresa'
-                    type='enterprise'
-                    variant='outlined'
-                    fullWidth
-                    value={enterprise}
-                    onChange={(e)=> setEnterprise(e.target.value)}
-                    sx={{
-                        my:1
-                    }}
-                />
-
-                <TextField
-                    className='field'   
-                    InputProps={{
-                        readOnly: bgInput.changes,
-                        sx: {
-                            backgroundColor: bgInput.color, 
-                        },
-                    }}
-                    id='address'
-                    label='Dirección'
-                    type='address'
-                    variant='outlined'
-                    fullWidth
-                    value={address}
-                    onChange={(e)=> setAddress(e.target.value)}
-                    sx={{
-                        my:1
-                    }}
-                />
-
-                <TextField
-                    className='field'   
-                    InputProps={{
-                        readOnly: bgInput.changes,
-                        sx: {
-                            backgroundColor: bgInput.color, 
-                        },
-                    }}
-                    id='country'
-                    label='País'
-                    type='country'
-                    variant='outlined'
-                    fullWidth
-                    value={country}
-                    onChange={(e)=> setCountry(e.target.value)}
-                    sx={{
-                        my:1
-                    }}
-                />
-                <Box sx={{
-                    mt:2,
-                    width:'100%'
-                }}>
-                </Box>
-                <Box id='password-changer' sx={{
-                    m:0,
-                    p:0,
-                    my:1,
-                    py:2,
-                    px:2,
-                    width:'100%',
-                    border:'solid 1px #CFD8DB',
-                    borderRadius:'15px'
-                }}>
-                    <Box sx={{
-                            m:0,
-                            p:0,
-                            width:'100%',
-                            display: passwordChange.display,
-                            justifyContent:'left'
-                        }}>
-                        <TextField 
-                            id='password'
-                            label='Contraseña'
-                            type='password'
-                            variant='outlined'
-                            fullWidth
-                            value={password}
-                            onChange={(e)=> setPassword(e.target.value)}
-                            sx={{
-                                my:1,
-                                mx:1
-                            }}
-                        />
-                        <TextField 
-                            id='password-confirmation'
-                            label='Confirma contraseña'
-                            type='password'
-                            variant='outlined'
-                            fullWidth
-                            value={passwordConfirmation}
-                            onChange={(e)=> setPasswordConfirmation(e.target.value)}
-                            sx={{
-                                my:1,
-                                mx:1
-                            }}
-                        />
-                    </Box>
-                    <Button variant='contained'
-                        onClick={handleEditPassword} sx={{
-                        color: 'white',
-                        my:2,
-                        width:'98%',
-                        height: '45px', 
-                        borderRadius: '10px', 
-                        marginBottom: '20px',  
-                    }}>
-                        Cambiar contraseña
-                    </Button>
-                </Box>
-                
-                <Box sx={{
-                    my:2,
-                    width:'100%'
-                }}>
-                    <Button type='submit' variant='contained' sx={{
-                        display: showSaveButton.display,
-                        color: 'white',
-                        my:2,
-                        width:'100%',
-                        height: '45px', 
-                        borderRadius: '10px', 
-                        marginBottom: '20px',  
-                    }}>
-                        Guardar cambios
-                    </Button>
-                </Box>
-            </Box> */}
-      {/* </Box>
-    </Container> */}
     </>
   );
 };
