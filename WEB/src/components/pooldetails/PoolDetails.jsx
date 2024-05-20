@@ -1,5 +1,15 @@
 import { useContext, useState, useEffect } from "react";
-import { Box, Button, Divider, IconButton, Typography, Grid, Container, CardMedia, CardContent } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  IconButton,
+  Typography,
+  Grid,
+  Container,
+  CardMedia,
+  CardContent,
+} from "@mui/material";
 import CarImage from "../../assets/maxus-T60-white-mazautos.jpeg";
 import InfoIcon from "@mui/icons-material/Info";
 import CarColor from "../carcolor/CarColor";
@@ -7,16 +17,14 @@ import { LoadingBar } from "../loadingBar/LoadingBar";
 import { useNavigate, useParams } from "react-router-dom";
 import { MyContext } from "../../context/PoolsContext";
 import EmojiObjectsIcon from "@mui/icons-material/EmojiObjects";
-import CarIcon  from "../icons/CarIcon"
-import EngineIcon  from "../icons/EngineIcon"
-import TransmissionIcon  from "../icons/TransmissionIcon"
-import RangeIcon  from "../icons/RangeIcon"
-import CapacityIcon  from "../icons/CapacityIcon"
-import FuelIcon  from "../icons/FuelIcon"
-import SeatingsIcon  from "../icons/SeatingsIcon"
-import ColorIcon  from "../icons/ColorIcon"
-
-
+import CarIcon from "../icons/CarIcon";
+import EngineIcon from "../icons/EngineIcon";
+import TransmissionIcon from "../icons/TransmissionIcon";
+import RangeIcon from "../icons/RangeIcon";
+import CapacityIcon from "../icons/CapacityIcon";
+import FuelIcon from "../icons/FuelIcon";
+import SeatingsIcon from "../icons/SeatingsIcon";
+import ColorIcon from "../icons/ColorIcon";
 
 export default function PoolDetails() {
   const navigate = useNavigate();
@@ -25,18 +33,21 @@ export default function PoolDetails() {
   const poolIdsAsString = pools.map((pool) => String(pool.id));
   const index = poolIdsAsString.findIndex((poolId) => poolId === id);
   const poolDetails = pools[index];
-  const color = "red"
+  const color = "red";
 
-  const [colorName, setColorName] = useState('')
+  const [colorName, setColorName] = useState("");
 
   useEffect(() => {
-    if (color) { //cambiar despues a poolDetails
+    if (color) {
+      //cambiar despues a poolDetails
       handleColorName();
     }
   }, [color]); //cambiar despues a poolDetails
 
   const handleColorName = () => {
-    switch (color) {  // cambiar luego a poolDetails.color
+    switch (
+      color // cambiar luego a poolDetails.color
+    ) {
       case "red":
         setColorName("Rojo");
         break;
@@ -121,7 +132,7 @@ export default function PoolDetails() {
             sx={{
               bgcolor: "#cfd8dc",
               height: "6vh",
-              my:2,
+              my: 2,
               display: "flex",
               alignItems: "center",
               justifyContent: { xs: "center", md: "space-around" },
@@ -135,14 +146,16 @@ export default function PoolDetails() {
                 alignItems: "center",
                 justifyContent: "center",
                 color: "#37474f",
-                m:'0 auto'
+                m: "0 auto",
               }}
             >
-              <FuelIcon sx={{
-                height:'50px',
-                width:'50px',
-                pr:2,
-              }}/>
+              <FuelIcon
+                sx={{
+                  height: "50px",
+                  width: "50px",
+                  pr: 2,
+                }}
+              />
               <Typography
                 variant="h4"
                 sx={{
@@ -159,14 +172,16 @@ export default function PoolDetails() {
                 alignItems: "center",
                 justifyContent: "center",
                 color: "#37474f",
-                m:'0 auto'
+                m: "0 auto",
               }}
             >
-              <TransmissionIcon sx={{
-                height:'45px',
-                width:'45px',
-                pr:1
-              }}/>
+              <TransmissionIcon
+                sx={{
+                  height: "45px",
+                  width: "45px",
+                  pr: 1,
+                }}
+              />
               <Typography
                 variant="h4"
                 sx={{
@@ -183,15 +198,16 @@ export default function PoolDetails() {
                 alignItems: "center",
                 justifyContent: "center",
                 color: "#37474f",
-                m:'0 auto'
+                m: "0 auto",
               }}
             >
-
-              <CarIcon sx={{
-                height: '50px',
-                width: '50px',
-                pr:2,
-              }}/>
+              <CarIcon
+                sx={{
+                  height: "50px",
+                  width: "50px",
+                  pr: 2,
+                }}
+              />
               <Typography
                 variant="h4"
                 sx={{
@@ -310,18 +326,22 @@ export default function PoolDetails() {
                 textAlign: "left",
                 height: "6.5vh",
                 display: "flex",
-                alignItems:'start',
+                alignItems: "start",
                 justifyContent: "left",
               }}
-            > 
-              <EngineIcon sx={{
-                m:'auto 8px',
-              }}/>
-              <Box sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}>
+            >
+              <EngineIcon
+                sx={{
+                  m: "auto 8px",
+                }}
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
                 <Typography
                   variant="h4"
                   sx={{
@@ -351,18 +371,22 @@ export default function PoolDetails() {
                 textAlign: "left",
                 height: "6.5vh",
                 display: "flex",
-                alignItems:'start',
+                alignItems: "start",
                 justifyContent: "left",
               }}
-            > 
-              <CapacityIcon sx={{
-                m:'auto 8px',
-              }}/>
-              <Box sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}>
+            >
+              <CapacityIcon
+                sx={{
+                  m: "auto 8px",
+                }}
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
                 <Typography
                   variant="h4"
                   sx={{
@@ -392,18 +416,22 @@ export default function PoolDetails() {
                 textAlign: "left",
                 height: "6.5vh",
                 display: "flex",
-                alignItems:'start',
+                alignItems: "start",
                 justifyContent: "left",
               }}
-            > 
-              <SeatingsIcon sx={{
-                m:'auto 8px',
-              }}/>
-              <Box sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}>
+            >
+              <SeatingsIcon
+                sx={{
+                  m: "auto 8px",
+                }}
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
                 <Typography
                   variant="h4"
                   sx={{
@@ -433,18 +461,22 @@ export default function PoolDetails() {
                 textAlign: "left",
                 height: "6.5vh",
                 display: "flex",
-                alignItems:'start',
+                alignItems: "start",
                 justifyContent: "left",
               }}
-            > 
-              <RangeIcon sx={{
-                m:'auto 8px',
-              }}/>
-              <Box sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}>
+            >
+              <RangeIcon
+                sx={{
+                  m: "auto 8px",
+                }}
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
                 <Typography
                   variant="h4"
                   sx={{
@@ -471,80 +503,80 @@ export default function PoolDetails() {
         {/* ColorSection */}
 
         <CardContent>
-        <Grid
-                container
+          <Grid
+            container
+            sx={{
+              height: "8vh",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Grid
+              item
+              xs={5.4}
+              md={6}
+              sx={{
+                py: 1,
+                px: 1,
+                textAlign: "left",
+                height: "6.5vh",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography
+                variant="h4"
                 sx={{
-                  height: "8vh",
-                  display: "flex",
-                  alignItems:'center',
-                  justifyContent: "space-between",
+                  fontSize: "0.8rem",
+                  fontWeight: "500",
                 }}
               >
-                <Grid
-                  item
-                  xs={5.4}
-                  md={6}
-                  sx={{
-                    py: 1,
-                    px: 1,
-                    textAlign: "left",
-                    height: "6.5vh",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Color
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                    }}
-                  >
-                    {colorName}
-                  </Typography>
-                </Grid>
-                <Grid
-                  item
-                  xs={5.4}
-                  md={6}
-                  sx={{
-                    py: 1,
-                    px: 1,
-                    textAlign: "left",
-                    height: "6.5vh",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Versión
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                    }}
-                  >
-                    {poolDetails.version}
-                  </Typography>
-                </Grid>
-              </Grid>
+                Color
+              </Typography>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontSize: "0.8rem",
+                }}
+              >
+                {colorName}
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={5.4}
+              md={6}
+              sx={{
+                py: 1,
+                px: 1,
+                textAlign: "left",
+                height: "6.5vh",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography
+                variant="h4"
+                sx={{
+                  fontSize: "0.8rem",
+                  fontWeight: "500",
+                }}
+              >
+                Versión
+              </Typography>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontSize: "0.8rem",
+                }}
+              >
+                {poolDetails.version}
+              </Typography>
+            </Grid>
+          </Grid>
         </CardContent>
         <Divider variant="middle" />
 
@@ -787,11 +819,13 @@ export default function PoolDetails() {
                     color: "#37474f",
                   }}
                 >
-                  <FuelIcon sx={{
-                    height:'50px',
-                    width:'50px',
-                    pr:2,
-                  }}/>
+                  <FuelIcon
+                    sx={{
+                      height: "50px",
+                      width: "50px",
+                      pr: 2,
+                    }}
+                  />
                   <Typography
                     variant="h4"
                     sx={{
@@ -810,11 +844,13 @@ export default function PoolDetails() {
                     color: "#37474f",
                   }}
                 >
-                  <TransmissionIcon sx={{
-                    height:'45px',
-                    width:'45px',
-                    pr:1
-                  }}/>
+                  <TransmissionIcon
+                    sx={{
+                      height: "45px",
+                      width: "45px",
+                      pr: 1,
+                    }}
+                  />
                   <Typography
                     variant="h4"
                     sx={{
@@ -833,11 +869,13 @@ export default function PoolDetails() {
                     color: "#37474f",
                   }}
                 >
-                  <CarIcon sx={{
-                    height: '55px',
-                    width: '55px',
-                    pr:2,
-                  }}/>
+                  <CarIcon
+                    sx={{
+                      height: "55px",
+                      width: "55px",
+                      pr: 2,
+                    }}
+                  />
                   <Typography
                     variant="h4"
                     sx={{
@@ -997,7 +1035,7 @@ export default function PoolDetails() {
             {/* Color Section */}
 
             <CardContent>
-            <Grid
+              <Grid
                 container
                 sx={{
                   height: "17.8vh",

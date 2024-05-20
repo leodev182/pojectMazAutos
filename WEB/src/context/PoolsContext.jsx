@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import useSecureUrl from "../hooks/useSecureUrl";
 
 export const MyContext = createContext({});
 
@@ -11,8 +10,7 @@ const PoolsContextProvider = ({ children }) => {
   const [payment, setPayment] = useState("");
 
   const getDataPools = async () => {
-    const apiUrl = useSecureUrl();
-    const response = await axios.get(`${apiUrl.url}/pools`);
+    const response = await axios.get(`http://localhost:9080/pools`);
     const data = response.data.data;
     setPools([...data]);
   };

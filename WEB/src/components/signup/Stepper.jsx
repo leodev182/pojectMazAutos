@@ -17,7 +17,7 @@ import {
 } from "@mui/material";
 import BuyACar from "../../assets/ver-las-ofertas-de-carros.png";
 import ContactSeller from "../../assets/servicio-al-cliente-mazautos.png";
-import { RequestContext } from "../../context/RequestsContext";
+import { UserContext } from "../../context/UsersContext";
 import { useContext } from "react";
 
 const steps = ["Paso 1", "Paso 2"];
@@ -27,7 +27,7 @@ const steps = ["Paso 1", "Paso 2"];
 //   };
 
 export default function HorizontalLinearStepper() {
-  const { api, setApi, setRequest, getRequests } = useContext(RequestContext);
+  const { makeRequest, role } = useContext(UserContext);
   const [newUser, setnewUser] = useState({});
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -61,9 +61,9 @@ export default function HorizontalLinearStepper() {
   };
 
   const handleSubmit = () => {
-    getRequests("users", dataUser);
+    makeRequest("post", "/users", dataUser);
   };
-  console.log(dataUser);
+
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
 

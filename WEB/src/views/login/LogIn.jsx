@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { UserContext } from "../../context/UsersContext";
 import { useNavigate } from "react-router-dom";
-import BGImage from "../../assets/mazautos-un-chico-comprando-un-auto-nuevo.jpg"
+import BGImage from "../../assets/mazautos-un-chico-comprando-un-auto-nuevo.jpg";
 import axios from "axios";
 
 export default function LogIn() {
@@ -21,9 +21,10 @@ export default function LogIn() {
   };
 
   const goToSignUp = () => {
-    navigate("/signup")
-  }
-  const { setUserId, setRole, saveToken } = useContext(UserContext);
+    navigate("/signup");
+  };
+  const { setUserId, setRole, saveToken, makeRequest } =
+    useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -37,12 +38,13 @@ export default function LogIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const user = {
+      email,
+      password,
+    };
 
     try {
-      const response = await axios.post("http://localhost:9080/login", {
-        email: email,
-        password: password,
-      });
+      const response = await makeRequest("post", "login", user);
 
       if (response.status === 200) {
         const data = response.data; // Obtener los datos de la respuesta

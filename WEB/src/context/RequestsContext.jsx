@@ -1,19 +1,31 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import useSecureUrl from "../hooks/useSecureUrl";
 
 export const RequestContext = createContext({});
 
 const RequestsContextProvider = ({ children }) => {
-  const [requests, setRequests] = useState([]);
+  const [response, setResponse] = useState([]);
   const [loading, setLoading] = useState(true);
-  const url = useSecureUrl();
 
-  const getRequests = async (endPoint, request) => {
+  const getRequests = async (endPoint) => {
     try {
-      const response = await axios.get(`${url}/${endPoint}`, request);
-      setRequests(response.data);
+      const response = await axios.get(`http://localhost:9080/${endPoint}`);
+      setResponse(response.data);
+      console.log(response.data);
       setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const postRequests = async (endPoint, payload) => {
+    try {
+      const response = await axios.post(
+        `http://localhost:9080/${endPoint}`,
+        payload
+      );
+      setResponse(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -22,11 +34,12 @@ const RequestsContextProvider = ({ children }) => {
   return (
     <RequestContext.Provider
       value={{
-        requests,
-        setRequests,
+        response,
+        setResponse,
         loading,
         setLoading,
         getRequests,
+        postRequests,
       }}
     >
       {children}
