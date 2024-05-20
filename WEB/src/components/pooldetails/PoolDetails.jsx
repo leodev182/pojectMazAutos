@@ -1129,7 +1129,7 @@ export default function PoolDetails() {
                     justifyContent: "left",
                   }}
                 >
-                <RangeIcon sx={{
+                <ColorIcon sx={{
                   m:'auto 8px',
                 }}/>
                   <Box sx={{
