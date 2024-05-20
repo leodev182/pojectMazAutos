@@ -508,7 +508,7 @@ export default function PoolDetails() {
             sx={{
               height: "8vh",
               display: "flex",
-              alignItems: "center",
+              alignItems: "start",
               justifyContent: "space-between",
             }}
           >
@@ -522,8 +522,8 @@ export default function PoolDetails() {
                 textAlign: "left",
                 height: "6.5vh",
                 display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
+                alignItems:'center',
+                justifyContent: "left",
               }}
             >
               <Typography
@@ -533,22 +533,8 @@ export default function PoolDetails() {
                   fontWeight: "500",
                 }}
               >
-
-                <Grid
-                  item
-                  xs={5.4}
-                  md={6}
-                  sx={{
-                    py: 1,
-                    px: 1,
-                    textAlign: "left",
-                    height: "6.5vh",
-                    display: "flex",
-                    alignItems:'center',
-                    justifyContent: "left",
-                  }}
-                >
-                <RangeIcon sx={{
+              </Typography>
+                <ColorIcon sx={{
                   m:'auto 8px',
                 }}/>
                   <Box sx={{
@@ -586,7 +572,7 @@ export default function PoolDetails() {
                     textAlign: "left",
                     height: "6.5vh",
                     display: "flex",
-                    alignItems:'center',
+                    alignItems:'start',
                     justifyContent: "left",
                   }}
                 >

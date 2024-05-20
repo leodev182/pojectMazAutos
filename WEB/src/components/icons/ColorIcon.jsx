@@ -2,7 +2,7 @@ import React from 'react'
 import SvgIcon from '@mui/material/SvgIcon';
 
 
-const ColorIcon = () => {
+const ColorIcon = (props) => {
   return (
     <SvgIcon
       {...props}
