@@ -40,7 +40,7 @@ const PaymentBox = () => {
     voucher: "",
     status: true,
   });
-  console.log(pools);
+  console.log(amount);
 
   const poolIdsAsString = pools.map((pool) => String(pool.id));
   const index = poolIdsAsString.findIndex((poolId) => poolId === id);

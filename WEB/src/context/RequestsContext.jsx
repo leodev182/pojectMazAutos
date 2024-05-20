@@ -1,17 +1,17 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import useSecureUrl from "../hooks/useSecureUrl";
+// import useSecureUrl from "../hooks/useSecureUrl";
 
 export const RequestContext = createContext({});
 
 const RequestsContextProvider = ({ children }) => {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
-  const url = useSecureUrl();
+  // const url = useSecureUrl();
 
   const getRequests = async (endPoint, request) => {
     try {
-      const response = await axios.get(`${url}/${endPoint}`, request);
+      const response = await axios.get(`http://localhost:9080/${endPoint}`, request);
       setRequests(response.data);
       setLoading(false);
     } catch (error) {
