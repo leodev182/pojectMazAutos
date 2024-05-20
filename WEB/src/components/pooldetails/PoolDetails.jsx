@@ -92,6 +92,8 @@ export default function PoolDetails() {
           maxWidth: "100vw",
           maxHeight: "100vh",
           overflow: "auto",
+          py:2,
+          px:4,
           display: { xs: "auto", md: "auto", lg: "none" },
         }}
       >
@@ -99,6 +101,8 @@ export default function PoolDetails() {
         <Box
           sx={{
             bgcolor: "#cfd8dc",
+            borderRadius:'15px',
+            border: "solid 1px #CFD8DB",
             py: 2,
           }}
         >
@@ -687,7 +691,9 @@ export default function PoolDetails() {
             <Box
               sx={{
                 bgcolor: "#cfd8dc",
-                py: 2,
+                borderRadius:'15px',
+                pt: 2,
+                mb:3,
               }}
             >
               <CardMedia
@@ -928,7 +934,7 @@ export default function PoolDetails() {
           <Grid
             container
             sx={{
-              height: "18vh",
+              height: "14vh",
               display: "flex",
               alignItems:'center',
               justifyContent: "space-between",
@@ -1109,7 +1115,7 @@ export default function PoolDetails() {
         <Grid
                 container
                 sx={{
-                  height: "10vh",
+                  height: "7vh",
                   display: "flex",
                   alignItems:'center',
                   justifyContent: "space-between",
@@ -1123,8 +1129,8 @@ export default function PoolDetails() {
                     py: 1,
                     px: 1,
                     textAlign: "left",
-                    height: "6.5vh",
                     display: "flex",
+                    height:'6.5vh',
                     alignItems:'center',
                     justifyContent: "left",
                   }}
@@ -1165,8 +1171,8 @@ export default function PoolDetails() {
                     py: 1,
                     px: 1,
                     textAlign: "left",
-                    height: "6.5vh",
                     display: "flex",
+                    height:'6.5vh',
                     alignItems:'center',
                     justifyContent: "left",
                   }}
