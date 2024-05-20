@@ -5,8 +5,8 @@ import AppBar from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import Logo from "../../assets/mazautos.svg";
 import { NavLink, useNavigate } from "react-router-dom";
+import { NavBarContext } from "../../context/NavBarContext";
 import { UserContext } from "../../context/UsersContext";
-import "./NavBar.css";
 
 function NavBar() {
 
@@ -15,18 +15,23 @@ function NavBar() {
     navigate("/");
   };
   const { token } = useContext(UserContext);
-
-  const [activePage, setActivePage] = useState({
-    name: token ? 'Cerrar Sesión' : 'Iniciar Sesión',
-    href: token ? '/' : '/login',
-  });
+  const { activePage, setActivePage, setActiveToken } = useContext(NavBarContext);
 
   useEffect(() => {
+    setActiveToken(token)
     setActivePage({
       name: token ? 'Cerrar Sesión' : 'Iniciar Sesión',
       href: token ? '/' : '/login',
     });
   }, [token]);
+
+  const handleLogout = () => {
+    removeToken();
+    setActivePage({
+      name: "Iniciar Sesión",
+      href: "/login",
+    });
+  };
   
   const [pages, setPages] = useState([]);
   
@@ -127,7 +132,7 @@ function NavBar() {
                   onClick={handleCloseNavMenu}
                   sx={{ my: 2, color: "primary", display: "block" }}
                 >
-                  <NavLink to={page.href}>
+                  <NavLink to={page.href} onClick={token ? handleLogout : null}>
                     {page.name}
                   </NavLink>
                 </Button>
@@ -217,7 +222,7 @@ function NavBar() {
                   >
                     {pages.map((page) => (
                       <MenuItem key={page} onClick={handleCloseNavMenu}>
-                        <NavLink to={page.href}>
+                        <NavLink to={page.href} onClick={token ? handleLogout : null}>
                           <Typography textAlign="center">{page.name}</Typography>
                         </NavLink>
                       </MenuItem>
