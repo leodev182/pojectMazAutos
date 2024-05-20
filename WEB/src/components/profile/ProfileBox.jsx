@@ -150,7 +150,7 @@ const ProfileBox = () => {
     };
 
   return (
-    <Container sx={{
+    <Box sx={{
         display:'flex',
         flexDirection:'column',
         alignItems:'center',
@@ -431,7 +431,7 @@ const ProfileBox = () => {
                 </Box>
             </Box>
         </Box>
-    </Container>
+    </Box>
     )
 }
 
