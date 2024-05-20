@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from "react";
+import axios from "axios";
 
 export const UserContext = createContext({});
 
@@ -17,6 +18,32 @@ const ContextProvider = ({ children }) => {
     window.localStorage.removeItem("token");
   };
 
+  const makeRequest = async (method, url, data = null) => {
+    const axiosInstance = axios.create({
+      baseURL: "http://localhost:9080",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    axiosInstance.interceptors.request.use(
+      (config) => {
+        if (token) {
+          config.headers["Authorization"] = `Bearer ${token}`;
+        }
+        if (role) {
+          config.headers["Role"] = role;
+        }
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
+
+    return axiosInstance[method](url, data);
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -27,6 +54,7 @@ const ContextProvider = ({ children }) => {
         setUserId,
         role,
         setRole,
+        makeRequest,
       }}
     >
       {children}
