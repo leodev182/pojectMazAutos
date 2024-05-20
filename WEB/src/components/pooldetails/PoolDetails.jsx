@@ -533,50 +533,93 @@ export default function PoolDetails() {
                   fontWeight: "500",
                 }}
               >
-                Color
-              </Typography>
-              <Typography
-                variant="h4"
-                sx={{
-                  fontSize: "0.8rem",
-                }}
-              >
-                {colorName}
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              xs={5.4}
-              md={6}
-              sx={{
-                py: 1,
-                px: 1,
-                textAlign: "left",
-                height: "6.5vh",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}
-            >
-              <Typography
-                variant="h4"
-                sx={{
-                  fontSize: "0.8rem",
-                  fontWeight: "500",
-                }}
-              >
-                Versión
-              </Typography>
-              <Typography
-                variant="h4"
-                sx={{
-                  fontSize: "0.8rem",
-                }}
-              >
-                {poolDetails.version}
-              </Typography>
-            </Grid>
-          </Grid>
+
+                <Grid
+                  item
+                  xs={5.4}
+                  md={6}
+                  sx={{
+                    py: 1,
+                    px: 1,
+                    textAlign: "left",
+                    height: "6.5vh",
+                    display: "flex",
+                    alignItems:'center',
+                    justifyContent: "left",
+                  }}
+                >
+                <RangeIcon sx={{
+                  m:'auto 8px',
+                }}/>
+                  <Box sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems:'start',
+                    justifyContent: "space-between",
+                  }}>
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        fontSize: "0.8rem",
+                        fontWeight: "500",
+                      }}
+                    >
+                      Color
+                    </Typography>
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        fontSize: "0.8rem",
+                      }}
+                    >
+                      {colorName}
+                    </Typography>
+                  </Box>
+                </Grid>
+                <Grid
+                  item
+                  xs={5.4}
+                  md={6}
+                  sx={{
+                    py: 1,
+                    px: 1,
+                    textAlign: "left",
+                    height: "6.5vh",
+                    display: "flex",
+                    alignItems:'center',
+                    justifyContent: "left",
+                  }}
+                >
+                <CarIcon sx={{
+                  m:'auto 8px',
+                }}/>
+                  <Box sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems:'start',
+                    justifyContent: "space-between",
+                  }}>
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        fontSize: "0.8rem",
+                        fontWeight: "500",
+                      }}
+                    >
+                      Versión
+                    </Typography>
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        fontSize: "0.8rem",
+                      }}
+                    >
+                      {poolDetails.version}
+                    </Typography>
+                  </Box>
+                </Grid>
+              </Grid>
+
         </CardContent>
         <Divider variant="middle" />
 
@@ -804,6 +847,7 @@ export default function PoolDetails() {
                 sx={{
                   bgcolor: "#cfd8dc",
                   height: "6vh",
+                  py:5,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: { xs: "center", md: "space-around" },
@@ -891,12 +935,197 @@ export default function PoolDetails() {
 
             {/* Characteristics */}
 
-            <CardContent>
-              <Grid
+
+        {/* Characteristics */}
+
+        <CardContent>
+          <Grid
+            container
+            sx={{
+              height: "18vh",
+              display: "flex",
+              alignItems:'center',
+              justifyContent: "space-between",
+            }}
+          >
+            <Grid
+              item
+              xs={5.4}
+              md={6}
+              sx={{
+                py: 1,
+                px: 1,
+                textAlign: "left",
+                height: "6.5vh",
+                display: "flex",
+                alignItems:'start',
+                justifyContent: "left",
+              }}
+            > 
+              <EngineIcon sx={{
+                m:'auto 8px',
+              }}/>
+              <Box sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontSize: "0.8rem",
+                    fontWeight: "500",
+                  }}
+                >
+                  Motor
+                </Typography>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontSize: "0.8rem",
+                  }}
+                >
+                  {poolDetails.engine}
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid
+              item
+              xs={5.4}
+              md={6}
+              sx={{
+                py: 1,
+                px: 1,
+                textAlign: "left",
+                height: "6.5vh",
+                display: "flex",
+                alignItems:'start',
+                justifyContent: "left",
+              }}
+            > 
+              <CapacityIcon sx={{
+                m:'auto 8px',
+              }}/>
+              <Box sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontSize: "0.8rem",
+                    fontWeight: "500",
+                  }}
+                >
+                  Capacidad de carga
+                </Typography>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontSize: "0.8rem",
+                  }}
+                >
+                  {poolDetails.capacity} Kg
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid
+              item
+              xs={5.4}
+              md={6}
+              sx={{
+                py: 1,
+                px: 1,
+                textAlign: "left",
+                height: "6.5vh",
+                display: "flex",
+                alignItems:'start',
+                justifyContent: "left",
+              }}
+            > 
+              <SeatingsIcon sx={{
+                m:'auto 8px',
+              }}/>
+              <Box sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontSize: "0.8rem",
+                    fontWeight: "500",
+                  }}
+                >
+                  Asientos
+                </Typography>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontSize: "0.8rem",
+                  }}
+                >
+                  {poolDetails.seatings} Asientos
+                </Typography>
+              </Box>
+            </Grid>
+            <Grid
+              item
+              xs={5.4}
+              md={6}
+              sx={{
+                py: 1,
+                px: 1,
+                textAlign: "left",
+                height: "6.5vh",
+                display: "flex",
+                alignItems:'start',
+                justifyContent: "left",
+              }}
+            > 
+              <RangeIcon sx={{
+                m:'auto 8px',
+              }}/>
+              <Box sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontSize: "0.8rem",
+                    fontWeight: "500",
+                  }}
+                >
+                  Autonomía
+                </Typography>
+                <Typography
+                  variant="h4"
+                  sx={{
+                    fontSize: "0.8rem",
+                  }}
+                >
+                  {poolDetails.range} Km
+                </Typography>
+              </Box>
+            </Grid>
+          </Grid>
+        </CardContent>
+        <Divider variant="middle" />
+
+        {/* ColorSection */}
+
+
+        <CardContent>
+        <Grid
                 container
                 sx={{
-                  height: "17.8vh",
+                  height: "10vh",
                   display: "flex",
+                  alignItems:'center',
                   justifyContent: "space-between",
                 }}
               >
@@ -910,27 +1139,37 @@ export default function PoolDetails() {
                     textAlign: "left",
                     height: "6.5vh",
                     display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
+                    alignItems:'center',
+                    justifyContent: "left",
                   }}
                 >
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Motor
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                    }}
-                  >
-                    {poolDetails.engine}
-                  </Typography>
+                <RangeIcon sx={{
+                  m:'auto 8px',
+                }}/>
+                  <Box sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems:'start',
+                    justifyContent: "space-between",
+                  }}>
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        fontSize: "0.8rem",
+                        fontWeight: "500",
+                      }}
+                    >
+                      Color
+                    </Typography>
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        fontSize: "0.8rem",
+                      }}
+                    >
+                      {colorName}
+                    </Typography>
+                  </Box>
                 </Grid>
                 <Grid
                   item
@@ -942,238 +1181,41 @@ export default function PoolDetails() {
                     textAlign: "left",
                     height: "6.5vh",
                     display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
+                    alignItems:'center',
+                    justifyContent: "left",
                   }}
                 >
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Capacidad de carga
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                    }}
-                  >
-                    {poolDetails.capacity}
-                  </Typography>
-                </Grid>
-                <Grid
-                  item
-                  xs={5.4}
-                  md={6}
-                  sx={{
-                    py: 1,
-                    px: 1,
-                    textAlign: "left",
-                    height: "6.5vh",
+                <CarIcon sx={{
+                  m:'auto 8px',
+                }}/>
+                  <Box sx={{
                     display: "flex",
                     flexDirection: "column",
+                    alignItems:'start',
                     justifyContent: "space-between",
-                  }}
-                >
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Asientos
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                    }}
-                  >
-                    {poolDetails.seatings}
-                  </Typography>
-                </Grid>
-                <Grid
-                  item
-                  xs={5.4}
-                  md={6}
-                  sx={{
-                    py: 1,
-                    px: 1,
-                    textAlign: "left",
-                    height: "6.5vh",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Automonía
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                    }}
-                  >
-                    {poolDetails.range}
-                  </Typography>
+                  }}>
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        fontSize: "0.8rem",
+                        fontWeight: "500",
+                      }}
+                    >
+                      Versión
+                    </Typography>
+                    <Typography
+                      variant="h4"
+                      sx={{
+                        fontSize: "0.8rem",
+                      }}
+                    >
+                      {poolDetails.version}
+                    </Typography>
+                  </Box>
                 </Grid>
               </Grid>
-            </CardContent>
-            <Divider variant="middle" />
-
-            {/* Color Section */}
-
-            <CardContent>
-              <Grid
-                container
-                sx={{
-                  height: "17.8vh",
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Grid
-                  item
-                  xs={5.4}
-                  md={6}
-                  sx={{
-                    py: 1,
-                    px: 1,
-                    textAlign: "left",
-                    height: "6.5vh",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Motor
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                    }}
-                  >
-                    {poolDetails.engine}
-                  </Typography>
-                </Grid>
-                <Grid
-                  item
-                  xs={5.4}
-                  md={6}
-                  sx={{
-                    py: 1,
-                    px: 1,
-                    textAlign: "left",
-                    height: "6.5vh",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Capacidad de carga
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                    }}
-                  >
-                    {poolDetails.capacity}
-                  </Typography>
-                </Grid>
-                <Grid
-                  item
-                  xs={5.4}
-                  md={6}
-                  sx={{
-                    py: 1,
-                    px: 1,
-                    textAlign: "left",
-                    height: "6.5vh",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Asientos
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                    }}
-                  >
-                    {poolDetails.seatings}
-                  </Typography>
-                </Grid>
-                <Grid
-                  item
-                  xs={5.4}
-                  md={6}
-                  sx={{
-                    py: 1,
-                    px: 1,
-                    textAlign: "left",
-                    height: "6.5vh",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Automonía
-                  </Typography>
-                  <Typography
-                    variant="h4"
-                    sx={{
-                      fontSize: "0.8rem",
-                    }}
-                  >
-                    {poolDetails.range}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </CardContent>
-            <Divider variant="middle" />
+        </CardContent>
+        <Divider variant="middle" />
 
             {/* Seccion de boton */}
 
