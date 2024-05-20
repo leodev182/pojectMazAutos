@@ -3,10 +3,19 @@ import React from 'react'
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import backgroundImage from '../../assets/mazautos-banner-homepage-autos.jpeg';
+import backgroundImage from '../../assets/maxus-t90-banner-home.jpeg';
 
 
 const Banner = () => {
+
+    const handleScroll = (event) => {
+        event.preventDefault();
+        const target = document.getElementById('pools');
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
   return (
     <>
         {/* Banner para dispositivos mobile */}
@@ -42,7 +51,7 @@ const Banner = () => {
 
     <Box sx={{ display: { xs: 'none', md: 'flex' } ,
     width: '100vw',
-    height: '75vh', 
+    height: '92vh', 
     bgcolor: 'blue',
     flexDirection: 'column',
     alignItems: 'center',
@@ -57,8 +66,9 @@ const Banner = () => {
             width: '90vw',
             height: '55px', 
             borderRadius: '15px', 
-            marginBottom: '20px',  
+            mb: 8,  
             marginTop: '20px'}}
+            onClick={handleScroll}
         >
             <Typography>
                 Ver maz autos
