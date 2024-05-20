@@ -7,15 +7,20 @@ const ContextProvider = ({ children }) => {
   const [userId, setUserId] = useState(null);
   const [role, setRole] = useState("");
   const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [isActive, setIsActive] = useState(!!localStorage.getItem("token"));
+  const [sesion, setSesion] = useState(false);
+  const [user, setUser] = useState([]);
 
   const saveToken = (newToken) => {
     setToken(newToken);
-    window.localStorage.setItem("token", newToken);
+    localStorage.setItem("token", newToken);
+    setIsActive(true);
   };
 
   const removeToken = () => {
     setToken(null);
-    window.localStorage.removeItem("token");
+    localStorage.removeItem("token");
+    setIsActive(false);
   };
 
   const makeRequest = async (method, url, data = null) => {
@@ -28,8 +33,9 @@ const ContextProvider = ({ children }) => {
 
     axiosInstance.interceptors.request.use(
       (config) => {
-        if (token) {
-          config.headers["Authorization"] = `Bearer ${token}`;
+        const currentToken = token;
+        if (currentToken) {
+          config.headers["Authorization"] = `Bearer ${currentToken}`;
         }
         if (role) {
           config.headers["Role"] = role;
@@ -55,6 +61,10 @@ const ContextProvider = ({ children }) => {
         role,
         setRole,
         makeRequest,
+        isActive,
+        setIsActive,
+        user,
+        setUser,
       }}
     >
       {children}

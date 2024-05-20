@@ -12,23 +12,32 @@ import SignUp from "./views/signup/SignUp.jsx";
 import NavBar from "./components/navbar/NavBar.jsx";
 import PreBooking from "./components/prebooking/PreBooking.jsx";
 import PoolEditor from "./components/pooleditor/PoolEditor.jsx";
+import { UserContext } from "./context/UsersContext.jsx";
 import "./App.css";
+import { useContext } from "react";
 
 function App() {
+  const { isActive } = useContext(UserContext);
   return (
     <>
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/details/:id" element={<Details />}></Route>
-        <Route path="/checkout/:id" element={<PreBooking />}></Route>
+        <Route
+          path="/checkout/:id"
+          element={isActive ? <PreBooking /> : <LogIn />}
+        ></Route>
         <Route path="/payment/:id" element={<Payment />}></Route>
         <Route path="/editor/:id" element={<PoolEditor />}></Route>
-        <Route path="/booking" element={<Bookings />} />
+        <Route path="/bookings" element={<Bookings />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/pools" element={<Pools/>} />
-        <Route path="/profile" element={<Profile/>} />
+        <Route path="/pools" element={<Pools />} />
+        <Route
+          path="/profile/:id"
+          element={isActive ? <Profile /> : <LogIn />}
+        />
         <Route path="/manager" element={<Manager />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
