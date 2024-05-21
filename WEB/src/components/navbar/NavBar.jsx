@@ -222,8 +222,7 @@ function NavBar() {
                     open={Boolean(anchorElNav)}
                     onClose={handleCloseNavMenu}
                     sx={{
-                      display: { xs: "block", md: "none", lg: "none" },
-                      display: "flex",
+                      display: { xs: "flex", md: "none", lg: "none" },
                       flexDirection: "column",
                       justifyContent: "center",
                       alignItems: "center",
