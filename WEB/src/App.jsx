@@ -12,9 +12,11 @@ import SignUp from "./views/signup/SignUp.jsx";
 import NavBar from "./components/navbar/NavBar.jsx";
 import PreBooking from "./components/prebooking/PreBooking.jsx";
 import PoolEditor from "./components/pooleditor/PoolEditor.jsx";
+import PaymentSuccess from "./components/payment/PaymentSuccess.jsx";
 import { UserContext } from "./context/UsersContext.jsx";
 import "./App.css";
 import { useContext } from "react";
+
 
 function App() {
   const { isActive } = useContext(UserContext);
@@ -31,6 +33,7 @@ function App() {
         <Route path="/payment/:id" element={<Payment />}></Route>
         <Route path="/editor/:id" element={<PoolEditor />}></Route>
         <Route path="/bookings" element={<Bookings />} />
+        <Route path="/success" element={<PaymentSuccess />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/pools" element={<Pools />} />

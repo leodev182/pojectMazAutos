@@ -386,6 +386,7 @@ const PaymentBox = () => {
                     borderRadius: "15px",
                     marginBottom: "20px",
                   }}
+                  href="/success"
                   onClick={() => {
                     setPayment("Transfer");
                     // console.log(payment);
