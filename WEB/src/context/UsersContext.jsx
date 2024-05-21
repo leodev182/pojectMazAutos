@@ -9,7 +9,7 @@ const ContextProvider = ({ children }) => {
   const [token, setToken] = useState(window.localStorage.getItem("token"));
   const [isActive, setIsActive] = useState(!!localStorage.getItem("token"));
   const [sesion, setSesion] = useState(false);
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({});
 
   const saveToken = (newToken) => {
     setToken(newToken);

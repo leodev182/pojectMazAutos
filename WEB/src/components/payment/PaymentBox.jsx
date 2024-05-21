@@ -22,22 +22,21 @@ import { UserContext } from "../../context/UsersContext";
 import axios from "axios";
 
 const PaymentBox = () => {
+  const { makeRequest, userId } = useContext(UserContext);
   const { id } = useParams();
   const { pools, quantity, amount } = useContext(MyContext);
-  const { token } = useContext(UserContext);
   const [banks, setBanks] = useState([]);
   const [selectedBank, setSelectedBank] = useState("");
   const [payment, setPayment] = useState("");
   const [voucher, setVoucher] = useState("");
   const [booking, setBooking] = useState({
-    pool_id: "",
     date: "",
-    quantity: 0,
-    amount: 0,
-    payment: "",
+    quantity: quantity,
+    amount: amount,
+    payment: payment,
     condition: "Pending",
-    bank: "",
-    voucher: "",
+    bank: selectedBank,
+    voucher: voucher,
     status: true,
   });
 
@@ -45,29 +44,14 @@ const PaymentBox = () => {
   const index = poolIdsAsString.findIndex((poolId) => poolId === id);
   const poolDetails = pools[index];
 
-  const createBookingId = async (id, token) => {
-    setBooking((prevBooking) => ({
-      ...prevBooking,
-      pool_id: id,
-      quantity: quantity,
-      amount: amount,
-      payment: payment,
-      bank: selectedBank,
-      voucher: voucher,
-    }));
-    // const data = await axios.post(
-    //   `http://localhost:9080/bookings/${id}`,
-    //   {
-    //     headers: { Authorization: `Bearer ${token}` },
-    //   },
-    //   {}
-    // );
-    // console.log(booking);
+  const createBookingId = async () => {
+    console.table(booking);
+    await makeRequest("post", `booking/${poolDetails.id}`, booking);
   };
 
-  useEffect(() => {
-    console.log(booking);
-  }, [booking]);
+  // useEffect(() => {
+  //   console.log(booking);
+  // }, [booking]);
 
   const url = "/accounts.json";
 
@@ -84,7 +68,7 @@ const PaymentBox = () => {
   useEffect(() => {
     getData();
   }, []);
-  console.log(banks)
+  console.log(banks);
   const bankInfo = (bank) => {
     return (
       <Box
