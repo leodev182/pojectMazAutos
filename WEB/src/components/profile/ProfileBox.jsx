@@ -13,7 +13,8 @@ import { useParams } from "react-router";
 import { UserContext } from "../../context/UsersContext";
 
 const ProfileBox = () => {
-  const { isActive, userId, makeRequest, user } = useContext(UserContext);
+  const { isActive, userId, makeRequest, user, setUser } =
+    useContext(UserContext);
   const { id } = useParams();
   const [email, setEmail] = useState(user.email);
   const [name, setName] = useState(user.name);
@@ -34,7 +35,7 @@ const ProfileBox = () => {
     name: name,
     lastname: lastName,
     email: email,
-    password: user.password,
+    password: password,
     phone: phone,
     enterprise: enterprise,
     address: address,
@@ -69,6 +70,7 @@ const ProfileBox = () => {
       color: prevState.edit ? "#eceff1" : "#fff",
       changes: !prevState.changes,
     }));
+    makeRequest("patch", `users/${userId}`, userInfo), getData();
     setShowSetButton((prevState) => ({
       ...prevState,
       show: !prevState.show,

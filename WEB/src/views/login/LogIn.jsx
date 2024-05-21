@@ -23,7 +23,7 @@ export default function LogIn() {
   const goToSignUp = () => {
     navigate("/signup");
   };
-  const { setUserId, setRole, saveToken, makeRequest } =
+  const { setUserId, setRole, saveToken, makeRequest, user, setUser } =
     useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,6 +51,7 @@ export default function LogIn() {
         const token = data.token;
         const userId = data.userId;
         const role = data.userRole;
+        const dataUser = data.user;
         saveToken(token);
         setUserId(userId);
         setRole(role);
