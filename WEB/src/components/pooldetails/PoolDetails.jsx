@@ -661,11 +661,9 @@ export default function PoolDetails() {
         xs={{ width: "100vw" }}
         md={{ width: "90vw" }}
         sx={{
-          display: "flex",
           justifyContent: "center",
-
           overflow: "auto",
-          display: { xs: "none", md: "none", lg: "block" },
+          display: { xs: "none", md: "none", lg: "flex" },
         }}
       >
         <Grid
