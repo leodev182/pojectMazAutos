@@ -328,7 +328,7 @@ export default function PoolDetails() {
                 py: 1,
                 px: 1,
                 textAlign: "left",
-                height: "6.5vh",
+                height: "10vh",
                 display: "flex",
                 alignItems: "start",
                 justifyContent: "left",

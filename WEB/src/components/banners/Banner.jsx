@@ -22,7 +22,7 @@ const Banner = () => {
 
         <Box sx={{ display: { xs: 'flex', sm: 'none' },
         width: '100vw',
-        height: '45vh',
+        height: '86vh',
         bgcolor: 'blue',
         flexDirection: 'column',
         alignItems: 'center',

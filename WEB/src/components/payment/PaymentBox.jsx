@@ -68,7 +68,7 @@ const PaymentBox = () => {
   useEffect(() => {
     getData();
   }, []);
-  console.log(banks);
+
   const bankInfo = (bank) => {
     return (
       <Box
@@ -188,7 +188,7 @@ const PaymentBox = () => {
     >
       <Container
         sx={{
-          width: "60vw",
+          width: {xs:'90vw', md:'60vh',lg:'60vh'},
           px: "10vw",
         }}
       >
