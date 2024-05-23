@@ -1,28 +1,18 @@
 import React, { useContext, useEffect } from "react";
-import {
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Divider,
-  Alert,
-  Container,
-} from "@mui/material";
+import { Box, Typography, TextField, Button, Alert } from "@mui/material";
 import { useState } from "react";
 import { useParams } from "react-router";
 import { UserContext } from "../../context/UsersContext";
 
 const ProfileBox = () => {
-  const { isActive, userId, makeRequest, user, setUser } =
-    useContext(UserContext);
+  const { makeRequest } = useContext(UserContext);
   const { id } = useParams();
-  const [email, setEmail] = useState(user.email);
-  const [name, setName] = useState(user.name);
-  const [lastName, setLastName] = useState(user.lastname);
-  const [phone, setPhone] = useState(user.phone);
-  const [enterprise, setEnterprise] = useState(user.enterprise);
-  const [address, setAddress] = useState(user.address);
-  const [country, setCountry] = useState(user.country);
+  const [user, setUser] = useState({});
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [enterprise, setEnterprise] = useState("");
+  const [address, setAddress] = useState("");
+  const [country, setCountry] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [alert, setAlert] = useState({
@@ -30,10 +20,10 @@ const ProfileBox = () => {
     status: "",
     message: "",
   });
+  // console.log("USERID", userId);
+  // console.table("ID", id);
 
   const userInfo = {
-    name: name,
-    lastname: lastName,
     email: email,
     password: password,
     phone: phone,
@@ -41,6 +31,19 @@ const ProfileBox = () => {
     address: address,
     country: country,
   };
+  // console.table(userInfo);
+
+  useEffect(() => {
+    makeRequest("get", `users/${id}`).then((response) => {
+      if (response.status === 200) {
+        setUser(response.data.data);
+        console.log(response.data);
+        console.log(user);
+      } else {
+        throw "Usuario no encontrado";
+      }
+    });
+  }, []);
 
   const [bgInput, setBgInput] = useState({
     edit: false,
@@ -70,7 +73,8 @@ const ProfileBox = () => {
       color: prevState.edit ? "#eceff1" : "#fff",
       changes: !prevState.changes,
     }));
-    makeRequest("patch", `users/${userId}`, userInfo), getData();
+
+    makeRequest("patch", `users/${id}`, userInfo);
     setShowSetButton((prevState) => ({
       ...prevState,
       show: !prevState.show,
@@ -224,7 +228,7 @@ const ProfileBox = () => {
             type="name"
             variant="outlined"
             fullWidth
-            value={name}
+            value={user.name}
             onChange={(e) => setName(e.target.value)}
             sx={{
               my: 1,
@@ -233,19 +237,19 @@ const ProfileBox = () => {
           <TextField
             className="field"
             InputProps={{
-              readOnly: true,
+              readOnly: false,
               sx: {
                 backgroundColor: "#eceff1",
               },
             }}
             id="email"
-            label="Email"
+            label="Correo electrónico"
             type="email"
             variant="outlined"
             fullWidth
             helperText={emailError.message}
             error={emailError.emailError}
-            value={email}
+            value={user.email}
             onChange={(e) => setEmail(e.target.value)}
             sx={{
               my: 1,
@@ -310,7 +314,7 @@ const ProfileBox = () => {
               },
             }}
             id="phone"
-            label="Teléfono"
+            label={user.phone}
             type="phone"
             variant="outlined"
             fullWidth
@@ -332,7 +336,7 @@ const ProfileBox = () => {
               },
             }}
             id="enterprise"
-            label="Empresa"
+            label={user.enterprise}
             type="enterprise"
             variant="outlined"
             fullWidth
@@ -352,7 +356,7 @@ const ProfileBox = () => {
               },
             }}
             id="address"
-            label="Dirección"
+            label={user.address}
             type="address"
             variant="outlined"
             fullWidth
@@ -372,7 +376,7 @@ const ProfileBox = () => {
               },
             }}
             id="country"
-            label="País"
+            label={user.country}
             type="country"
             variant="outlined"
             fullWidth

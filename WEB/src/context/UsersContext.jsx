@@ -4,16 +4,20 @@ import axios from "axios";
 export const UserContext = createContext({});
 
 const ContextProvider = ({ children }) => {
-  const [userId, setUserId] = useState(null);
-  const [role, setRole] = useState("");
-  const [token, setToken] = useState(window.localStorage.getItem("token"));
+  const [userId, setUserId] = useState(localStorage.getItem("userId"));
+  const [role, setRole] = useState(localStorage.getItem("role"));
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const [isActive, setIsActive] = useState(!!localStorage.getItem("token"));
-  const [sesion, setSesion] = useState(false);
+
   const [user, setUser] = useState({});
 
-  const saveToken = (newToken) => {
+  const saveToken = (newToken, idUser, roleUser) => {
     setToken(newToken);
+    setUserId(idUser);
+    setRole(roleUser);
     localStorage.setItem("token", newToken);
+    localStorage.setItem(userId, idUser);
+    localStorage.setItem(role, roleUser);
     setIsActive(true);
   };
 
