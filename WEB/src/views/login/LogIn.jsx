@@ -12,7 +12,6 @@ import {
 import { UserContext } from "../../context/UsersContext";
 import { useNavigate } from "react-router-dom";
 import BGImage from "../../assets/mazautos-un-chico-comprando-un-auto-nuevo.jpg";
-import axios from "axios";
 
 export default function LogIn() {
   const navigate = useNavigate();
@@ -23,7 +22,7 @@ export default function LogIn() {
   const goToSignUp = () => {
     navigate("/signup");
   };
-  const { setUserId, setRole, saveToken, makeRequest, user, setUser } =
+  const { setUserId, setRole, saveToken, makeRequest, setUser } =
     useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -49,17 +48,17 @@ export default function LogIn() {
       if (response.status === 200) {
         const data = response.data; // Obtener los datos de la respuesta
         const token = data.token;
-        const userId = data.userId;
-        const role = data.userRole;
-        const dataUser = data.user;
+        const user_Id = data.userId;
+        const userRole = data.userRole;
         saveToken(token);
-        setUserId(userId);
-        setRole(role);
+        setUserId(user_Id);
+        setRole(userRole);
         setAlert({
           status: true,
           type: "success",
           message: "Inicio de sesión exitoso.",
         });
+
         goToPools();
       } else {
         console.error("Error al iniciar sesión:", response.status);
