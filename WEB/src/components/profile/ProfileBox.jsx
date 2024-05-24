@@ -7,12 +7,18 @@ import { UserContext } from "../../context/UsersContext";
 const ProfileBox = () => {
   const { makeRequest } = useContext(UserContext);
   const { id } = useParams();
-  const [user, setUser] = useState({});
-  const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [enterprise, setEnterprise] = useState("");
-  const [address, setAddress] = useState("");
-  const [country, setCountry] = useState("");
+  const [userData, setUserData] = useState({
+    name: '',
+    lastname: '',
+    email: '',
+    phone: '',
+    enterprise: '',
+    address: '',
+    district: '',
+    city: '',
+    country: '',
+  });
+ 
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [alert, setAlert] = useState({
@@ -23,27 +29,37 @@ const ProfileBox = () => {
   // console.log("USERID", userId);
   // console.table("ID", id);
 
-  const userInfo = {
-    email: email,
-    password: password,
-    phone: phone,
-    enterprise: enterprise,
-    address: address,
-    country: country,
-  };
+  // const userInfo = {
+  //   email: email,
+  //   password: password,
+  //   phone: phone,
+  //   enterprise: enterprise,
+  //   address: address,
+  //   country: country,
+  // };
   // console.table(userInfo);
 
   useEffect(() => {
     makeRequest("get", `users/${id}`).then((response) => {
       if (response.status === 200) {
-        setUser(response.data.data);
+        setUserData(response.data.data);
         console.log(response.data);
-        console.log(user);
+        console.log(userData);
       } else {
-        throw "Usuario no encontrado";
+        throw new Error("Usuario no encontrado. Regístrate hoy.");
       }
+    }).catch((error) => {
+      console.error('Error fetching user data:', error);
     });
-  }, []);
+  }, [id, makeRequest]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const [bgInput, setBgInput] = useState({
     edit: false,
@@ -74,7 +90,7 @@ const ProfileBox = () => {
       changes: !prevState.changes,
     }));
 
-    makeRequest("patch", `users/${id}`, userInfo);
+    // makeRequest("patch", `users/${id}`, userInfo);
     setShowSetButton((prevState) => ({
       ...prevState,
       show: !prevState.show,
@@ -109,11 +125,6 @@ const ProfileBox = () => {
     message: "",
   });
 
-  const emailValidation = (email) => {
-    const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-    return regex.test(email);
-  };
-
   const phoneValidation = (phone) => {
     const regex = /^9\d{8}$/;
     return regex.test(phone);
@@ -124,27 +135,12 @@ const ProfileBox = () => {
 
     let hasError = false;
 
-    // Validación del correo electrónico
-    if (!emailValidation(email)) {
-      setEmailError({
-        emailError: true,
-        message: "Ingresa un correo válido",
-      });
-      hasError = true; // Marcar que hay un error
-    } else {
-      setEmailError({
-        emailError: false,
-        message: "",
-      });
-    }
-
-    // Validación del teléfono
-    if (!phoneValidation(phone)) {
+    if (!phoneValidation(userData.phone)) {
       setPhoneError({
         phoneError: true,
         message: `Debe ser un formato válido, ej: "987546321"`,
       });
-      hasError = true; // Marcar que hay un error
+      hasError = true; 
     } else {
       setPhoneError({
         phoneError: false,
@@ -225,11 +221,11 @@ const ProfileBox = () => {
             }}
             id="name"
             label="Nombre"
-            type="name"
+            type="text"
             variant="outlined"
             fullWidth
-            value={user.name}
-            onChange={(e) => setName(e.target.value)}
+            value={userData.name}
+            onChange={handleChange}
             sx={{
               my: 1,
             }}
@@ -237,7 +233,7 @@ const ProfileBox = () => {
           <TextField
             className="field"
             InputProps={{
-              readOnly: false,
+              readOnly: true,
               sx: {
                 backgroundColor: "#eceff1",
               },
@@ -249,8 +245,8 @@ const ProfileBox = () => {
             fullWidth
             helperText={emailError.message}
             error={emailError.emailError}
-            value={user.email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={userData.email}
+            onChange={handleChange}
             sx={{
               my: 1,
             }}
@@ -293,13 +289,17 @@ const ProfileBox = () => {
                 backgroundColor: bgInput.color,
               },
             }}
-            id="lastname"
-            label="Apellidos"
-            type="lastname"
+            id="phone"
+            label="Teléfono"
+            name="phone"
+            InputLabelProps={{ shrink: true }}
+            type="number"
             variant="outlined"
             fullWidth
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
+            // helperText={phoneError.message}
+            // error={phoneError.phoneError}
+            value={userData.phone}
+            onChange={handleChange}
             sx={{
               my: 1,
             }}
@@ -313,15 +313,15 @@ const ProfileBox = () => {
                 backgroundColor: bgInput.color,
               },
             }}
-            id="phone"
-            label={user.phone}
-            type="phone"
+            id="lastname"
+            label="Apellidos"
+            name="lastname"
+            InputLabelProps={{ shrink: true }}
+            type="text"
             variant="outlined"
             fullWidth
-            helperText={phoneError.message}
-            error={phoneError.phoneError}
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            value={userData.lastname}
+            onChange={handleChange}
             sx={{
               my: 1,
             }}
@@ -336,12 +336,14 @@ const ProfileBox = () => {
               },
             }}
             id="enterprise"
-            label={user.enterprise}
-            type="enterprise"
+            label="Empresa"
+            name="enterprise"
+            InputLabelProps={{ shrink: true }}
+            type="text"
             variant="outlined"
             fullWidth
-            value={enterprise}
-            onChange={(e) => setEnterprise(e.target.value)}
+            value={userData.enterprise}
+            onChange={handleChange}
             sx={{
               my: 1,
             }}
@@ -356,12 +358,14 @@ const ProfileBox = () => {
               },
             }}
             id="address"
-            label={user.address}
-            type="address"
+            label="Dirección"
+            name="address"
+            InputLabelProps={{ shrink: true }}
+            type="text"
             variant="outlined"
             fullWidth
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
+            value={userData.address}
+            onChange={handleChange}
             sx={{
               my: 1,
             }}
@@ -376,12 +380,14 @@ const ProfileBox = () => {
               },
             }}
             id="country"
-            label={user.country}
-            type="country"
+            label="País"
+            name="country"
+            InputLabelProps={{ shrink: true }}
+            type="text"
             variant="outlined"
             fullWidth
-            value={country}
-            onChange={(e) => setCountry(e.target.value)}
+            value={userData.country}
+            onChange={handleChange}
             sx={{
               my: 1,
             }}
@@ -393,10 +399,10 @@ const ProfileBox = () => {
             }}
           >
             {alert && alert.status === "error" ? (
-              <Alert severity={alert.status}> {alert.message} </Alert>
+              <Alert severity={alert.status} sx={{mb:2, borderRadius:'10px'}}> {alert.message} </Alert>
             ) : null}
             {alert && alert.status === "success" ? (
-              <Alert severity={alert.status}> {alert.message} </Alert>
+              <Alert severity={alert.status} sx={{mb:2, borderRadius:'10px'}}> {alert.message} </Alert>
             ) : null}
           </Box>
           <Box
@@ -424,6 +430,7 @@ const ProfileBox = () => {
               <TextField
                 id="password"
                 label="Contraseña"
+                InputLabelProps={{ shrink: true }}
                 type="password"
                 variant="outlined"
                 fullWidth
@@ -437,6 +444,7 @@ const ProfileBox = () => {
               <TextField
                 id="password-confirmation"
                 label="Confirma contraseña"
+                InputLabelProps={{ shrink: true }}
                 type="password"
                 variant="outlined"
                 fullWidth
