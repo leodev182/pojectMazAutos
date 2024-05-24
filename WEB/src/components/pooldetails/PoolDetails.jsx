@@ -10,7 +10,6 @@ import {
   CardMedia,
   CardContent,
 } from "@mui/material";
-import CarImage from "../../assets/maxus-T60-white-mazautos.jpeg";
 import InfoIcon from "@mui/icons-material/Info";
 import CarColor from "../carcolor/CarColor";
 import { LoadingBar } from "../loadingBar/LoadingBar";

@@ -9,7 +9,6 @@ import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import CarImage from "../../assets/maxus-T60-white-mazautos.jpeg";
 import InfoIcon from "@mui/icons-material/Info";
 import { LoadingBar } from "../loadingBar/LoadingBar";
 import { useNavigate } from "react-router-dom";
