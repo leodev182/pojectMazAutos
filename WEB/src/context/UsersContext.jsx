@@ -23,7 +23,11 @@ const ContextProvider = ({ children }) => {
 
   const removeToken = () => {
     setToken(null);
+    setUserId(null);
+    setRole(null);
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("role");
     setIsActive(false);
   };
 
@@ -50,6 +54,10 @@ const ContextProvider = ({ children }) => {
         return Promise.reject(error);
       }
     );
+
+    console.log("Método:", method); // Log para verificar el método
+    console.log("URL:", url); // Log para verificar la URL
+    console.log("Datos:", data); // Log para verificar los datos enviados
 
     return axiosInstance[method](url, data);
   };

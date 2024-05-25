@@ -1,5 +1,14 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Box, Button, Divider, Typography, Grid, Container, Select, MenuItem } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Typography,
+  Grid,
+  Container,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import TextField from "@mui/material/TextField";
@@ -12,7 +21,8 @@ import { MyContext } from "../../context/PoolsContext";
 
 const PreBooking = () => {
   const navigate = useNavigate();
-  const { pools, setPools, amount, setAmount, quantity, setQuantity } = useContext(MyContext);
+  const { pools, setPools, amount, setAmount, quantity, setQuantity } =
+    useContext(MyContext);
   const { id } = useParams();
   const poolIdsAsString = pools.map((pool) => String(pool.id));
   const index = poolIdsAsString.findIndex((poolId) => poolId == id);
@@ -39,8 +49,12 @@ const PreBooking = () => {
   };
 
   const carAvailability = poolDetails.goal_quantity - poolDetails.quantity;
-  const formattedPrice = parseFloat(poolDetails.initial_price).toLocaleString("de-DE");
-  const formattedSavedPrice = parseFloat(poolDetails.saved_price).toLocaleString("de-DE");
+  const formattedPrice = parseFloat(poolDetails.initial_price).toLocaleString(
+    "de-DE"
+  );
+  const formattedSavedPrice = parseFloat(
+    poolDetails.saved_price
+  ).toLocaleString("de-DE");
   const bookingAmount = () => {
     const amount = quantity * (poolDetails.initial_price * 0.05);
     return parseFloat(amount).toLocaleString("de-DE");
