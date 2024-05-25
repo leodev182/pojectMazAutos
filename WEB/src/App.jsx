@@ -17,7 +17,6 @@ import { UserContext } from "./context/UsersContext.jsx";
 import "./App.css";
 import { useContext } from "react";
 
-
 function App() {
   const { isActive } = useContext(UserContext);
   return (
@@ -36,7 +35,7 @@ function App() {
         <Route path="/success" element={<PaymentSuccess />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/pools" element={<Pools />} />
+        <Route path="/pools" element={isActive ? <Pools /> : <LogIn />} />
         <Route
           path="/profile/:id"
           element={isActive ? <Profile /> : <LogIn />}

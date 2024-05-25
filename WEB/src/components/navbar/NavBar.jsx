@@ -126,7 +126,6 @@ function NavBar() {
                         `/users/${userId}`
                       );
                       setUser(response.data.data);
-                      console.table(response.data.data);
                     }}
                   >
                     Perfil

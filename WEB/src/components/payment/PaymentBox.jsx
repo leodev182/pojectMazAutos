@@ -19,39 +19,45 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { useParams } from "react-router-dom";
 import { MyContext } from "../../context/PoolsContext";
 import { UserContext } from "../../context/UsersContext";
-import axios from "axios";
 
 const PaymentBox = () => {
-  const { makeRequest, userId } = useContext(UserContext);
-  const { id } = useParams();
+  const { makeRequest } = useContext(UserContext);
   const { pools, quantity, amount } = useContext(MyContext);
+  const { id } = useParams();
   const [banks, setBanks] = useState([]);
   const [selectedBank, setSelectedBank] = useState("");
   const [payment, setPayment] = useState("");
   const [voucher, setVoucher] = useState("");
-  const [booking, setBooking] = useState({
-    date: "",
-    quantity: quantity,
-    amount: amount,
-    payment: payment,
-    condition: "Pending",
-    bank: selectedBank,
-    voucher: voucher,
-    status: true,
-  });
+  const [booking, setBooking] = useState({});
+
+  useEffect(() => {
+    const dataBooking = {
+      date: "",
+      amount: amount,
+      payment: payment,
+      condition: "Pending",
+      bank: selectedBank,
+      voucher: voucher,
+      status: true,
+    };
+    setBooking(dataBooking);
+  }, [quantity, amount, payment, selectedBank, voucher]);
+
+  console.table(booking);
 
   const poolIdsAsString = pools.map((pool) => String(pool.id));
   const index = poolIdsAsString.findIndex((poolId) => poolId === id);
   const poolDetails = pools[index];
 
   const createBookingId = async () => {
-    console.table(booking);
     await makeRequest("post", `booking/${poolDetails.id}`, booking);
   };
 
-  // useEffect(() => {
-  //   console.log(booking);
-  // }, [booking]);
+  const updaTePools = async () => {
+    await makeRequest("patch", `pools/update/${poolDetails.id}`, {
+      quantity: poolDetails.quantity,
+    });
+  };
 
   const url = "/accounts.json";
 
@@ -150,10 +156,6 @@ const PaymentBox = () => {
     );
   };
 
-  const handleBankChange = (e) => {
-    setSelectedBank(e.target.value);
-  };
-
   const handleTransferAccordionChange = () => {
     setExpandedTransferAccordion((prevExpanded) => !prevExpanded);
   };
@@ -188,7 +190,7 @@ const PaymentBox = () => {
     >
       <Container
         sx={{
-          width: {xs:'90vw', md:'60vh',lg:'60vh'},
+          width: { xs: "90vw", md: "60vh", lg: "60vh" },
           px: "10vw",
         }}
       >
@@ -328,7 +330,9 @@ const PaymentBox = () => {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={selectedBank}
-                  onChange={handleBankChange}
+                  onChange={(e) => {
+                    setSelectedBank(e.target.value), setPayment("Transfer");
+                  }}
                   fullWidth
                 >
                   {banks.map((bank) => (
@@ -352,7 +356,9 @@ const PaymentBox = () => {
                   fullWidth
                   sx={{ my: 1 }}
                   value={voucher}
-                  onChange={(e) => setVoucher(e.target.value)}
+                  onChange={(e) => {
+                    setVoucher(e.target.value), updaTePools();
+                  }}
                 />
                 <Button
                   component="label"
@@ -388,9 +394,8 @@ const PaymentBox = () => {
                   }}
                   href="/success"
                   onClick={() => {
-                    setPayment("Transfer");
-                    // console.log(payment);
                     createBookingId();
+                    updaTePools();
                   }}
                 >
                   <Typography>Iniciar reserva</Typography>
