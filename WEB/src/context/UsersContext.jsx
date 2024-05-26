@@ -31,9 +31,9 @@ const ContextProvider = ({ children }) => {
     setIsActive(false);
   };
 
-  const makeRequest = async (method, url, data = null) => {
+  const makeRequest = async (method, endpoint, data = null) => {
     const axiosInstance = axios.create({
-      baseURL: "http://localhost:9080",
+      baseURL: "https://orchestrator-wywq.onrender.com",
       headers: {
         "Content-Type": "application/json",
       },
@@ -56,10 +56,10 @@ const ContextProvider = ({ children }) => {
     );
 
     console.log("Método:", method); // Log para verificar el método
-    console.log("URL:", url); // Log para verificar la URL
+    console.log("URL:", endpoint); // Log para verificar la URL
     console.log("Datos:", data); // Log para verificar los datos enviados
 
-    return axiosInstance[method](url, data);
+    return axiosInstance[method](endpoint, data);
   };
 
   return (

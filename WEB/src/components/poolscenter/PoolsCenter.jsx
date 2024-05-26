@@ -8,7 +8,6 @@ import { UserContext } from "../../context/UsersContext";
 const PoolsCenter = () => {
   const { pools } = useContext(MyContext);
   let { role } = useContext(UserContext);
-  // console.log(role)
 
   return (
     <Container

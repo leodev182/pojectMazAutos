@@ -43,7 +43,7 @@ export default function LogIn() {
     };
 
     try {
-      const response = await makeRequest("post", "login", user);
+      const response = await makeRequest("post", "/login", user);
 
       if (response.status === 200) {
         const data = response.data; // Obtener los datos de la respuesta
