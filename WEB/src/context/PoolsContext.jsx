@@ -10,7 +10,9 @@ const PoolsContextProvider = ({ children }) => {
   const [payment, setPayment] = useState("");
 
   const getDataPools = async () => {
-    const response = await axios.get(`http://localhost:9080/pools`);
+    const response = await axios.get(
+      "https://orchestrator-wywq.onrender.com/pools"
+    );
     const data = response.data.data;
     setPools([...data]);
   };
